@@ -18,5 +18,12 @@
     "tailwindcss": "^3.4.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.3"
+  },
+  "engines": {
+    "node": ">=22 < 23"
+  },
+  "volta": {
+    "node": "22.11.0",
+    "npm": "10.9.0"
   }
 }
