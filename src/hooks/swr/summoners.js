@@ -1,3 +1,5 @@
+"use client";
+
 import useSWR from "swr";
 import qs from "qs";
 import { fetcher } from "./fetcher";
