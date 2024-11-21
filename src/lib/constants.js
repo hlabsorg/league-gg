@@ -1,4 +1,4 @@
-export const REGIONS = {
+export const REGION_IDS = {
   BR: "br1",
   EUN: "eun1",
   EUW: "euw1",
@@ -16,4 +16,15 @@ export const REGIONS = {
   TR: "tr1",
   TW: "tw2",
   VN: "vn2",
+};
+
+export const REGIONS = {
+  AMERICAS: "americas",
+  ASIA: "asia",
+  ESPORTS: "esports",
+  EUROPE: "europe",
+};
+
+export const REGION_MAP = {
+  na1: "americas",
 };
