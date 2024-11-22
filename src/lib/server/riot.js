@@ -23,3 +23,14 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
   }
   return res.json();
 };
+
+export const getSummonerAccount = async (puuid, regionId) => {
+  const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
+  const res = await requestRiot(url);
+  if (!res.ok) {
+    const error = new Error(`Error fetching summoner account: ${res.statusText}`);
+    error.status = res.status;
+    throw error;
+  }
+  return res.json();
+};

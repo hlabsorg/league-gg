@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getRiotAccount } from "@/lib/server/riot";
+import { getRiotAccount, getSummonerAccount } from "@/lib/server/riot";
 
 export const GET = async (req) => {
   const { searchParams } = req.nextUrl;
@@ -11,7 +11,14 @@ export const GET = async (req) => {
   }
   try {
     const riotAccount = await getRiotAccount(gameName, tagLine, regionId);
-    return NextResponse.json(riotAccount);
+    const summonerAccount = await getSummonerAccount(riotAccount.puuid, regionId);
+    const summonerProfile = {
+      gameName: riotAccount.gameName,
+      tagLine: riotAccount.tagLine,
+      profileIconId: summonerAccount.profileIconId,
+      summonerLevel: summonerAccount.summonerLevel,
+    };
+    return NextResponse.json(summonerProfile);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: error.message }, { status: error.status });
