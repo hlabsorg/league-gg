@@ -27,4 +27,5 @@ export const REGIONS = {
 
 export const REGION_MAP = {
   na1: "americas",
+  euw1: "europe",
 };

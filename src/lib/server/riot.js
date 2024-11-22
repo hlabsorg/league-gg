@@ -1,5 +1,4 @@
 import "server-only";
-import dotenv from "dotenv";
 import { REGION_MAP } from "../constants";
 
 export const requestRiot = (url) =>
@@ -9,7 +8,7 @@ export const requestRiot = (url) =>
       "Accept-Language": "en-US,en;q=0.9",
       "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
       Origin: "https://developer.riotgames.com",
-      "X-Riot-Token": process.env.RIOT_API,
+      "X-Riot-Token": process.env.RIOT_API_KEY,
     },
   });
 
@@ -19,7 +18,7 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
   const res = await requestRiot(url);
   if (!res.ok) {
     const error = new Error(`Error fetching riot account: ${res.statusText}`);
-    error.code = res.status;
+    error.status = res.status;
     throw error;
   }
   return res.json();

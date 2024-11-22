@@ -12,7 +12,7 @@ export const useSummoners = (gameName, tagLine, regionId) => {
     tagLine,
     regionId,
   });
-  const { data, error, isLoading } = useSWR(`${API_PREFIX}/summoners?${params}`);
+  const { data, error, isLoading } = useSWR(`${API_PREFIX}/summoners?${params}`, fetcher);
 
   return {
     data,
