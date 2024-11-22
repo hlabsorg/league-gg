@@ -2,7 +2,21 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+> Make sure you have `Node v20^` installed before proceeding
+
+1.  In the root of the project, create your `.env` file from existing `.env.example`
+
+```bash
+cp .env.example .env
+```
+
+2. Add all required fields to your `.env` file (e.g. `RIOT_API_KEY`)
+
+```env
+RIOT_API_KEY=(paste key here)
+```
+
+3. Next, run the development server:
 
 ```bash
 npm run dev

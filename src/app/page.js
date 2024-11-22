@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
+import { useSummoners } from "@/hooks/swr/summoners";
 
 export default function Home() {
+  const { data, error, isLoading } = useSummoners("ssj4gogeta84", "8084", "na1");
   return (
     <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
+      {isLoading ? <div>getting profile...</div> : <code>{JSON.stringify(data)}</code>}
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
         <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={180} height={38} priority />
         <ol className="list-inside list-decimal text-center font-[family-name:var(--font-geist-mono)] text-sm sm:text-left">
