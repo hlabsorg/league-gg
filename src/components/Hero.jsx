@@ -58,7 +58,7 @@ export function Hero({ onSearch }) {
               onChange={(e) => setTagLine(e.target.value)}
             />
             <Button type="submit" className="h-12 px-6" variant="default">
-              <Search className="h-5 w-5" />
+              <Search className="size-5" />
             </Button>
           </div>
           <p className="mt-2 text-center text-sm text-white/80">
