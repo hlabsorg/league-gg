@@ -21,10 +21,9 @@ const createRedisInstance = () => {
       console.warn("[Redis] Error connecting", error);
     });
 
-    redis.on("connect", (data) => {
+    redis.on("connect", () => {
       console.log("[Redis] successfully connected to Redis instance.");
     });
-    console.log("redis get", redis.get);
     return redis;
   } catch (error) {
     console.error(error);
