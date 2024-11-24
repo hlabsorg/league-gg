@@ -24,3 +24,5 @@ export const GET = async (req) => {
     return NextResponse.json({ error: error.message }, { status: error.status });
   }
 };
+
+export const runtime = "edge";
