@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-> Make sure you have `Node v20^` installed before proceeding
+> Make sure you have `Node v20^` and `redis` installed before proceeding
 
 1.  In the root of the project, create your `.env` file from existing `.env.example`
 
@@ -14,6 +14,17 @@ cp .env.example .env
 
 ```env
 RIOT_API_KEY=(paste key here)
+```
+
+**If you have redis installed locally**, you won't need to fill out any `REDIS_` environment variables
+
+**If you can't install redis locally**, ensure you have all redis envs filled out
+
+```env
+REDIS_HOST=sincere-mammoth-42894.upstash.io
+REDIS_PASSWORD=(reach out to team member)
+REDIS_PORT=6379
+REDIS_ENABLE_TLS=true
 ```
 
 3. Next, run the development server:
