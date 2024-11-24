@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSummoners } from "@/hooks/swr/summoners";
 import { Hero } from "@/components/Hero";
+import { ProfileIcon } from "@/components/ProfileIcon";
 
 export default function Page() {
   const [region, setRegion] = useState("na");
@@ -25,7 +26,10 @@ export default function Page() {
       ) : error ? (
         <div>Error loading data: {error.message}</div>
       ) : (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <>
+          <ProfileIcon profileIconId={data.profileIconId} />
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </>
       )}
       <main className="flex flex-col items-center gap-8">
         <h1 className="text-4xl font-bold">Welcome to League GG</h1>
