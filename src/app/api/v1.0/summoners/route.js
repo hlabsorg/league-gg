@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { getRiotAccount, getSummonerAccount } from "@/lib/server/riot";
+import { setCache, checkCache } from "@/db/redis/cache";
 
 export const GET = async (req) => {
+  const cached = await checkCache(req.url);
+  if (cached) {
+    return NextResponse.json(cached);
+  }
   const { searchParams } = req.nextUrl;
   const gameName = searchParams.get("gameName");
   const tagLine = searchParams.get("tagLine");
@@ -18,6 +23,8 @@ export const GET = async (req) => {
       profileIconId: summonerAccount.profileIconId,
       summonerLevel: summonerAccount.summonerLevel,
     };
+    // setting cache
+    await setCache(req.url, summonerProfile);
     return NextResponse.json(summonerProfile);
   } catch (error) {
     console.error(error);

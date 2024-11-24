@@ -1,5 +1,6 @@
 import "server-only";
 import { REGION_MAP } from "../constants";
+import { setCache, checkCache } from "@/db/redis/cache";
 
 export const requestRiot = (url) =>
   fetch(url, {
@@ -15,13 +16,19 @@ export const requestRiot = (url) =>
 export const getRiotAccount = async (gameName, tagLine, regionId) => {
   const prefix = REGION_MAP[regionId];
   const url = `https://${prefix}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+  const cached = await checkCache(url);
+  if (cached) {
+    return cached;
+  }
   const res = await requestRiot(url);
   if (!res.ok) {
     const error = new Error(`Error fetching riot account: ${res.statusText}`);
     error.status = res.status;
     throw error;
   }
-  return res.json();
+  const response = await res.json();
+  await setCache(url, response);
+  return response;
 };
 
 export const getSummonerAccount = async (puuid, regionId) => {
