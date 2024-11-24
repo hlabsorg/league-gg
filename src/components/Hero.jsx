@@ -1,31 +1,25 @@
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Search } from "lucide-react"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { useState } from "react"
-import { REGION_IDS } from "@/lib/constants"
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react";
+import { REGION_IDS } from "@/lib/constants";
 
 export function Hero({ onSearch }) {
-  const [region, setRegion] = useState("na")
-  const [summonerName, setSummonerName] = useState("")
-  const [tagLine, setTagLine] = useState("")
+  const [region, setRegion] = useState("na");
+  const [summonerName, setSummonerName] = useState("");
+  const [tagLine, setTagLine] = useState("");
 
   const handleSearch = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (summonerName.trim() && tagLine.trim()) {
       console.log("Summoner Name:", summonerName);
       console.log("Tagline:", tagLine);
-      onSearch(tagLine.trim(), summonerName.trim(), region)
+      onSearch(tagLine.trim(), summonerName.trim(), region);
     } else {
       console.error("Both summoner name and tagline must be provided.");
     }
-  }
+  };
 
   return (
     <section className="relative h-[500px] w-full bg-background">
@@ -64,7 +58,7 @@ export function Hero({ onSearch }) {
               onChange={(e) => setTagLine(e.target.value)}
             />
             <Button type="submit" className="h-12 px-6" variant="default">
-              <Search className="h-5 w-5" />
+              <Search className="size-5" />
             </Button>
           </div>
           <p className="mt-2 text-center text-sm text-white/80">
@@ -73,5 +67,5 @@ export function Hero({ onSearch }) {
         </form>
       </div>
     </section>
-  )
-} 
+  );
+}
