@@ -10,9 +10,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 cp .env.example .env
 ```
 
-2. Add all required fields to your `.env`
+2. Add all required fields to your `.env` file
 
 ```env
+# client envs
+NEXT_PUBLIC_R2_HOST=(paste url here)
+
 # server envs
 RIOT_API_KEY=(paste key here)
 UPSTASH_REDIS_REST_URL=(paste url here)
