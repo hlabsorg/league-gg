@@ -6,7 +6,7 @@ import { useState } from "react";
 import { REGION_IDS } from "@/lib/constants";
 
 export function Hero({ onSearch }) {
-  const [region, setRegion] = useState("na");
+  const [region, setRegion] = useState("na1");
   const [summonerName, setSummonerName] = useState("");
   const [tagLine, setTagLine] = useState("");
 
@@ -33,7 +33,7 @@ export function Hero({ onSearch }) {
         <h1 className="text-4xl font-bold text-white">League GG</h1>
         <form onSubmit={handleSearch} className="w-full max-w-2xl">
           <div className="flex gap-2">
-            <Select defaultValue="na" onValueChange={(value) => setRegion(value)}>
+            <Select defaultValue={region} onValueChange={(value) => setRegion(value)}>
               <SelectTrigger className="h-12 w-[100px] bg-white/95">
                 <SelectValue placeholder="Region" />
               </SelectTrigger>
