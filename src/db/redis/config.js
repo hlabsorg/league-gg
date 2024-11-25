@@ -1,8 +1,6 @@
-const { REDIS_HOST = "", REDIS_PASSWORD = "", REDIS_PORT = 6379, REDIS_ENABLE_TLS = "false" } = process.env;
+const { UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN } = process.env;
 
 export const redisConfig = {
-  host: REDIS_HOST,
-  password: REDIS_PASSWORD,
-  port: REDIS_PORT,
-  tls: REDIS_ENABLE_TLS === "true" ? {} : undefined,
+  url: UPSTASH_REDIS_REST_URL,
+  token: UPSTASH_REDIS_REST_TOKEN,
 };

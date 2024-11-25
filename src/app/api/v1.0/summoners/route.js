@@ -32,4 +32,4 @@ export const GET = async (req) => {
   }
 };
 
-export const runtime = "node";
+export const runtime = "edge";

@@ -13,4 +13,4 @@ export const GET = async () => {
   }
 };
 
-export const runtime = "node";
+export const runtime = "edge";

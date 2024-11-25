@@ -4,9 +4,10 @@ import { redis } from "./redis";
 
 export const setCache = async (key, data) => {
   const MAX_AGE = 60000 * 60; // 1 hour
-  const EXPIRY_MS = "PX";
 
-  await redis.set(key, JSON.stringify(data), EXPIRY_MS, MAX_AGE);
+  await redis.set(key, JSON.stringify(data), {
+    px: MAX_AGE,
+  });
 };
 
 export const checkCache = async (key) => {
@@ -15,7 +16,7 @@ export const checkCache = async (key) => {
     if (data) {
       // cache hit
       console.log("cache hit: ", key);
-      return JSON.parse(data);
+      return data;
     }
     // cache miss;
     return;
