@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-> Make sure you have `Node v20^` and `redis` installed before proceeding
+> Make sure you have `Node v20^` installed before proceeding
 
 1.  In the root of the project, create your `.env` file from existing `.env.example`
 
