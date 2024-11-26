@@ -12,7 +12,13 @@ export const useSummoners = (gameName, tagLine, regionId) => {
     tagLine,
     regionId,
   });
-  const apiUrl = `${API_PREFIX}/summoners?${params}`;
+
+  let apiUrl;
+  if (!gameName || !tagLine) {
+    apiUrl = null;
+  } else {
+    apiUrl = `${API_PREFIX}/summoners?${params}`;
+  }
   const { data, error, isLoading } = useSWR(apiUrl, fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

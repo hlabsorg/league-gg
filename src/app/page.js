@@ -24,13 +24,13 @@ export default function Page() {
       {isLoading ? (
         <div>Getting profile...</div>
       ) : error ? (
-        <div>Error loading data: {error.message}</div>
-      ) : (
+        <div>Error loading data: {error.info.error}</div>
+      ) : data ? (
         <>
           <ProfileIcon profileIconId={data.profileIconId} />
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </>
-      )}
+      ) : null}
       <main className="flex flex-col items-center gap-8">
         <h1 className="text-4xl font-bold">Welcome to League GG</h1>
         <p className="text-lg text-muted-foreground">
