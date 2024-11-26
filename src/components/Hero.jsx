@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { useSummoners } from "@/hooks/swr/summoners";
+import { Icons } from "@/components/Icons";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Alert, AlertDescription } from "./ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProfileIcon } from "./ProfileIcon";
 import { REGION_IDS } from "@/lib/constants";
 
-export function Hero({ onSearch }) {
+export function Hero() {
   const [regionId, setRegionId] = useState("na1");
   const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
+  const [formError, setFormError] = useState(null);
 
   const { data, error, isLoading } = useSummoners(gameName, tagLine, regionId);
 
   const handleSubmit = (e) => {
+    setFormError(null);
     e.preventDefault();
     const gameName = e.target.gameName.value;
     const tagLine = e.target.tagLine.value;
@@ -24,7 +27,7 @@ export function Hero({ onSearch }) {
       setTagLine(tagLine);
       setRegionId(regionId);
     } else {
-      console.error("Both summoner name, tagline, and region must be provided.");
+      setFormError("Both summoner name, tagline, and region must be provided.");
     }
   };
 
@@ -67,23 +70,44 @@ export function Hero({ onSearch }) {
               defaultValue={tagLine}
             />
             <Button type="submit" className="h-12 px-6" variant="default">
-              <Search className="size-5" />
+              <Icons.search className="size-5" />
             </Button>
           </div>
-          {isLoading ? (
-            <div>Getting profile...</div>
-          ) : error ? (
-            <div>Error loading data: {error.info.error}</div>
-          ) : data ? (
-            <>
-              <ProfileIcon profileIconId={data.profileIconId} />
-              <pre>{JSON.stringify(data, null, 2)}</pre>
-            </>
-          ) : (
-            <p className="mt-2 text-center text-sm text-white/80">
-              Enter your League of Legends summoner name and tagline to look up stats
-            </p>
-          )}
+          <div className="mt-4 flex min-h-16 items-center justify-center">
+            {isLoading ? (
+              <Icons.spinner className="animate-spin text-white" />
+            ) : formError ? (
+              <Alert variant="destructive">
+                <AlertDescription>{formError}</AlertDescription>
+              </Alert>
+            ) : error ? (
+              <Alert variant="destructive">
+                <AlertDescription>{error.info.error}</AlertDescription>
+              </Alert>
+            ) : formError ? (
+              <Alert variant="destructive">
+                <AlertDescription>{formError}</AlertDescription>
+              </Alert>
+            ) : data ? (
+              <div className="relative flex size-full flex-row gap-4 rounded-lg border bg-background p-4 text-foreground">
+                <div>
+                  <ProfileIcon profileIconId={data.profileIconId} />
+                </div>
+                <div className="flex w-full flex-col justify-center">
+                  <div className="flex flex-row gap-2">
+                    <h4 className="font-bold">{data.gameName}</h4>
+                    <h4 className="text-slate-500">#{data.tagLine}</h4>
+                  </div>
+                  <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
+                </div>
+                <Icons.chevronRight className="self-center justify-self-end" />
+              </div>
+            ) : (
+              <p className="mt-2 text-center text-sm text-white/80">
+                Enter your League of Legends summoner name and tagline to look up stats
+              </p>
+            )}
+          </div>
         </form>
       </div>
     </section>

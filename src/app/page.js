@@ -1,9 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useSummoners } from "@/hooks/swr/summoners";
 import { Hero } from "@/components/Hero";
-import { ProfileIcon } from "@/components/ProfileIcon";
 
 export default function Page() {
   return (
