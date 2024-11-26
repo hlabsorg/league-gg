@@ -1,23 +1,30 @@
+import { useState } from "react";
+import { useSummoners } from "@/hooks/swr/summoners";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
+import { ProfileIcon } from "./ProfileIcon";
 import { REGION_IDS } from "@/lib/constants";
 
 export function Hero({ onSearch }) {
-  const [region, setRegion] = useState("na1");
-  const [summonerName, setSummonerName] = useState("");
+  const [regionId, setRegionId] = useState("na1");
+  const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
 
-  const handleSearch = (e) => {
+  const { data, error, isLoading } = useSummoners(gameName, tagLine, regionId);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (summonerName.trim() && tagLine.trim()) {
-      console.log("Summoner Name:", summonerName);
-      console.log("Tagline:", tagLine);
-      onSearch(tagLine.trim(), summonerName.trim(), region);
+    const gameName = e.target.gameName.value;
+    const tagLine = e.target.tagLine.value;
+    const regionId = e.target.regionId.value;
+    if (gameName.trim() && tagLine.trim() && regionId.trim()) {
+      setGameName(gameName);
+      setTagLine(tagLine);
+      setRegionId(regionId);
     } else {
-      console.error("Both summoner name and tagline must be provided.");
+      console.error("Both summoner name, tagline, and region must be provided.");
     }
   };
 
@@ -31,9 +38,9 @@ export function Hero({ onSearch }) {
       </div>
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
         <h1 className="text-4xl font-bold text-white">League GG</h1>
-        <form onSubmit={handleSearch} className="w-full max-w-2xl">
+        <form onSubmit={handleSubmit} className="w-full max-w-2xl">
           <div className="flex gap-2">
-            <Select defaultValue={region} onValueChange={(value) => setRegion(value)}>
+            <Select defaultValue={regionId} name="regionId">
               <SelectTrigger className="h-12 w-[100px] bg-white/95">
                 <SelectValue placeholder="Region" />
               </SelectTrigger>
@@ -48,22 +55,35 @@ export function Hero({ onSearch }) {
             <Input
               className="h-12 bg-white/95"
               placeholder="Summoner Name"
-              value={summonerName}
-              onChange={(e) => setSummonerName(e.target.value)}
+              name="gameName"
+              type="text"
+              defaultValue={gameName}
             />
             <Input
               className="h-12 bg-white/95"
               placeholder="Tagline"
-              value={tagLine}
-              onChange={(e) => setTagLine(e.target.value)}
+              name="tagLine"
+              type="text"
+              defaultValue={tagLine}
             />
             <Button type="submit" className="h-12 px-6" variant="default">
               <Search className="size-5" />
             </Button>
           </div>
-          <p className="mt-2 text-center text-sm text-white/80">
-            Enter your League of Legends summoner name and tagline to look up stats
-          </p>
+          {isLoading ? (
+            <div>Getting profile...</div>
+          ) : error ? (
+            <div>Error loading data: {error.info.error}</div>
+          ) : data ? (
+            <>
+              <ProfileIcon profileIconId={data.profileIconId} />
+              <pre>{JSON.stringify(data, null, 2)}</pre>
+            </>
+          ) : (
+            <p className="mt-2 text-center text-sm text-white/80">
+              Enter your League of Legends summoner name and tagline to look up stats
+            </p>
+          )}
         </form>
       </div>
     </section>
