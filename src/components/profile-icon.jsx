@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { SUPABASE_ASSET_PATH } from "@/lib/constants";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
