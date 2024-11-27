@@ -44,3 +44,46 @@ export const getSummonerAccount = async (puuid, regionId) => {
   }
   return res.json();
 };
+
+export const getLeagueEntries = async (summonerId, regionId) => {
+  const url = `https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`;
+  const res = await requestRiot(url);
+  if (!res.ok) {
+    const error = new Error(`Error fetching league entries: ${res.statusText}`);
+    error.status = res.status;
+    throw error;
+  }
+  return res.json();
+};
+
+export const getSummonerMatches = async (puuid, regionId) => {
+  const prefix = REGION_MAP[regionId];
+  const url = `https://${prefix}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids`;
+  const res = await requestRiot(url);
+  if (!res.ok) {
+    const error = new Error(`Error fetching league entries: ${res.statusText}`);
+    error.status = res.status;
+    throw error;
+  }
+  return res.json();
+};
+
+export const getMatch = async (matchId, regionId) => {
+  const prefix = REGION_MAP[regionId];
+  const url = `https://${prefix}.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+  const res = await requestRiot(url);
+  if (!res.ok) {
+    const error = new Error(`Error fetching league entries: ${res.statusText}`);
+    error.status = res.status;
+    throw error;
+  }
+  return res.json();
+};
+
+export const Riot = {
+  getRiotAccount,
+  getSummonerAccount,
+  getLeagueEntries,
+  getSummonerMatches,
+  getMatch,
+};

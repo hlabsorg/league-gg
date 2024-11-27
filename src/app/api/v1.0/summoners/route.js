@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getRiotAccount, getSummonerAccount } from "@/lib/server/riot";
+import { Riot } from "@/lib/server/riot";
 import { setCache, checkCache } from "@/db/redis/cache";
 
 export const GET = async (req) => {
@@ -15,8 +15,8 @@ export const GET = async (req) => {
     return NextResponse.json({ error: "Missing required parameter" }, { status: 400 });
   }
   try {
-    const riotAccount = await getRiotAccount(gameName, tagLine, regionId);
-    const summonerAccount = await getSummonerAccount(riotAccount.puuid, regionId);
+    const riotAccount = await Riot.getRiotAccount(gameName, tagLine, regionId);
+    const summonerAccount = await Riot.getSummonerAccount(riotAccount.puuid, regionId);
     const summonerProfile = {
       regionId,
       ...riotAccount,
