@@ -18,10 +18,9 @@ export const GET = async (req) => {
     const riotAccount = await getRiotAccount(gameName, tagLine, regionId);
     const summonerAccount = await getSummonerAccount(riotAccount.puuid, regionId);
     const summonerProfile = {
-      gameName: riotAccount.gameName,
-      tagLine: riotAccount.tagLine,
-      profileIconId: summonerAccount.profileIconId,
-      summonerLevel: summonerAccount.summonerLevel,
+      regionId,
+      ...riotAccount,
+      ...summonerAccount,
     };
     // setting cache
     await setCache(req.url, summonerProfile);

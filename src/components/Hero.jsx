@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useSummoners } from "@/hooks/swr/summoners";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -91,19 +92,21 @@ export function Hero() {
                 <AlertDescription>{formError}</AlertDescription>
               </Alert>
             ) : data ? (
-              <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
-                <div>
-                  <ProfileIcon profileIconId={data.profileIconId} />
-                </div>
-                <div className="flex w-full flex-col justify-center">
-                  <div className="flex flex-row gap-2">
-                    <h4 className="font-bold">{data.gameName}</h4>
-                    <h4 className="text-slate-500">#{data.tagLine}</h4>
+              <Link prefetch href={`/summoner/${data.regionId}/${data.gameName}-${data.tagLine}`} className="w-full">
+                <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
+                  <div>
+                    <ProfileIcon profileIconId={data.profileIconId} />
                   </div>
-                  <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
+                  <div className="flex w-full flex-col justify-center">
+                    <div className="flex flex-row gap-2">
+                      <h4 className="font-bold">{data.gameName}</h4>
+                      <h4 className="text-slate-500">#{data.tagLine}</h4>
+                    </div>
+                    <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
+                  </div>
+                  <Icons.chevronRight className="self-center justify-self-end" />
                 </div>
-                <Icons.chevronRight className="self-center justify-self-end" />
-              </div>
+              </Link>
             ) : (
               <p className="mt-2 text-center text-sm text-white/80">
                 Enter your League of Legends summoner name and tagline to look up stats
