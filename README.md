@@ -14,7 +14,7 @@ cp .env.example .env
 
 ```env
 # client envs
-NEXT_PUBLIC_R2_HOST=(paste url here)
+NEXT_PUBLIC_SUPABASE_ASSET_HOST=(paste url here)
 
 # server envs
 RIOT_API_KEY=(paste key here)

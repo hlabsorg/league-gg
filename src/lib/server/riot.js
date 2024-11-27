@@ -1,4 +1,5 @@
 import "server-only";
+
 import { REGION_MAP } from "../constants";
 import { setCache, checkCache } from "@/db/redis/cache";
 
@@ -27,7 +28,9 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
     throw error;
   }
   const response = await res.json();
-  await setCache(url, response);
+  await setCache(url, response, {
+    ex: 604800,
+  });
   return response;
 };
 
