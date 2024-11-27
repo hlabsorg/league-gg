@@ -16,4 +16,4 @@ const ProfileIcon = ({ profileIconId }) => {
   // return <Image priority src={src} alt={profileIconId} width={200} height={200} />;
 };
 
-export default ProfileIcon;
+export { ProfileIcon };
