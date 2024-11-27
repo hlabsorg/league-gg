@@ -91,7 +91,7 @@ export function Hero() {
                 <AlertDescription>{formError}</AlertDescription>
               </Alert>
             ) : data ? (
-              <div className="relative flex size-full flex-row gap-4 rounded-lg border bg-background p-4 text-foreground">
+              <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
                 <div>
                   <ProfileIcon profileIconId={data.profileIconId} />
                 </div>
