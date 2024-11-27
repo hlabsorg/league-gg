@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useSummoners } from "@/hooks/swr/summoners";
 import { Input } from "@/components/ui/input";
