@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useSummoners } from "@/hooks/swr/summoners";
-import { Icons } from "@/components/Icons";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "./ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ProfileIcon } from "./ProfileIcon";
+import { ProfileIcon } from "./profile-icon";
+import { Icons } from "./icons";
 import { REGION_IDS } from "@/lib/constants";
 
 export function Hero() {
@@ -73,7 +73,7 @@ export function Hero() {
               <Icons.search className="size-5" />
             </Button>
           </div>
-          <div className="mt-4 flex min-h-16 items-center justify-center">
+          <div className="mt-4 flex h-20 items-center justify-center">
             {isLoading ? (
               <Icons.spinner className="animate-spin text-white" />
             ) : formError ? (
