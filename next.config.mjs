@@ -7,6 +7,7 @@ const nextConfig = {
         async_hooks: false,
       };
     }
+    return config;
   },
   images: {
     minimumCacheTTL: 7200,
