@@ -12,3 +12,5 @@ export const GET = async () => {
     return NextResponse.json({}, { status: 500, statusText: "Unable to connect to DB" });
   }
 };
+
+export const runtime = "edge";
