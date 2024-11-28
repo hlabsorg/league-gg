@@ -13,7 +13,7 @@ export default async function Page({ params }) {
   const summonerAccount = await Riot.getSummonerAccount(riotAccount.puuid, regionId);
   const leagueEntries = await Riot.getLeagueEntries(summonerAccount.id, regionId);
   const matches = await Riot.getSummonerMatches(riotAccount.puuid, regionId);
-  const matchHistory = await Promise.all(matches.map(async (match) => await Riot.getMatch(match, regionId)));
+  const matchHistory = await Riot.getMatch(matches[0], regionId);
   return (
     <div>
       <div>
