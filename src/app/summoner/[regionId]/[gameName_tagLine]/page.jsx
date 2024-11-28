@@ -7,7 +7,6 @@ export default async function Page({ params }) {
     throw new Error(`Invalid region: ${regionId}`);
   }
   const [gameName, tagLine] = gameName_tagLine.split("-");
-  console.log("region", regionId);
 
   const riotAccount = await Riot.getRiotAccount(gameName, tagLine, regionId);
   const summonerAccount = await Riot.getSummonerAccount(riotAccount.puuid, regionId);
