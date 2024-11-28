@@ -28,3 +28,12 @@ export const checkCache = async (key) => {
     console.error(error);
   }
 };
+
+export const deleteCache = async (key) => {
+  try {
+    console.log("deleting cache", key);
+    await redis.del(key);
+  } catch (error) {
+    console.error(error);
+  }
+};
