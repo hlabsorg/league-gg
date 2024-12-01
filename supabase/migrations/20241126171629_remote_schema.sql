@@ -70,8 +70,8 @@ CREATE OR REPLACE FUNCTION "public"."handle_new_user"() RETURNS "trigger"
     SET "search_path" TO ''
     AS $$
 begin
-  insert into public.profiles (id, first_name, last_name)
-  values (new.id, new.raw_user_meta_data ->> 'first_name', new.raw_user_meta_data ->> 'last_name');
+  insert into public.profiles (user_id, first_name, last_name)
+  values (new.user_id, new.raw_user_meta_data ->> 'first_name', new.raw_user_meta_data ->> 'last_name');
   return new;
 end;
 $$;
@@ -85,7 +85,7 @@ SET default_table_access_method = "heap";
 
 
 CREATE TABLE IF NOT EXISTS "public"."profiles" (
-    "id" "uuid" NOT NULL,
+    "user_id" "uuid" NOT NULL,
     "first_name" "text",
     "last_name" "text"
 );
@@ -95,12 +95,12 @@ ALTER TABLE "public"."profiles" OWNER TO "postgres";
 
 
 ALTER TABLE ONLY "public"."profiles"
-    ADD CONSTRAINT "profiles_pkey" PRIMARY KEY ("id");
+    ADD CONSTRAINT "profiles_pkey" PRIMARY KEY ("user_id");
 
 
 
 ALTER TABLE ONLY "public"."profiles"
-    ADD CONSTRAINT "profiles_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
+    ADD CONSTRAINT "profiles_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 

@@ -3,7 +3,7 @@ on "public"."profiles"
 as permissive
 for select
 to authenticated
-using ((( SELECT auth.uid() AS uid) = id));
+using ((( SELECT auth.uid() AS uid) = user_id));
 
 
 
