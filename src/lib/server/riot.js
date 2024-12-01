@@ -1,6 +1,6 @@
 import "server-only";
 
-import { REGION_MAP } from "../constants";
+import { REGION_MAP } from "@/constants/regions";
 import { setCache, checkCache } from "@/db/redis/cache";
 
 export const requestRiot = (url) =>

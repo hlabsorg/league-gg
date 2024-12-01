@@ -1,4 +1,4 @@
-import { SUPABASE_ASSET_PATH } from "@/lib/constants";
+import { SUPABASE_ASSET_PATH } from "@/constants/supabase";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Icons } from "./icons";
 
