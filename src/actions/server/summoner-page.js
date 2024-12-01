@@ -17,6 +17,7 @@ export const getSummonerProfile = async (gameName, tagLine, regionId) => {
 };
 
 export const getSummonerEntries = async (summonerId, regionId) => {
+  "use server";
   try {
     const entries = await Riot.getLeagueEntries(summonerId, regionId);
     return [entries, null];
@@ -27,6 +28,7 @@ export const getSummonerEntries = async (summonerId, regionId) => {
 };
 
 export const getSummonerMatchHistory = async (puuid, regionId) => {
+  "use server";
   try {
     const matches = await Riot.getSummonerMatches(puuid, regionId);
     const matchHistory = await Riot.getMatch(matches[0], regionId);
