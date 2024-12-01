@@ -7,6 +7,7 @@ export default function Error({ error }) {
   useEffect(() => {
     // Log the error to an error reporting service
     setErrorMessage(error.message);
+    console.log("digest", error.digest);
     console.error(error);
   }, [error]);
 
