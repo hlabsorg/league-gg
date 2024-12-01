@@ -22,12 +22,12 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
     return cached;
   }
   const res = await requestRiot(url);
+  const response = await res.json();
   if (!res.ok) {
-    const error = new Error(`Error fetching riot account: ${res.statusText}`);
+    const error = new Error(response.status.message);
     error.status = res.status;
     throw error;
   }
-  const response = await res.json();
   await setCache(url, response, {
     ex: 604800,
   });
@@ -37,12 +37,13 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
 export const getSummonerAccount = async (puuid, regionId) => {
   const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
   const res = await requestRiot(url);
+  const response = await res.json();
   if (!res.ok) {
-    const error = new Error(`Error fetching summoner account: ${res.statusText}`);
+    const error = new Error(response.status.message);
     error.status = res.status;
     throw error;
   }
-  return res.json();
+  return response;
 };
 
 export const getLeagueEntries = async (summonerId, regionId) => {
@@ -52,12 +53,12 @@ export const getLeagueEntries = async (summonerId, regionId) => {
     return cached;
   }
   const res = await requestRiot(url);
+  const response = await res.json();
   if (!res.ok) {
-    const error = new Error(`Error fetching league entries: ${res.statusText}`);
+    const error = new Error(response.status.message);
     error.status = res.status;
     throw error;
   }
-  const response = await res.json();
   await setCache(url, response);
   return response;
 };
@@ -70,12 +71,12 @@ export const getSummonerMatches = async (puuid, regionId) => {
     return cached;
   }
   const res = await requestRiot(url);
+  const response = await res.json();
   if (!res.ok) {
-    const error = new Error(`Error fetching league entries: ${res.statusText}`);
+    const error = new Error(response.status.message);
     error.status = res.status;
     throw error;
   }
-  const response = await res.json();
   await setCache(url, response, {
     ex: 28800,
   });
@@ -90,12 +91,12 @@ export const getMatch = async (matchId, regionId) => {
     return cached;
   }
   const res = await requestRiot(url);
+  const response = await res.json();
   if (!res.ok) {
-    const error = new Error(`Error fetching league entries: ${res.statusText}`);
+    const error = new Error(response.status.message);
     error.status = res.status;
     throw error;
   }
-  const response = await res.json();
   await setCache(url, response, {
     ex: 604800,
   });
