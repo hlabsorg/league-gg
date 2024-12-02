@@ -1,12 +1,8 @@
 import { NextResponse } from "next/server";
 import { Riot } from "@/lib/server/riot";
-import { setCache, checkCache } from "@/db/redis/cache";
+import { createServerClient } from "@/lib/supabase/clients";
 
 export const GET = async (req) => {
-  const cached = await checkCache(req.url);
-  if (cached) {
-    return NextResponse.json(cached);
-  }
   const { searchParams } = req.nextUrl;
   const gameName = searchParams.get("gameName");
   const tagLine = searchParams.get("tagLine");
@@ -21,9 +17,12 @@ export const GET = async (req) => {
       regionId,
       ...riotAccount,
       ...summonerAccount,
+      summonerId: summonerAccount.id,
+      id: undefined,
     };
-    // setting cache
-    await setCache(req.url, summonerProfile);
+    const supabase = await createServerClient();
+    const { error } = await supabase.from("summoner_profiles").upsert(summonerProfile);
+    if (error) console.error("SUPABASE INSERT ERROR: ", error);
     return NextResponse.json(summonerProfile);
   } catch (error) {
     console.error(error);
