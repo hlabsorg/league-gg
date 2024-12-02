@@ -1,5 +1,5 @@
 import { REGION_IDS } from "@/constants/regions";
-import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/actions/server/summoner-page";
+import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/lib/server/actions/summoner-page";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;

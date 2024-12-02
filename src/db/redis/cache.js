@@ -11,16 +11,17 @@ export const setCache = async (
     ex: MAX_AGE,
   },
 ) => {
-  await redis.set(key.trim().toLowerCase(), JSON.stringify(data), options);
+  key = key.trim().toLowerCase();
+  await redis.set(key, JSON.stringify(data), options);
 };
 
 export const checkCache = async (key) => {
+  key = key.trim().toLowerCase();
   try {
-    const data = await redis.get(key.trim().toLowerCase());
+    const data = await redis.get(key);
     if (data) {
       // cache hit
       console.log("cache hit: ", key);
-      console.log("DATA", data);
       return data;
     }
     // cache miss;
@@ -31,8 +32,9 @@ export const checkCache = async (key) => {
 };
 
 export const deleteCache = async (key) => {
+  key = key.trim().toLowerCase();
   try {
-    console.log("deleting cache", key.trim().toLowerCase());
+    console.log("deleting cache", key);
     await redis.del(key);
   } catch (error) {
     console.error(error);

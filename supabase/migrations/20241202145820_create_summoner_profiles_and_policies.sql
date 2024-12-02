@@ -1,14 +1,15 @@
 create table "public"."summoner_profiles" (
     "id" uuid not null default gen_random_uuid(),
     "created_at" timestamp with time zone not null default now(),
-    "puuid" uuid not null,
-    "summonerId" uuid not null,
-    "accountId" uuid not null,
+    "puuid" character varying not null,
+    "summonerId" character varying not null,
+    "accountId" character varying not null,
     "gameName" character varying not null,
     "tagLine" character varying not null,
     "profileIconId" integer not null,
     "summonerLevel" smallint not null,
-    "revisionDate" bigint not null
+    "revisionDate" bigint not null,
+    "regionId" character varying not null
 );
 
 
@@ -95,5 +96,11 @@ for select
 to authenticated
 using ((( SELECT auth.uid() AS uid) = user_id));
 
-
+reate policy "Allow anon users to update summoner_profiles"
+on "public"."summoner_profiles"
+as permissive
+for update
+to anon
+using (true)
+with check (true);
 
