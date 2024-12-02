@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Riot } from "@/lib/server/riot";
-import { createServerClient } from "@/lib/supabase/clients";
+import { Supabase } from "@/lib/supabase/clients";
 
 export const GET = async (req) => {
   const { searchParams } = req.nextUrl;
@@ -20,7 +20,7 @@ export const GET = async (req) => {
       summonerId: summonerAccount.id,
       id: undefined,
     };
-    const supabase = await createServerClient();
+    const supabase = await Supabase.getServerClient();
     const { error } = await supabase.from("summoner_profiles").upsert(summonerProfile);
     if (error) console.error("SUPABASE INSERT ERROR: ", error);
     return NextResponse.json(summonerProfile);
