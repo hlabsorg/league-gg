@@ -131,6 +131,11 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 -- Data for Name: summoner_profiles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO "public"."summoner_profiles" ("id", "created_at", "puuid", "summonerId", "accountId", "gameName", "tagLine", "profileIconId", "summonerLevel", "revisionDate", "regionId") VALUES
+	('6757321d-611e-4b44-bbdd-0d96ba2112cc', '2024-12-02 20:59:30.149366+00', 'itY86sCgc59fqTJcIoO2nxEQ8DN-VwkifiOMZt_8cw2Hu9kMYqZoOtQCcNZmT3CVY4ART_wPHlUiYA', '9hGe9vhiFL8zEcvgGLDrj1yJVciJQHzSjbJdYOjdnf0NksA', 'mif3J_73yZOU_JS0ogWyCAyjLtOzrqpQHrX23OwEBsmtgNk', 'SSJ4Gogeta84', '8084', 4972, 469, 1733040382000, 'na1'),
+	('40e1a0fa-242b-483d-9d55-353e21bb25a7', '2024-12-02 20:59:41.061435+00', 'm_sbfwDYcCtEiYgm1Ks_E_92D1-zbynhDM020zGgJDj3X-1z7KDXai1CLkNe5545s2Ld_e0NvZYx7w', 'IqQJEbJG5R3xwOTlZPEErXOAzHGLvxRcxQnIIEivlk7zhFI', 'AURuu1k5kQDthutaTw0gPs1vESf4Y4FUVIDUSd8r_d68Ow', 'Cheehu', 'NA1', 4022, 221, 1642948702000, 'na1'),
+	('63a86ad9-626a-417f-86f6-0e18704f8bb6', '2024-12-02 20:59:47.562925+00', 'WPY0-QimZ9zgzotQxFWqldZgK1AX5gcAnKF6IPJStpSZGpN49_cotJ7DSriuK46cDLrLC8kxqBNDiQ', 'uGz5uKz6iGjV6s3ekgUE1sDpNJKyr-hypxqtfv_HfFX_yRA', 'CDkR41kfdqCBbh6BbuBcwbMGz-JQe8BTaVp8-Q0o8UXqiQ', 'conartist314', 'NA1', 3505, 309, 1733168779306, 'na1'),
+	('0e089ee4-c979-4693-aff0-8fefc67c56ba', '2024-12-02 20:59:55.042204+00', 'M_dyGrCgU6vXK_oMjiHQ1lcG5Giy8E1uXPUzpJLgjoi3RT77UkQRPhrn007HVke6bjdb26l19tDUIw', 'l1fhF-4eOccC-VKXgw5BWWs2zjSuwpAv7D8O40FkxEUHTSk', '5K4W_4LEQxMoD0WXqPPjP8bnaKCIUCTnZl5B9XD-llXu4Q', 'CheeHuu', 'NA1', 3462, 784, 1733129561137, 'na1');
 
 
 --
