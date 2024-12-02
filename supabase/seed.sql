@@ -25,7 +25,8 @@ SET row_security = off;
 INSERT INTO "auth"."audit_log_entries" ("instance_id", "id", "payload", "created_at", "ip_address") VALUES
 	('00000000-0000-0000-0000-000000000000', '5f03cd59-b064-4d39-8446-303bb12fda65', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"aukai.tirrell@gmail.com","user_id":"07812d0d-2387-4174-b790-80f5b3ac5ad7","user_phone":""}}', '2024-12-02 13:56:11.482471+00', ''),
 	('00000000-0000-0000-0000-000000000000', '3bd9276a-2fc9-4ede-9059-5d94f0479e5b', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"arthurleedev@gmail.com","user_id":"e30ebc83-8409-472f-b6cd-7830e2ec4fcd","user_phone":""}}', '2024-12-02 13:56:40.419083+00', ''),
-	('00000000-0000-0000-0000-000000000000', '307bfcf6-6ae2-46d6-bcf6-b08b711d7907', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"takahashi808@gmail.com","user_id":"bd7e79a0-b8b6-4941-be0b-36eadd9110c5","user_phone":""}}', '2024-12-02 13:56:52.7092+00', '');
+	('00000000-0000-0000-0000-000000000000', '307bfcf6-6ae2-46d6-bcf6-b08b711d7907', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"takahashi808@gmail.com","user_id":"bd7e79a0-b8b6-4941-be0b-36eadd9110c5","user_phone":""}}', '2024-12-02 13:56:52.7092+00', ''),
+	('00000000-0000-0000-0000-000000000000', 'd313849a-ab66-4a34-b891-4e6b701ef192', '{"action":"user_signedup","actor_id":"00000000-0000-0000-0000-000000000000","actor_username":"service_role","actor_via_sso":false,"log_type":"team","traits":{"user_email":"aukaitirrell@webmocha.com","user_id":"6df7608d-bedc-4315-afde-81e64977d16b","user_phone":""}}', '2024-12-02 16:54:25.482822+00', '');
 
 
 --
@@ -122,6 +123,12 @@ INSERT INTO "auth"."identities" ("provider_id", "user_id", "identity_data", "pro
 
 --
 -- Data for Name: key; Type: TABLE DATA; Schema: pgsodium; Owner: supabase_admin
+--
+
+
+
+--
+-- Data for Name: summoner_profiles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
