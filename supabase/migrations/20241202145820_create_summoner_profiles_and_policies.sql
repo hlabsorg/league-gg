@@ -96,7 +96,7 @@ for select
 to authenticated
 using ((( SELECT auth.uid() AS uid) = user_id));
 
-reate policy "Allow anon users to update summoner_profiles"
+create policy "Allow anon users to update summoner_profiles"
 on "public"."summoner_profiles"
 as permissive
 for update
