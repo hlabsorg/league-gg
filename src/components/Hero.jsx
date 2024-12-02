@@ -9,7 +9,7 @@ import { Alert, AlertDescription } from "./ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProfileIcon } from "./profile-icon";
 import { Icons } from "./icons";
-import { REGION_IDS } from "@/lib/constants";
+import { REGION_IDS } from "@/constants/regions";
 
 export function Hero() {
   const [regionId, setRegionId] = useState("na1");

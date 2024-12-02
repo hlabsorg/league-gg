@@ -1,4 +1,4 @@
-import { REGION_IDS } from "@/lib/constants";
+import { REGION_IDS } from "@/constants/regions";
 import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/actions/server/summoner-page";
 
 export default async function Page({ params }) {
