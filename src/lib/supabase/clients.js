@@ -7,6 +7,7 @@ const getBrowserClient = () => {
 };
 
 const getServerClient = async () => {
+  "use server";
   const cookieStore = await cookies();
 
   // Create a server's supabase client with newly configured cookie,
