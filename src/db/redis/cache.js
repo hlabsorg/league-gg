@@ -11,10 +11,12 @@ export const setCache = async (
     ex: MAX_AGE,
   },
 ) => {
+  key = key.trim().toLowerCase();
   await redis.set(key, JSON.stringify(data), options);
 };
 
 export const checkCache = async (key) => {
+  key = key.trim().toLowerCase();
   try {
     const data = await redis.get(key);
     if (data) {
@@ -30,6 +32,7 @@ export const checkCache = async (key) => {
 };
 
 export const deleteCache = async (key) => {
+  key = key.trim().toLowerCase();
   try {
     console.log("deleting cache", key);
     await redis.del(key);
