@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useSummoners } from "@/hooks/swr/summoners";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Alert, AlertDescription } from "./ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProfileIcon } from "./profile-icon";
@@ -19,7 +21,8 @@ export function Hero() {
   const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
   const [formError, setFormError] = useState(null);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data, error, isLoading } = useSummoners(gameName, tagLine, regionId);
 
@@ -38,9 +41,12 @@ export function Hero() {
     }
   };
 
-  const handleSearch = async (e) => {
-    const { data } = await supabase.rpc("search_summoner_profiles_by_prefix", { prefix: e.target.value });
-    setSearchResults(data);
+  const handleSearch = async (value) => {
+    if (!value) {
+      return setSearchResults(null);
+    }
+    const { data } = await supabase.rpc("search_summoner_profiles_by_prefix", { prefix: value });
+    setSearchResults(data || []);
   };
 
   return (
@@ -53,14 +59,6 @@ export function Hero() {
       </div>
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
         <h1 className="text-4xl font-bold text-white">League GG</h1>
-        <Input
-          className="h-12 bg-white/95"
-          placeholder="Search Game Name"
-          onChange={debounce(handleSearch, 200)}
-          name="search"
-          type="text"
-          defaultValue={gameName}
-        />
         <form onSubmit={handleSubmit} className="w-full max-w-2xl">
           <div className="flex gap-2">
             <Select defaultValue={regionId} name="regionId">
@@ -75,13 +73,53 @@ export function Hero() {
                 ))}
               </SelectContent>
             </Select>
-            <Input
-              className="h-12 bg-white/95"
-              placeholder="Summoner Name"
-              name="gameName"
-              type="text"
-              defaultValue={gameName}
-            />
+            <Popover open={isOpen} onOpenChange={setIsOpen}>
+              <Command label="Summoner Name" shouldFilter={false} className="z-10">
+                <PopoverTrigger asChild>
+                  <CommandInput
+                    className="h-12 bg-white/95"
+                    placeholder="Summoner Name"
+                    name="gameName"
+                    type="text"
+                    onValueChange={debounce(handleSearch, 200)}
+                  />
+                </PopoverTrigger>
+                <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
+                  <CommandList className="z-10">
+                    <CommandEmpty>
+                      {!searchResults
+                        ? "Search for summoner by Game Name!"
+                        : "No results found.  Please manually input Tagline in the next field."}
+                    </CommandEmpty>
+                    <CommandGroup className="z-10">
+                      {searchResults?.map((summoner) => (
+                        <CommandItem key={summoner.id} value={summoner}>
+                          <Link
+                            prefetch
+                            href={`/summoner/${summoner.regionId}/${summoner.gameName}-${summoner.tagLine}`}
+                            className="w-full"
+                          >
+                            <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
+                              <div>
+                                <ProfileIcon profileIconId={summoner.profileIconId} />
+                              </div>
+                              <div className="flex w-full flex-col justify-center">
+                                <div className="flex flex-row gap-2">
+                                  <h4 className="font-bold">{summoner.gameName}</h4>
+                                  <h4 className="text-slate-500">#{summoner.tagLine}</h4>
+                                </div>
+                                <p className="text-sm text-slate-500">Level {summoner.summonerLevel}</p>
+                              </div>
+                              <Icons.chevronRight className="self-center justify-self-end" />
+                            </div>
+                          </Link>
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </PopoverContent>
+              </Command>
+            </Popover>
             <Input
               className="h-12 bg-white/95"
               placeholder="Tagline"
@@ -128,32 +166,6 @@ export function Hero() {
               <p className="mt-2 text-center text-sm text-white/80">
                 Enter your League of Legends summoner name and tagline to look up stats
               </p>
-            )}
-            {searchResults?.length && (
-              <div className="flex flex-col">
-                {searchResults.map((summoner) => (
-                  <Link
-                    key={summoner.id}
-                    prefetch
-                    href={`/summoner/${summoner.regionId}/${summoner.gameName}-${summoner.tagLine}`}
-                    className="w-full"
-                  >
-                    <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
-                      <div>
-                        <ProfileIcon profileIconId={summoner.profileIconId} />
-                      </div>
-                      <div className="flex w-full flex-col justify-center">
-                        <div className="flex flex-row gap-2">
-                          <h4 className="font-bold">{summoner.gameName}</h4>
-                          <h4 className="text-slate-500">#{summoner.tagLine}</h4>
-                        </div>
-                        <p className="text-sm text-slate-500">Level {summoner.summonerLevel}</p>
-                      </div>
-                      <Icons.chevronRight className="self-center justify-self-end" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
             )}
           </div>
         </form>
