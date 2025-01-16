@@ -17,6 +17,19 @@ export const getSummonerProfile = async (gameName, tagLine, regionId) => {
   }
 };
 
+export const getSummonerProfileByPUUID = async (puuid, regionId) => {
+  try {
+    const summonerAccount = await Riot.getSummonerAccount(puuid, regionId);
+    const summonerProfile = {
+      ...summonerAccount,
+    };
+    return [summonerProfile, null];
+  } catch (error) {
+    console.error(error);
+    return [null, error];
+  }
+};
+
 export const getSummonerEntries = async (summonerId, regionId) => {
   try {
     const entries = await Riot.getLeagueEntries(summonerId, regionId);

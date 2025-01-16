@@ -1,5 +1,10 @@
 import { REGION_IDS } from "@/constants/regions";
-import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/lib/server/actions/summoner-page";
+import {
+  getSummonerProfile,
+  getSummonerEntries,
+  getSummonerMatchHistory,
+  getSummonerProfileByPUUID,
+} from "@/lib/server/actions/summoner-page";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;
@@ -26,6 +31,15 @@ export default async function Page({ params }) {
     return <div>{matchHistoryError.message}</div>;
   }
 
+  const [participantOne, participantOneError] = await getSummonerProfileByPUUID(
+    matchHistory.metadata.participants[0],
+    regionId,
+  );
+
+  if (participantOneError) {
+    return <div>{participantOneError.message}</div>;
+  }
+
   return (
     <div>
       <div>
@@ -36,9 +50,13 @@ export default async function Page({ params }) {
         <h1>League Entries</h1>
         <pre>{JSON.stringify(entries, null, 2)}</pre>
       </div>
-      <div>
+      {/* <div>
         <h1>Match History</h1>
         <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
+      </div> */}
+      <div>
+        <h1>ParticipantOne </h1>
+        <pre>{JSON.stringify(participantOne, null, 2)}</pre>
       </div>
     </div>
   );
