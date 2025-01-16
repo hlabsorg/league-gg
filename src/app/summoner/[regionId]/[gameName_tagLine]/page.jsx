@@ -13,8 +13,6 @@ export default async function Page({ params }) {
   }
   const [gameName, tagLine] = gameName_tagLine.split("-");
 
-  // const riotAccount = await Riot.getRiotAccount(gameName, tagLine, regionId);
-  // const summonerAccount = await Riot.getSummonerAccount(riotAccount.puuid, regionId);
   const [summonerProfile, profileError] = await getSummonerProfile(gameName, tagLine, regionId);
   if (profileError) {
     return <div>{profileError.message}</div>;
