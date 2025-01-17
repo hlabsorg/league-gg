@@ -2,11 +2,9 @@
 
 import React from 'react';
 import { Auth } from '@supabase/auth-ui-react';
-import { createClient } from '@supabase/supabase-js';
+import { getBrowserClient } from '@/lib/supabase/browser';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const supabase = getBrowserClient()
 
 const SignUpPage = () => {
   return (

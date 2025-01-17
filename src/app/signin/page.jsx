@@ -3,12 +3,11 @@
 // league-gg/src/app/signin/page.jsx
 import React from 'react';
 import { Auth } from '@supabase/auth-ui-react';
-import { createClient } from '@supabase/supabase-js';
+import { getBrowserClient } from '@/lib/supabase/browser';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL; // Ensure you have this in your .env
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY; // Ensure you have this in your .env
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+const supabase = getBrowserClient()
 
 const SignInPage = () => {
     return (
