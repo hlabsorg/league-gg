@@ -31,6 +31,11 @@ export default function Navbar() {
               Sign In
             </Link>
           </Button>
+          <Button>
+            <Link href="/signup">
+              Sign Up
+            </Link>
+          </Button>
         </div>
       </div>
     </nav>
