@@ -11,8 +11,8 @@ export const GET = async (req) => {
     return NextResponse.json({ error: "Missing required parameter" }, { status: 400 });
   }
   try {
-    const riotAccount = await Riot.getRiotAccount(gameName, tagLine, regionId);
-    const summonerAccount = await Riot.getSummonerAccount(riotAccount.puuid, regionId);
+    const riotAccount = await Riot.getRiotAccountByName(gameName, tagLine, regionId);
+    const summonerAccount = await Riot.getSummonerAccountByPUUID(riotAccount.puuid, regionId);
     const summonerProfile = {
       regionId,
       ...riotAccount,
