@@ -4,6 +4,7 @@
 import React from 'react';
 import { Auth } from '@supabase/auth-ui-react';
 import { getBrowserClient } from '@/lib/supabase/browser';
+import { ThemeSupa } from '@supabase/auth-ui-shared'
 
 // Initialize Supabase client
 
@@ -18,6 +19,8 @@ const SignInPage = () => {
                     supabaseClient={supabase} 
                     providers={['google']} 
                     socialLayout="horizontal"
+                    appearance={{ theme: ThemeSupa }}
+                    theme="dark"
                     view="sign_in" // Explicitly set to sign in
                 />
             </div>
