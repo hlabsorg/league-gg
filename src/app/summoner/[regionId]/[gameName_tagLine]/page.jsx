@@ -6,6 +6,7 @@ import {
   getSummonerProfileByPUUID,
 } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
+import { ChampionIcon } from "@/components/champion-icon";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;
@@ -69,6 +70,12 @@ export default async function Page({ params }) {
             <div className="text-center mb-4">
               <h3 className="text-xl font-medium">{matchHistory.info.gameMode}</h3>
               <p className="text-gray-600">{new Date(matchHistory.info.gameCreation).toLocaleDateString()}</p>
+              <p className={`font-bold ${matchHistory.info.teams[0].win ? 'text-blue-600' : 'text-red-600'}`}>
+                {matchHistory.info.teams[0].win ? 'Victory' : 'Defeat'}
+              </p>
+              <p className="text-sm text-gray-500">
+                Duration: {Math.floor(matchHistory.info.gameDuration / 60)}m {matchHistory.info.gameDuration % 60}s
+              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -79,10 +86,24 @@ export default async function Page({ params }) {
                   .filter(p => p.teamId === 100)
                   .map((participant) => (
                     <div key={participant.puuid} className="flex items-center p-2 bg-blue-50 rounded">
-                      <ProfileIcon profileIconId={participant.profileIcon} size={32} />
-                      <div className="ml-2">
-                        <p className="font-medium">{participant.riotIdGameName}</p>
-                        <p className="text-sm text-gray-600">#{participant.riotIdTagline}</p>
+                      <div className="flex items-center gap-2">
+                        <ChampionIcon championName={participant.championName} size={40} />
+                        <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                      </div>
+                      <div className="ml-2 flex-grow">
+                        <div className="flex items-center">
+                          <p className="font-medium">{participant.riotIdGameName}</p>
+                          <p className="text-sm text-gray-600 ml-1">#{participant.riotIdTagline}</p>
+                        </div>
+                        <div className="text-sm">
+                          <span className="font-medium">{participant.kills}/{participant.deaths}/{participant.assists}</span>
+                          <span className="ml-2 text-gray-500">
+                            CS: {participant.totalMinionsKilled}
+                            {/* toFixed rounds the CS/min to one decimal place */}
+                            {/* CS is displayed in seconds so convert it to min and then use the games duration */}
+                            ({((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min) 
+                          </span>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -95,10 +116,22 @@ export default async function Page({ params }) {
                   .filter(p => p.teamId === 200)
                   .map((participant) => (
                     <div key={participant.puuid} className="flex items-center p-2 bg-red-50 rounded">
-                      <ProfileIcon profileIconId={participant.profileIcon} size={32} />
-                      <div className="ml-2">
-                        <p className="font-medium">{participant.riotIdGameName}</p>
-                        <p className="text-sm text-gray-600">#{participant.riotIdTagline}</p>
+                      <div className="flex items-center gap-2">
+                        <ChampionIcon championName={participant.championName} size={40} />
+                        <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                      </div>
+                      <div className="ml-2 flex-grow">
+                        <div className="flex items-center">
+                          <p className="font-medium">{participant.riotIdGameName}</p>
+                          <p className="text-sm text-gray-600 ml-1">#{participant.riotIdTagline}</p>
+                        </div>
+                        <div className="text-sm">
+                          <span className="font-medium">{participant.kills}/{participant.deaths}/{participant.assists}</span>
+                          <span className="ml-2 text-gray-500">
+                            CS: {participant.totalMinionsKilled}
+                            ({((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min)
+                          </span>
+                        </div>
                       </div>
                     </div>
                   ))}
