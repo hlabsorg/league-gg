@@ -3,7 +3,8 @@ import Image from 'next/image';
 const SUPABASE_ASSET_PATH = '/storage/v1/object/public/league-assets';
 
 export function ChampionIcon({ championName, size = 32 }) {
-  if (!championName) return null;
+  if (!championName) 
+    return null;
   
   // Convert champion names like "Kai'Sa" to "KaiSa" for the image URL
   const formattedName = championName.replace(/[^a-zA-Z]/g, '');

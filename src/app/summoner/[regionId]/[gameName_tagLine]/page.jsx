@@ -7,6 +7,7 @@ import {
 } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { ChampionIcon } from "@/components/champion-icon";
+import { ItemIcon } from "@/components/item-icon";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;
@@ -99,10 +100,21 @@ export default async function Page({ params }) {
                           <span className="font-medium">{participant.kills}/{participant.deaths}/{participant.assists}</span>
                           <span className="ml-2 text-gray-500">
                             CS: {participant.totalMinionsKilled}
-                            {/* toFixed rounds the CS/min to one decimal place */}
-                            {/* CS is displayed in seconds so convert it to min and then use the games duration */}
-                            ({((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min) 
+                            ({((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min)
                           </span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-1">
+                          <div className="flex gap-1">
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item0} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item1} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item2} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item3} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item4} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item5} /></div>
+                          </div>
+                          <div className="ml-1 w-6 h-6">
+                            <ItemIcon itemId={participant.item6} /> {/* Trinket */}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -131,6 +143,19 @@ export default async function Page({ params }) {
                             CS: {participant.totalMinionsKilled}
                             ({((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min)
                           </span>
+                        </div>
+                        <div className="flex items-center gap-1 mt-1">
+                          <div className="flex gap-1">
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item0} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item1} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item2} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item3} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item4} /></div>
+                            <div className="w-6 h-6"><ItemIcon itemId={participant.item5} /></div>
+                          </div>
+                          <div className="ml-1 w-6 h-6">
+                            <ItemIcon itemId={participant.item6} /> {/* Trinket */}
+                          </div>
                         </div>
                       </div>
                     </div>
