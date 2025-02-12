@@ -17,6 +17,25 @@ export const requestRiot = (url) =>
 export const getRiotAccount = async (gameName, tagLine, regionId) => {
   const prefix = REGION_MAP[regionId];
   const url = `https://${prefix}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
+  // const cached = await checkCache(url);
+  // if (cached) {
+  //   return cached;
+  // }
+  const res = await requestRiot(url);
+  const response = await res.json();
+  if (!res.ok) {
+    const error = new Error(response.status.message);
+    error.status = res.status;
+    throw error;
+  }
+  // await setCache(url, response, {
+  //   ex: 604800,
+  // });
+  return response;
+};
+
+export const getSummonerAccount = async (puuid, regionId) => {
+  const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
   const cached = await checkCache(url);
   if (cached) {
     return cached;
@@ -28,21 +47,7 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
     error.status = res.status;
     throw error;
   }
-  await setCache(url, response, {
-    ex: 604800,
-  });
-  return response;
-};
-
-export const getSummonerAccount = async (puuid, regionId) => {
-  const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
-  const res = await requestRiot(url);
-  const response = await res.json();
-  if (!res.ok) {
-    const error = new Error(response.status.message);
-    error.status = res.status;
-    throw error;
-  }
+  await setCache(url, response);
   return response;
 };
 
