@@ -1,9 +1,9 @@
-import { SUPABASE_ASSET_PATH } from "@/constants/supabase";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { Icons } from "./icons";
+import { DATA_DRAGON_ASSETS_PATH } from "@/constants/data_dragon";
 
 const ProfileIcon = ({ profileIconId }) => {
-  const src = `https://${process.env.NEXT_PUBLIC_SUPABASE_ASSET_HOST}${SUPABASE_ASSET_PATH}/icons/profile/${profileIconId}.png`;
+  const src = `${DATA_DRAGON_ASSETS_PATH}/img/profileicon/${profileIconId}.png`;
   return (
     <Avatar>
       <AvatarImage src={src} alt={profileIconId} />

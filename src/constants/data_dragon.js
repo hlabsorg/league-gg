@@ -1,0 +1,1 @@
+export const DATA_DRAGON_ASSETS_PATH = `https://${process.env.NEXT_PUBLIC_DATA_DRAGON_ASSET_HOST}/cdn/${process.env.NEXT_PUBLIC_DATA_DRAGON_VERSION}`;
