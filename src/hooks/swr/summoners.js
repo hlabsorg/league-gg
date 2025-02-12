@@ -4,8 +4,6 @@ import { fetcher } from "./fetcher";
 
 const API_PREFIX = "/api/v1.0";
 
-const aukai = "aukai";
-
 export const useSummoners = (gameName, tagLine, regionId) => {
   const params = qs.stringify({
     gameName,
