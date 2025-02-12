@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_SUPABASE_ASSET_HOST,
+        hostname: process.env.NEXT_PUBLIC_DATA_DRAGON_ASSET_HOST,
         port: "",
       },
     ],

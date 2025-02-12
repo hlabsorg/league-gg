@@ -21,9 +21,9 @@ To integrate the Riot API with your Next.js application:
 - **Authentication:** Include your API key in the `X-Riot-Token` header of your HTTP requests.
 
   ```javascript
-  const response = await fetch('https://<region>.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}', {
+  const response = await fetch("https://<region>.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}", {
     headers: {
-      'X-Riot-Token': process.env.RIOT_API_KEY,
+      "X-Riot-Token": process.env.RIOT_API_KEY,
     },
   });
   ```
@@ -61,10 +61,12 @@ For detailed information, consult the [Rate Limiting Documentation](https://deve
 Key endpoints relevant to your application include:
 
 - **Summoner API:** Retrieve summoner details by name or PUUID.
+
   - `/lol/summoner/v4/summoners/by-name/{summonerName}`
   - `/lol/summoner/v4/summoners/by-puuid/{puuid}`
 
 - **Match API:** Access match history and details.
+
   - `/lol/match/v5/matches/by-puuid/{puuid}/ids`
   - `/lol/match/v5/matches/{matchId}`
 
@@ -86,4 +88,3 @@ For a complete list, refer to the [API Reference](https://developer.riotgames.co
 - **Community Libraries:** Utilize existing libraries to streamline integration.
 
 - **Support:** Engage with the developer community and access support through the [Developer Portal](https://developer.riotgames.com/).
-
