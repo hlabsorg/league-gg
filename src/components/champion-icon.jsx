@@ -1,15 +1,11 @@
-import Image from 'next/image';
+import Image from "next/image";
 import { DATA_DRAGON_ASSETS_PATH } from "@/constants/data_dragon";
 
 // const SUPABASE_ASSET_PATH = '/storage/v1/object/public/league-assets';
 
 export function ChampionIcon({ championName, size = 32 }) {
-  if (!championName) 
-    return null;
-  
-  // Convert champion names like "Kai'Sa" to "KaiSa" for the image URL
-  const formattedName = championName.replace(/[^a-zA-Z]/g, '');
-  
+  if (!championName) return null;
+
   return (
     <Image
       src={`${DATA_DRAGON_ASSETS_PATH}/img/champion/${championName}.png`}
@@ -20,4 +16,4 @@ export function ChampionIcon({ championName, size = 32 }) {
       unoptimized
     />
   );
-} 
+}
