@@ -1,4 +1,5 @@
 import { REGION_IDS } from "@/constants/regions";
+import Link from "next/link";
 import {
   getSummonerProfile,
   getSummonerEntries,
@@ -89,7 +90,13 @@ export default async function Page({ params }) {
                     <div key={participant.puuid} className="flex items-center p-2 bg-blue-50 rounded">
                       <div className="flex items-center gap-2">
                         <ChampionIcon championName={participant.championName} size={40} />
+                        <Link
+                            prefetch
+                            href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
+                            className="w-full"
+                          >
                         <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                        </Link>
                       </div>
                       <div className="ml-2 flex-grow">
                         <div className="flex items-center">
@@ -130,7 +137,13 @@ export default async function Page({ params }) {
                     <div key={participant.puuid} className="flex items-center p-2 bg-red-50 rounded">
                       <div className="flex items-center gap-2">
                         <ChampionIcon championName={participant.championName} size={40} />
+                        <Link
+                            prefetch
+                            href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
+                            className="w-full"
+                          >
                         <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                        </Link>
                       </div>
                       <div className="ml-2 flex-grow">
                         <div className="flex items-center">

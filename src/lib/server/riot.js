@@ -34,7 +34,7 @@ export const getRiotAccountByName = async (gameName, tagLine, regionId) => {
   return response;
 };
 
-export const getSummonerAccount = async (puuid, regionId) => {
+export const getSummonerAccountByPUUID = async (puuid, regionId) => {
   const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
   const cached = await checkCache(url);
   if (cached) {

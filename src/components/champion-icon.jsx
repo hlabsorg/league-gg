@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { DATA_DRAGON_ASSETS_PATH } from "@/constants/data_dragon";
 
-const SUPABASE_ASSET_PATH = '/storage/v1/object/public/league-assets';
+// const SUPABASE_ASSET_PATH = '/storage/v1/object/public/league-assets';
 
 export function ChampionIcon({ championName, size = 32 }) {
   if (!championName) 
@@ -11,7 +12,7 @@ export function ChampionIcon({ championName, size = 32 }) {
   
   return (
     <Image
-      src={`https://${process.env.NEXT_PUBLIC_SUPABASE_ASSET_HOST}${SUPABASE_ASSET_PATH}/icons/champion/${formattedName}.png`}
+      src={`${DATA_DRAGON_ASSETS_PATH}/img/champion/${championName}.png`}
       alt={championName}
       className="rounded"
       width={size}
