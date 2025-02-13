@@ -14,7 +14,7 @@ export const requestRiot = (url) =>
     },
   });
 
-export const getRiotAccount = async (gameName, tagLine, regionId) => {
+export const getRiotAccountByName = async (gameName, tagLine, regionId) => {
   const prefix = REGION_MAP[regionId];
   const url = `https://${prefix}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
   // const cached = await checkCache(url);
@@ -34,7 +34,7 @@ export const getRiotAccount = async (gameName, tagLine, regionId) => {
   return response;
 };
 
-export const getSummonerAccount = async (puuid, regionId) => {
+export const getSummonerAccountByPUUID = async (puuid, regionId) => {
   const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
   const cached = await checkCache(url);
   if (cached) {
@@ -109,8 +109,8 @@ export const getMatch = async (matchId, regionId) => {
 };
 
 export const Riot = {
-  getRiotAccount,
-  getSummonerAccount,
+  getRiotAccountByName,
+  getSummonerAccountByPUUID,
   getLeagueEntries,
   getSummonerMatches,
   getMatch,
