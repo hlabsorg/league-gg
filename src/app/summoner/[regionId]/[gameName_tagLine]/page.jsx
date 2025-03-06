@@ -198,10 +198,12 @@ export default async function Page({ params }) {
         </div>
       </div>
 
-      <div>
-        <h1>Match History</h1>
-        <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
-      </div>
+      {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
+        <div>
+          <h1>Match History</h1>
+          <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 }
