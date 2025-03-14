@@ -42,9 +42,13 @@ export const getSummonerEntries = async (summonerId, regionId) => {
 
 export const getSummonerMatchHistory = async (puuid, regionId) => {
   try {
-    const matches = await Riot.getSummonerMatches(puuid, regionId);
-    const matchHistory = await Riot.getMatch(matches[0], regionId);
-    return [matchHistory, null];
+    const matchIds = await Riot.getSummonerMatches(puuid, regionId);
+    // Fetch first 3 matches
+    const matchPromises = matchIds.slice(0, 3).map(matchId => 
+      Riot.getMatch(matchId, regionId)
+    );
+    const matches = await Promise.all(matchPromises);
+    return [matches, null];
   } catch (error) {
     console.error(error);
     return [null, error];
