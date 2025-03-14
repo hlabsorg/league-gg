@@ -59,7 +59,11 @@ export default async function Page({ params }) {
       </div>
       <div className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">Match History</h2>
-        <MatchHistory matches={matchHistory} regionId={regionId} />
+        <MatchHistory 
+          matches={matchHistory} 
+          regionId={regionId} 
+          summonerName={summonerProfile.gameName} 
+        />
       </div>
 
       <div>

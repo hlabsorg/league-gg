@@ -9,7 +9,7 @@ import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 
-export function MatchHistory({ matches, regionId }) {
+export function MatchHistory({ matches, regionId, summonerName }) {
   if (!matches || !Array.isArray(matches)) {
     return <div>No matches found</div>;
   }
@@ -17,13 +17,14 @@ export function MatchHistory({ matches, regionId }) {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       {matches.map((match, index) => {
-        // Find the current player in the match using the first PUUID from metadata
-        const currentPuuid = match.metadata.participants[0];
+        // Find the current summoner's data in the match
         const currentPlayer = match.info.participants.find(
-          p => p.puuid === currentPuuid
+          p => p.riotIdGameName?.toLowerCase() === summonerName.toLowerCase() || 
+               p.summonerName?.toLowerCase() === summonerName.toLowerCase()
         );
 
         if (!currentPlayer) {
+          console.warn(`Could not find ${summonerName} in match:`, match.info.gameId);
           return null; // Skip this match if player not found
         }
 
