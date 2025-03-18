@@ -80,7 +80,6 @@ export default async function Page({ params }) {
                   .map((participant) => (
                     <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
                       <div className="flex items-center gap-2">
-                        <ChampionIcon championName={participant.championName} size={40} />
                         <Link
                           prefetch
                           href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
@@ -88,6 +87,7 @@ export default async function Page({ params }) {
                         >
                           <ProfileIcon profileIconId={participant.profileIcon} size={32} />
                         </Link>
+                        <ChampionIcon championName={participant.championName} size={40} />
                       </div>
                       <div className="ml-2 grow">
                         <div className="flex items-center">
@@ -141,7 +141,6 @@ export default async function Page({ params }) {
                   .map((participant) => (
                     <div key={participant.puuid} className="flex items-center rounded bg-red-50 p-2">
                       <div className="flex items-center gap-2">
-                        <ChampionIcon championName={participant.championName} size={40} />
                         <Link
                           prefetch
                           href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
@@ -149,6 +148,7 @@ export default async function Page({ params }) {
                         >
                           <ProfileIcon profileIconId={participant.profileIcon} size={32} />
                         </Link>
+                        <ChampionIcon championName={participant.championName} size={40} />
                       </div>
                       <div className="ml-2 grow">
                         <div className="flex items-center">
