@@ -1,9 +1,7 @@
 import { REGION_IDS } from "@/constants/regions";
-import Link from "next/link";
 import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
-import { ChampionIcon } from "@/components/champion-icon";
-import { ItemIcon } from "@/components/item-icon";
+import { MatchHistory } from "@/components/match-history";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;
@@ -27,7 +25,7 @@ export default async function Page({ params }) {
   const [matchHistory, matchHistoryError] = await getSummonerMatchHistory(summonerProfile.puuid, regionId);
 
   if (matchHistoryError) {
-    return <div>{matchHistoryError.message}</div>;
+    return <div>Error loading match history</div>;
   }
 
   return (
@@ -58,144 +56,7 @@ export default async function Page({ params }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
-        <div className="space-y-4">
-          <div className="rounded-lg bg-white p-4 shadow">
-            <div className="mb-4 text-center">
-              <h3 className="text-xl font-medium">{matchHistory.info.gameMode}</h3>
-              <p className="text-gray-600">{new Date(matchHistory.info.gameCreation).toLocaleDateString()}</p>
-              <p className={`font-bold ${matchHistory.info.teams[0].win ? "text-blue-600" : "text-red-600"}`}>
-                {matchHistory.info.teams[0].win ? "Victory" : "Defeat"}
-              </p>
-              <p className="text-sm text-gray-500">
-                Duration: {Math.floor(matchHistory.info.gameDuration / 60)}m {matchHistory.info.gameDuration % 60}s
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {/* Blue Team */}
-              <div className="space-y-2">
-                <h4 className="mb-2 font-semibold text-blue-600">Blue Team</h4>
-                {matchHistory.info.participants
-                  .filter((p) => p.teamId === 100)
-                  .map((participant) => (
-                    <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
-                      <div className="flex items-center gap-2">
-                        <Link
-                          prefetch
-                          href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
-                          className="w-full"
-                        >
-                          <ProfileIcon profileIconId={participant.profileIcon} size={32} />
-                        </Link>
-                        <ChampionIcon championName={participant.championName} size={40} />
-                      </div>
-                      <div className="ml-2 grow">
-                        <div className="flex items-center">
-                          <p className="font-medium">{participant.riotIdGameName}</p>
-                          <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
-                        </div>
-                        <div className="text-sm">
-                          <span className="font-medium">
-                            {participant.kills}/{participant.deaths}/{participant.assists}
-                          </span>
-                          <span className="ml-2 text-gray-500">
-                            CS: {participant.totalMinionsKilled}(
-                            {((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min)
-                          </span>
-                        </div>
-                        <div className="mt-1 flex items-center gap-1">
-                          <div className="flex gap-1">
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item0} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item1} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item2} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item3} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item4} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item5} />
-                            </div>
-                          </div>
-                          <div className="ml-1 size-6">
-                            <ItemIcon itemId={participant.item6} /> {/* Trinket */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-
-              {/* Red Team */}
-              <div className="space-y-2">
-                <h4 className="mb-2 font-semibold text-red-600">Red Team</h4>
-                {matchHistory.info.participants
-                  .filter((p) => p.teamId === 200)
-                  .map((participant) => (
-                    <div key={participant.puuid} className="flex items-center rounded bg-red-50 p-2">
-                      <div className="flex items-center gap-2">
-                        <Link
-                          prefetch
-                          href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
-                          className="w-full"
-                        >
-                          <ProfileIcon profileIconId={participant.profileIcon} size={32} />
-                        </Link>
-                        <ChampionIcon championName={participant.championName} size={40} />
-                      </div>
-                      <div className="ml-2 grow">
-                        <div className="flex items-center">
-                          <p className="font-medium">{participant.riotIdGameName}</p>
-                          <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
-                        </div>
-                        <div className="text-sm">
-                          <span className="font-medium">
-                            {participant.kills}/{participant.deaths}/{participant.assists}
-                          </span>
-                          <span className="ml-2 text-gray-500">
-                            CS: {participant.totalMinionsKilled}(
-                            {((participant.totalMinionsKilled * 60) / matchHistory.info.gameDuration).toFixed(1)}/min)
-                          </span>
-                        </div>
-                        <div className="mt-1 flex items-center gap-1">
-                          <div className="flex gap-1">
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item0} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item1} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item2} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item3} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item4} />
-                            </div>
-                            <div className="size-6">
-                              <ItemIcon itemId={participant.item5} />
-                            </div>
-                          </div>
-                          <div className="ml-1 size-6">
-                            <ItemIcon itemId={participant.item6} /> {/* Trinket */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
       </div>
 
       <div>
