@@ -1,9 +1,6 @@
 import { REGION_IDS } from "@/constants/regions";
-import Link from "next/link";
 import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
-import { ChampionIcon } from "@/components/champion-icon";
-import { ItemIcon } from "@/components/item-icon";
 import { MatchHistory } from "@/components/match-history";
 
 export default async function Page({ params }) {

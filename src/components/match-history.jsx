@@ -1,9 +1,4 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "./ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
@@ -19,8 +14,9 @@ export function MatchHistory({ matches, regionId, summonerName }) {
       {matches.map((match, index) => {
         // Find the current summoner's data in the match
         const currentPlayer = match.info.participants.find(
-          p => p.riotIdGameName?.toLowerCase() === summonerName.toLowerCase() || 
-               p.summonerName?.toLowerCase() === summonerName.toLowerCase()
+          (p) =>
+            p.riotIdGameName?.toLowerCase() === summonerName.toLowerCase() ||
+            p.summonerName?.toLowerCase() === summonerName.toLowerCase(),
         );
 
         if (!currentPlayer) {
@@ -29,18 +25,16 @@ export function MatchHistory({ matches, regionId, summonerName }) {
         }
 
         return (
-          <AccordionItem key={match.info.gameId} value={`match-${index}`} className="border rounded-lg">
-            <AccordionTrigger className="px-4 py-2 hover:no-underline w-full">
-              <div className="flex items-center w-full gap-4">
+          <AccordionItem key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
+            <AccordionTrigger className="w-full px-4 py-2 hover:no-underline">
+              <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
-                <div className="flex-shrink-0 w-24">
+                <div className="w-24 shrink-0">
                   <p className="font-medium">{match.info.gameMode}</p>
-                  <p className={`font-bold ${currentPlayer.win ? 'text-blue-600' : 'text-red-600'}`}>
-                    {currentPlayer.win ? 'Victory' : 'Defeat'}
+                  <p className={`font-bold ${currentPlayer.win ? "text-blue-600" : "text-red-600"}`}>
+                    {currentPlayer.win ? "Victory" : "Defeat"}
                   </p>
-                  <p className="text-sm text-gray-500">
-                    {Math.floor(match.info.gameDuration / 60)}m
-                  </p>
+                  <p className="text-sm text-gray-500">{Math.floor(match.info.gameDuration / 60)}m</p>
                 </div>
 
                 {/* Champion and Summoner Info in preview */}
@@ -50,17 +44,19 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                 </div>
 
                 {/* KDA and CS */}
-                <div className="flex-grow">
+                <div className="grow">
                   <div className="flex items-center gap-2">
                     <span className="font-medium">
                       {currentPlayer.kills}/{currentPlayer.deaths}/{currentPlayer.assists}
                     </span>
                     <span className="text-gray-600">
-                      {((currentPlayer.kills + currentPlayer.assists) / Math.max(1, currentPlayer.deaths)).toFixed(2)} KDA
+                      {((currentPlayer.kills + currentPlayer.assists) / Math.max(1, currentPlayer.deaths)).toFixed(2)}{" "}
+                      KDA
                     </span>
                   </div>
                   <div className="text-sm text-gray-500">
-                    CS: {currentPlayer.totalMinionsKilled} ({((currentPlayer.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
+                    CS: {currentPlayer.totalMinionsKilled} (
+                    {((currentPlayer.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
                   </div>
                 </div>
 
@@ -76,7 +72,7 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                 </div>
 
                 {/* Game Time */}
-                <div className="flex-shrink-0 text-right text-sm text-gray-500">
+                <div className="shrink-0 text-right text-sm text-gray-500">
                   {new Date(match.info.gameCreation).toLocaleDateString()}
                 </div>
               </div>
@@ -86,11 +82,11 @@ export function MatchHistory({ matches, regionId, summonerName }) {
               <div className="grid grid-cols-2 gap-4">
                 {/* Blue Team */}
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-blue-600 mb-2">Blue Team</h4>
+                  <h4 className="mb-2 font-semibold text-blue-600">Blue Team</h4>
                   {match.info.participants
-                    .filter(p => p.teamId === 100)
-                    .map(participant => (
-                      <div key={participant.puuid} className="flex items-center p-2 bg-blue-50 rounded">
+                    .filter((p) => p.teamId === 100)
+                    .map((participant) => (
+                      <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
                         <div className="flex items-center gap-2">
                           <Link
                             prefetch
@@ -100,21 +96,21 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                           </Link>
                           <ChampionIcon championName={participant.championName} size={32} />
                         </div>
-                        <div className="ml-2 flex-grow">
+                        <div className="ml-2 grow">
                           <div className="flex items-center">
                             <p className="font-medium">{participant.riotIdGameName}</p>
-                            <p className="text-sm text-gray-600 ml-1">#{participant.riotIdTagline}</p>
+                            <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
                           </div>
                           <div className="text-sm">
                             <span className="font-medium">
                               {participant.kills}/{participant.deaths}/{participant.assists}
                             </span>
                             <span className="ml-2 text-gray-500">
-                              CS: {participant.totalMinionsKilled}
-                              ({((participant.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
+                              CS: {participant.totalMinionsKilled}(
+                              {((participant.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
                             </span>
                           </div>
-                          <div className="flex gap-1 mt-1">
+                          <div className="mt-1 flex gap-1">
                             <ItemIcon itemId={participant.item0} size={20} />
                             <ItemIcon itemId={participant.item1} size={20} />
                             <ItemIcon itemId={participant.item2} size={20} />
@@ -130,11 +126,11 @@ export function MatchHistory({ matches, regionId, summonerName }) {
 
                 {/* Red Team */}
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-red-600 mb-2">Red Team</h4>
+                  <h4 className="mb-2 font-semibold text-red-600">Red Team</h4>
                   {match.info.participants
-                    .filter(p => p.teamId === 200)
-                    .map(participant => (
-                      <div key={participant.puuid} className="flex items-center p-2 bg-red-50 rounded">
+                    .filter((p) => p.teamId === 200)
+                    .map((participant) => (
+                      <div key={participant.puuid} className="flex items-center rounded bg-red-50 p-2">
                         <div className="flex items-center gap-2">
                           <Link
                             prefetch
@@ -144,21 +140,21 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                           </Link>
                           <ChampionIcon championName={participant.championName} size={32} />
                         </div>
-                        <div className="ml-2 flex-grow">
+                        <div className="ml-2 grow">
                           <div className="flex items-center">
                             <p className="font-medium">{participant.riotIdGameName}</p>
-                            <p className="text-sm text-gray-600 ml-1">#{participant.riotIdTagline}</p>
+                            <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
                           </div>
                           <div className="text-sm">
                             <span className="font-medium">
                               {participant.kills}/{participant.deaths}/{participant.assists}
                             </span>
                             <span className="ml-2 text-gray-500">
-                              CS: {participant.totalMinionsKilled}
-                              ({((participant.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
+                              CS: {participant.totalMinionsKilled}(
+                              {((participant.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
                             </span>
                           </div>
-                          <div className="flex gap-1 mt-1">
+                          <div className="mt-1 flex gap-1">
                             <ItemIcon itemId={participant.item0} size={20} />
                             <ItemIcon itemId={participant.item1} size={20} />
                             <ItemIcon itemId={participant.item2} size={20} />
@@ -178,4 +174,4 @@ export function MatchHistory({ matches, regionId, summonerName }) {
       })}
     </Accordion>
   );
-} 
+}
