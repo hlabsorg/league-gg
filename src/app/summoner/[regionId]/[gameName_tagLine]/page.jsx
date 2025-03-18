@@ -59,36 +59,12 @@ export default async function Page({ params }) {
         <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
       </div>
 
-      <div>
-        <h1>Match History</h1>
-        <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
-      </div>
+      {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
+        <div>
+          <h1>Match History</h1>
+          <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
-}
-
-{
-  /* </div>
-    <div>
-      <div>
-        <h1>
-          <ProfileIcon profileIconId={summonerProfile.profileIconId} />
-          Summoner Info</h1>
-        <pre>{JSON.stringify(summonerProfile, null, 2)}</pre>
-      </div>
-      <div>
-        <h1>League Entries</h1>
-        <pre>{JSON.stringify(entries, null, 2)}</pre>
-      </div>
-      <div>
-        <h1>Match History</h1>
-        <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
-      </div>
-      <div>
-        <h1>ParticipantOne </h1>
-        <pre>{JSON.stringify(participantOne, null, 2)}</pre>
-      </div>
-    </div>
-  );
-} */
 }
