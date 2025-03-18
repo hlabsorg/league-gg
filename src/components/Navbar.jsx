@@ -24,7 +24,7 @@ export default function Navbar() {
             </Link>
           </div>
           <Button asChild className="rounded-full">
-            <Link href="/signin">Sign In</Link>
+            <Link href="/login">Sign In</Link>
           </Button>
           <Button>
             <Link href="/signup">Sign Up</Link>
