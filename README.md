@@ -18,6 +18,7 @@ NEXT_PUBLIC_DATA_DRAGON_ASSET_HOST=(paste url here)
 NEXT_PUBLIC_DATA_DRAGON_VERSION=(paste url here)
 NEXT_PUBLIC_SUPABASE_URL=(paste url here)
 NEXT_PUBLIC_SUPABASE_ANON_KEY=(paste key here)
+NEXT_PUBLIC_DEBUG_MODE=(paste value here)
 
 # server envs
 RIOT_API_KEY=(paste key here)
