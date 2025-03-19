@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { getBrowserClient } from '@/lib/supabase/browser';
+import { redirect } from 'next/navigation';
 
 const ProfilePage = () => {
     const mockUser = {
@@ -16,6 +17,7 @@ const ProfilePage = () => {
             console.error('Error logging out:', error.message);
         } else {
             console.log('Successfully logged out');
+            redirect("/"); // Redirect to the home page after logout
         }
     };
 
