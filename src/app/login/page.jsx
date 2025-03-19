@@ -1,15 +1,28 @@
 "use client";
 
-// league-gg/src/app/signin/page.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { getBrowserClient } from "@/lib/supabase/browser";
+import { useRouter } from "next/navigation"; 
 
 // Initialize Supabase client
-
 const supabase = getBrowserClient();
 
 const SignInPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_IN") {
+        router.push("/profile"); // Redirect to profile page on successful sign-in
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router]);
+
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
