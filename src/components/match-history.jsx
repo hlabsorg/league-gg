@@ -39,8 +39,10 @@ export function MatchHistory({ matches, regionId, summonerName }) {
 
                 {/* Champion and Summoner Info in preview */}
                 <div className="flex items-center gap-2">
-                  <ProfileIcon profileIconId={currentPlayer.profileIcon} size={48} />
-                  <ChampionIcon championName={currentPlayer.championName} size={32} />
+                  <ProfileIcon profileIconId={currentPlayer.profileIcon} size={32} />
+                  <div className="h-7 w-7 overflow-hidden">
+                    <ChampionIcon championName={currentPlayer.championName} size={28} />
+                  </div>
                 </div>
 
                 {/* KDA and CS */}
@@ -92,9 +94,11 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             prefetch
                             href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
                           >
-                            <ProfileIcon profileIconId={participant.profileIcon} size={40} />
+                            <ProfileIcon profileIconId={participant.profileIcon} size={32} />
                           </Link>
-                          <ChampionIcon championName={participant.championName} size={32} />
+                          <div className="h-6 w-6">
+                            <ChampionIcon championName={participant.championName} size={24} />
+                          </div>
                         </div>
                         <div className="ml-2 grow">
                           <div className="flex items-center">
@@ -136,9 +140,11 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             prefetch
                             href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
                           >
-                            <ProfileIcon profileIconId={participant.profileIcon} size={40} />
+                            <ProfileIcon profileIconId={participant.profileIcon} size={32} />
                           </Link>
-                          <ChampionIcon championName={participant.championName} size={32} />
+                          <div className="h-6 w-6">
+                            <ChampionIcon championName={participant.championName} size={24} />
+                          </div>
                         </div>
                         <div className="ml-2 grow">
                           <div className="flex items-center">
