@@ -1,7 +1,8 @@
 import { REGION_IDS } from "@/constants/regions";
-import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/lib/server/actions/summoner-page";
+import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory, getSummonerChampionMasteries } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
+import { ChampionMasteries } from "@/components/champion-masteries";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;
@@ -20,6 +21,11 @@ export default async function Page({ params }) {
   const [entries, entriesError] = await getSummonerEntries(summonerProfile.id, regionId);
   if (entriesError) {
     return <div>{entriesError.message}</div>;
+  }
+
+  const [masteries, masteriesError] = await getSummonerChampionMasteries(summonerProfile.puuid, regionId);
+  if (masteriesError) {
+    return <div>Error loading champion masteries</div>;
   }
 
   const [matchHistory, matchHistoryError] = await getSummonerMatchHistory(summonerProfile.puuid, regionId);
@@ -55,14 +61,21 @@ export default async function Page({ params }) {
         )}
       </div>
       <div className="mb-6">
+        <h2 className="mb-4 text-2xl font-semibold">Champion Masteries</h2>
+        <ChampionMasteries masteries={masteries} />
+      </div>
+      <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
         <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
       </div>
 
       {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
         <div>
-          <h1>Match History</h1>
+          <h1>Debug Information</h1>
+          <h2>Match History</h2>
           <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
+          <h2>Champion Masteries</h2>
+          <pre>{JSON.stringify(masteries, null, 2)}</pre>
         </div>
       )}
     </div>
