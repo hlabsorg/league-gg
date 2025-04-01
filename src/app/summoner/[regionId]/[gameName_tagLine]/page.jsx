@@ -2,8 +2,14 @@ import { REGION_IDS } from "@/constants/regions";
 import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
+import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queueTypes";
+import Link from "next/link";
 
-export default async function Page({ params }) {
+
+export default async function Page({ params, searchParams }) {
+  const queryParams = await searchParams;
+  const queueType = queryParams.hasOwnProperty("queue") ? queryParams.queue : "all";
+  const queueId = QUEUE_IDS[queueType] || null;
   const { regionId, gameName_tagLine } = await params;
   if (!Object.values(REGION_IDS).includes(regionId)) {
     return <div>Invalid region: {regionId}</div>;
@@ -22,7 +28,7 @@ export default async function Page({ params }) {
     return <div>{entriesError.message}</div>;
   }
 
-  const [matchHistory, matchHistoryError] = await getSummonerMatchHistory(summonerProfile.puuid, regionId);
+  const [matchHistory, matchHistoryError] = await getSummonerMatchHistory(summonerProfile.puuid, regionId, queueId);
 
   if (matchHistoryError) {
     return <div>Error loading match history</div>;
@@ -56,7 +62,15 @@ export default async function Page({ params }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
-        <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
+        <div>
+        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.SOLO}`}> solo
+        </Link>
+        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.FLEX}`}> flex
+        </Link>
+        
+        </div>
+          <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} queueId={queueId}/>
+        
       </div>
 
       {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
