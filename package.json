@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "format": "prettier --write '**/*{js,jsx,ts,tsx,json,css,scss,md,mdx}' --list-different",
-    "format:staged": "pretty-quick --staged"
+    "format:staged": "pretty-quick --staged",
+    "update-ddragon": "node scripts/update-ddragon-version.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",

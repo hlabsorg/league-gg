@@ -1,51 +1,21 @@
-// Cache for champion data
-let championJson = {};
-let championByIdCache = {};
-
 export async function getLatestChampionDDragon(language = "en_US") {
-  if (championJson[language]) {
-    return championJson[language];
-  }
-
-  let response;
-  let versionIndex = 0;
-  
-  // Loop over versions because some versions might be broken
-  do {
-    const versionsRes = await fetch("https://ddragon.leagueoflegends.com/api/versions.json");
-    const versions = await versionsRes.json();
-    const version = versions[versionIndex++];
-
-    response = await fetch(
-      `https://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/champion.json`
-    );
-  } while (!response.ok);
-
-  championJson[language] = await response.json();
-  return championJson[language];
+  const response = await fetch(
+    `https://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_DATA_DRAGON_VERSION}/data/${language}/champion.json`
+  );
+  return await response.json();
 }
 
 export async function getChampionIdToNameMapping(language = "en_US") {
-  // Setup cache
-  if (!championByIdCache[language]) {
-    const json = await getLatestChampionDDragon(language);
-    
-    championByIdCache[language] = {};
-    for (const championName in json.data) {
-      if (!json.data.hasOwnProperty(championName)) continue;
-      
-      const champInfo = json.data[championName];
-      championByIdCache[language][champInfo.key] = champInfo.id;
-    }
-  }
-
-  return championByIdCache[language];
+  const json = await getLatestChampionDDragon(language);
+  return Object.fromEntries( 
+    Object.values(json.data).map(champ => [champ.key, champ.id])// Takes the json data and turns it into an array with the key(number) and id(champion name). 
+    // The map gives us the an array of arrays that contains the champion id number and the champion name. 
+    // object.fromentries turns it into an object with the key being the champion id number and the value being the champion name.
+  );
 }
 
 export async function getChampionByKey(key, language = "en_US") {
-  const json = await getLatestChampionDDragon(language);
-  const mapping = await getChampionIdToNameMapping(language);
-  const championName = mapping[key];
-  
+  const getChampionName = await getChampionIdToNameMapping(language);
+  const championName = getChampionName[key];
   return championName ? json.data[championName] : null;
 } 

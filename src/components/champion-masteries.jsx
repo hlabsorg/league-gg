@@ -44,7 +44,6 @@ export function ChampionMasteries({ masteries }) {
           <div className="relative">
             <div className="relative h-16 w-16 overflow-hidden rounded-lg ring-2 ring-black/10">
               <ChampionIcon 
-                championId={mastery.championId} 
                 championName={championNames[mastery.championId]} 
                 size={64} 
               />
