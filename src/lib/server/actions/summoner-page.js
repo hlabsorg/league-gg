@@ -54,3 +54,13 @@ export const getSummonerMatchHistory = async (puuid, regionId, queueId) => {
     return [null, error];
   }
 };
+
+export const getSummonerChampionMasteries = async (puuid, regionId) => {
+  try {
+    const masteries = await Riot.getChampionMasteries(puuid, regionId);
+    return [masteries, null];
+  } catch (error) {
+    console.error(error);
+    return [null, error];
+  }
+};

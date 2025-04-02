@@ -109,10 +109,28 @@ export const getMatch = async (matchId, regionId) => {
   return response;
 };
 
+export const getChampionMasteries = async (puuid, regionId) => {
+  const url = `https://${regionId}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}`;
+  const cached = await checkCache(url);
+  if (cached) {
+    return cached;
+  }
+  const res = await requestRiot(url);
+  const response = await res.json();
+  if (!res.ok) {
+    const error = new Error(response.status.message);
+    error.status = res.status;
+    throw error;
+  }
+  await setCache(url, response);
+  return response;
+};
+
 export const Riot = {
   getRiotAccountByName,
   getSummonerAccountByPUUID,
   getLeagueEntries,
   getSummonerMatches,
   getMatch,
+  getChampionMasteries,
 };
