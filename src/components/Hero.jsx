@@ -53,7 +53,6 @@ export function Hero() {
     <section className="relative h-[500px] w-full bg-background">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/50" />
       </div>
