@@ -1,6 +1,9 @@
+import { DATA_DRAGON_ASSETS_PATH } from "@/constants/data_dragon";
+
+
 export async function getLatestChampionDDragon(language = "en_US") {
   const response = await fetch(
-    `https://ddragon.leagueoflegends.com/cdn/${process.env.NEXT_PUBLIC_DATA_DRAGON_VERSION}/data/${language}/champion.json`
+    `${ DATA_DRAGON_ASSETS_PATH }/data/${language}/champion.json`
   );
   return await response.json();
 }
@@ -17,5 +20,5 @@ export async function getChampionIdToNameMapping(language = "en_US") {
 export async function getChampionByKey(key, language = "en_US") {
   const getChampionName = await getChampionIdToNameMapping(language);
   const championName = getChampionName[key];
-  return championName ? json.data[championName] : null;
+  return championName;
 } 
