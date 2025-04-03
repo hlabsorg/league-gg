@@ -4,13 +4,13 @@ import {
   getSummonerEntries,
   getSummonerMatchHistory,
   getSummonerChampionMasteries,
+  getMappedChampionNames,
 } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
 import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queue-types";
 import Link from "next/link";
 import { ChampionMasteries } from "@/components/champion-masteries";
-import { getMappedChampionNames } from "@/lib/server/actions/summoner-page";
 
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;

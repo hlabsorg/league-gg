@@ -1,7 +1,7 @@
 "use server";
 
-import { Riot } from "@/lib/server/riot";
-import { getChampionIdToNameMapping } from "@/lib/server/champions";
+import { Riot } from "@/lib/riot/riot";
+import { DataDragon } from "@/lib/riot/data-dragon";
 
 export const getSummonerProfile = async (gameName, tagLine, regionId) => {
   try {
@@ -43,11 +43,9 @@ export const getSummonerEntries = async (summonerId, regionId) => {
 
 export const getSummonerMatchHistory = async (puuid, regionId, queueId) => {
   try {
-    const matchIds = await Riot.getSummonerMatches(puuid, regionId, queueId );
+    const matchIds = await Riot.getSummonerMatches(puuid, regionId, queueId);
     // Fetch first 3 matches
-    const matchPromises = matchIds.slice(0, 3).map(matchId => 
-      Riot.getMatch(matchId, regionId)
-    );
+    const matchPromises = matchIds.slice(0, 3).map((matchId) => Riot.getMatch(matchId, regionId));
     const matches = await Promise.all(matchPromises);
     return [matches, null];
   } catch (error) {
@@ -68,10 +66,10 @@ export const getSummonerChampionMasteries = async (puuid, regionId) => {
 
 export const getMappedChampionNames = async () => {
   try {
-    const championNames = await getChampionIdToNameMapping();
-    return [championNames, null]
-  } catch (error){
+    const championNames = await DataDragon.getChampionIdToNameMapping();
+    return [championNames, null];
+  } catch (error) {
     console.error(error);
     return [null, error];
   }
-}
+};

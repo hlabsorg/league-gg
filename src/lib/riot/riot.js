@@ -3,7 +3,7 @@ import "server-only";
 import { REGION_MAP } from "@/constants/regions";
 import { setCache, checkCache } from "@/db/redis/cache";
 
-export const requestRiot = (url) =>
+const requestRiot = (url) =>
   fetch(url, {
     method: "GET",
     headers: {
@@ -14,7 +14,7 @@ export const requestRiot = (url) =>
     },
   });
 
-export const getRiotAccountByName = async (gameName, tagLine, regionId) => {
+const getRiotAccountByName = async (gameName, tagLine, regionId) => {
   const prefix = REGION_MAP[regionId];
   const url = `https://${prefix}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
   // const cached = await checkCache(url);
@@ -34,7 +34,7 @@ export const getRiotAccountByName = async (gameName, tagLine, regionId) => {
   return response;
 };
 
-export const getSummonerAccountByPUUID = async (puuid, regionId) => {
+const getSummonerAccountByPUUID = async (puuid, regionId) => {
   const url = `https://${regionId}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`;
   const cached = await checkCache(url);
   if (cached) {
@@ -51,7 +51,7 @@ export const getSummonerAccountByPUUID = async (puuid, regionId) => {
   return response;
 };
 
-export const getLeagueEntries = async (summonerId, regionId) => {
+const getLeagueEntries = async (summonerId, regionId) => {
   const url = `https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`;
   const cached = await checkCache(url);
   if (cached) {
@@ -68,7 +68,7 @@ export const getLeagueEntries = async (summonerId, regionId) => {
   return response;
 };
 
-export const getSummonerMatches = async (puuid, regionId, queueId) => {
+const getSummonerMatches = async (puuid, regionId, queueId) => {
   const prefix = REGION_MAP[regionId];
   const queue = queueId ? queueId : "";
   const url = `https://${prefix}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?queue=${queue}`;
@@ -89,7 +89,7 @@ export const getSummonerMatches = async (puuid, regionId, queueId) => {
   return response;
 };
 
-export const getMatch = async (matchId, regionId) => {
+const getMatch = async (matchId, regionId) => {
   const prefix = REGION_MAP[regionId];
   const url = `https://${prefix}.api.riotgames.com/lol/match/v5/matches/${matchId}`;
   const cached = await checkCache(url);
@@ -109,7 +109,7 @@ export const getMatch = async (matchId, regionId) => {
   return response;
 };
 
-export const getChampionMasteries = async (puuid, regionId) => {
+const getChampionMasteries = async (puuid, regionId) => {
   const url = `https://${regionId}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/${puuid}`;
   const cached = await checkCache(url);
   if (cached) {
