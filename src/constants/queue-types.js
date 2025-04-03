@@ -11,4 +11,4 @@ export const QUEUE_IDS = {
   [QUEUE_TYPES.SOLO]: 420,
   [QUEUE_TYPES.FLEX]: 440,
   [QUEUE_TYPES.ARAM]: 450,
-}
+};

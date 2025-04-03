@@ -1,12 +1,16 @@
 import { REGION_IDS } from "@/constants/regions";
-import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory, getSummonerChampionMasteries } from "@/lib/server/actions/summoner-page";
+import {
+  getSummonerProfile,
+  getSummonerEntries,
+  getSummonerMatchHistory,
+  getSummonerChampionMasteries,
+} from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
-import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queueTypes";
+import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queue-types";
 import Link from "next/link";
 import { ChampionMasteries } from "@/components/champion-masteries";
 import { getMappedChampionNames } from "@/lib/server/actions/summoner-page";
-
 
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;
@@ -41,7 +45,7 @@ export default async function Page({ params, searchParams }) {
     return <div>Error loading match history</div>;
   }
 
-  const [championNames, championNamesError ]= await getMappedChampionNames();
+  const [championNames, championNamesError] = await getMappedChampionNames();
   if (championNamesError) {
     return <div>Error loading champion names</div>;
   }
@@ -79,21 +83,13 @@ export default async function Page({ params, searchParams }) {
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
         <div>
-        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ALL}`}> All
-        </Link>
-        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.NORMAL}`}> Normal
-        </Link>
-        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.SOLO}`}> Solo
-        </Link>
-        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.FLEX}`}> Flex
-        </Link>
-        <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ARAM}`}> Aram
-        </Link>
-
-        
+          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ALL}`}> All</Link>
+          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.NORMAL}`}> Normal</Link>
+          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.SOLO}`}> Solo</Link>
+          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.FLEX}`}> Flex</Link>
+          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ARAM}`}> Aram</Link>
         </div>
-          <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName}/>
-        
+        <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
       </div>
 
       {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
@@ -108,4 +104,3 @@ export default async function Page({ params, searchParams }) {
     </div>
   );
 }
-
