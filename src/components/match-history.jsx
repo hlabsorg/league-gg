@@ -40,7 +40,7 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                 {/* Champion and Summoner Info in preview */}
                 <div className="flex items-center gap-2">
                   <ProfileIcon profileIconId={currentPlayer.profileIcon} size={32} />
-                  <div className="h-7 w-7 overflow-hidden">
+                  <div className="size-7 overflow-hidden">
                     <ChampionIcon championName={currentPlayer.championName} size={28} />
                   </div>
                 </div>
@@ -96,7 +96,7 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                           >
                             <ProfileIcon profileIconId={participant.profileIcon} size={32} />
                           </Link>
-                          <div className="h-6 w-6">
+                          <div className="size-6">
                             <ChampionIcon championName={participant.championName} size={24} />
                           </div>
                         </div>
@@ -142,7 +142,7 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                           >
                             <ProfileIcon profileIconId={participant.profileIcon} size={32} />
                           </Link>
-                          <div className="h-6 w-6">
+                          <div className="size-6">
                             <ChampionIcon championName={participant.championName} size={24} />
                           </div>
                         </div>
