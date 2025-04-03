@@ -83,11 +83,26 @@ export default async function Page({ params, searchParams }) {
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
         <div>
-          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ALL}`}> All</Link>
-          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.NORMAL}`}> Normal</Link>
-          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.SOLO}`}> Solo</Link>
-          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.FLEX}`}> Flex</Link>
-          <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ARAM}`}> Aram</Link>
+          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ALL}`}>
+            {" "}
+            All
+          </Link>
+          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.NORMAL}`}>
+            {" "}
+            Normal
+          </Link>
+          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.SOLO}`}>
+            {" "}
+            Solo
+          </Link>
+          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.FLEX}`}>
+            {" "}
+            Flex
+          </Link>
+          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ARAM}`}>
+            {" "}
+            Aram
+          </Link>
         </div>
         <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
       </div>
