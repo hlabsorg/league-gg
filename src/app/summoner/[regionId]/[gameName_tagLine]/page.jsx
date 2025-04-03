@@ -3,6 +3,7 @@ import { getSummonerProfile, getSummonerEntries, getSummonerMatchHistory, getSum
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
 import { ChampionMasteries } from "@/components/champion-masteries";
+import { getChampionIdToNameMapping } from "@/lib/server/champions";
 
 export default async function Page({ params }) {
   const { regionId, gameName_tagLine } = await params;
@@ -34,6 +35,8 @@ export default async function Page({ params }) {
     return <div>Error loading match history</div>;
   }
 
+  const championNames = await getChampionIdToNameMapping();
+
   return (
     <div className="bg-gray-100 p-6">
       <div className="mb-6 flex items-center">
@@ -62,7 +65,7 @@ export default async function Page({ params }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Champion Masteries</h2>
-        <ChampionMasteries masteries={masteries} />
+        <ChampionMasteries masteries={masteries} championNames={championNames} />
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
