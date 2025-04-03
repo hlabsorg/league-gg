@@ -86,7 +86,7 @@ export default async function Page({ params, searchParams }) {
 
         
         </div>
-          <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} queueId={queueId}/>
+          <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName}/>
         
       </div>
 
