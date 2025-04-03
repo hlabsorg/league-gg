@@ -51,9 +51,7 @@ export function Hero() {
 
   return (
     <section className="relative h-[500px] w-full bg-background">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-      >
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat">
         <div className="absolute inset-0 bg-black/50" />
       </div>
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">

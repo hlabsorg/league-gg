@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Riot } from "@/lib/server/riot";
+import { Riot } from "@/lib/riot/riot";
 import { getServerClient } from "@/lib/supabase/server";
 
 export const GET = async (req) => {
