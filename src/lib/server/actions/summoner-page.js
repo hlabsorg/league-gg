@@ -41,9 +41,9 @@ export const getSummonerEntries = async (summonerId, regionId) => {
   }
 };
 
-export const getSummonerMatchHistory = async (puuid, regionId) => {
+export const getSummonerMatchHistory = async (puuid, regionId, queueId) => {
   try {
-    const matchIds = await Riot.getSummonerMatches(puuid, regionId);
+    const matchIds = await Riot.getSummonerMatches(puuid, regionId, queueId );
     // Fetch first 3 matches
     const matchPromises = matchIds.slice(0, 3).map(matchId => 
       Riot.getMatch(matchId, regionId)
