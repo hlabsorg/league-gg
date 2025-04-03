@@ -4,7 +4,7 @@ import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 
-export function MatchHistory({ matches, regionId, summonerName }) {
+export function MatchHistory({ matches, regionId, summonerName, championNames }) {
   if (!matches || !Array.isArray(matches)) {
     return <div>No matches found</div>;
   }
@@ -39,9 +39,13 @@ export function MatchHistory({ matches, regionId, summonerName }) {
 
                 {/* Champion and Summoner Info in preview */}
                 <div className="flex items-center gap-2">
-                  <ProfileIcon profileIconId={currentPlayer.profileIcon} size={32} />
-                  <div className="size-7 overflow-hidden">
-                    <ChampionIcon championName={currentPlayer.championName} size={28} />
+                  <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12 lg:size-14" />
+                  <div className="overflow-hidden">
+                    <ChampionIcon
+                      championName={championNames[currentPlayer.championId]}
+                      size={128}
+                      className="size-6 lg:size-7"
+                    />
                   </div>
                 </div>
 
@@ -94,11 +98,13 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             prefetch
                             href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
                           >
-                            <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                            <ProfileIcon profileIconId={participant.profileIcon} className="size-12 lg:size-14" />
                           </Link>
-                          <div className="size-6">
-                            <ChampionIcon championName={participant.championName} size={24} />
-                          </div>
+                          <ChampionIcon
+                            championName={championNames[participant.championId]}
+                            size={24}
+                            className="size-6 lg:size-7"
+                          />
                         </div>
                         <div className="ml-2 grow">
                           <div className="flex items-center">
@@ -140,11 +146,13 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             prefetch
                             href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
                           >
-                            <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                            <ProfileIcon profileIconId={participant.profileIcon} className="size-12 lg:size-14" />
                           </Link>
-                          <div className="size-6">
-                            <ChampionIcon championName={participant.championName} size={24} />
-                          </div>
+                          <ChampionIcon
+                            championName={championNames[participant.championId]}
+                            size={24}
+                            className="size-6 lg:size-7"
+                          />
                         </div>
                         <div className="ml-2 grow">
                           <div className="flex items-center">
