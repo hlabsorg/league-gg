@@ -115,7 +115,7 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             </span>
                           </div>
                           <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} size={20} />
+                            <ItemIcon itemId={participant.item0} size={24} />
                             <ItemIcon itemId={participant.item1} size={20} />
                             <ItemIcon itemId={participant.item2} size={20} />
                             <ItemIcon itemId={participant.item3} size={20} />
