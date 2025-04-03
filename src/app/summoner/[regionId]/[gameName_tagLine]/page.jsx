@@ -53,7 +53,7 @@ export default async function Page({ params, searchParams }) {
   return (
     <div className="bg-gray-100 p-6">
       <div className="mb-6 flex items-center">
-        <ProfileIcon profileIconId={summonerProfile.profileIconId} />
+        <ProfileIcon profileIconId={summonerProfile.profileIconId} className="size-16 md:size-24 lg:size-32" />
         <div className="ml-4">
           <h1 className="text-3xl font-bold">
             {summonerProfile.gameName}#{summonerProfile.tagLine}
@@ -104,7 +104,12 @@ export default async function Page({ params, searchParams }) {
             Aram
           </Link>
         </div>
-        <MatchHistory matches={matchHistory} regionId={regionId} summonerName={summonerProfile.gameName} />
+        <MatchHistory
+          matches={matchHistory}
+          regionId={regionId}
+          summonerName={summonerProfile.gameName}
+          championNames={championNames}
+        />
       </div>
 
       {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (

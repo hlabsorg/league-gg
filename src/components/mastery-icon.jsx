@@ -11,7 +11,7 @@ export function MasteryIcon({ level, size = 24 }) {
     4: 4,
     3: 3,
     2: 2,
-    1: 1
+    1: 1,
   };
 
   const iconNumber = masteryIconMap[level] || 1;
@@ -23,7 +23,6 @@ export function MasteryIcon({ level, size = 24 }) {
       className="absolute -bottom-2 -right-2 z-10"
       width={size}
       height={size}
-      unoptimized
     />
   );
-} 
+}
