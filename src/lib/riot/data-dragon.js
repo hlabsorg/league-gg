@@ -14,7 +14,9 @@ const getLatestChampionDDragon = async (language = "en_US") => {
     error.status = res.status;
     throw Error;
   }
-  await setCache(url, response);
+  await setCache(url, response, {
+    ex: 604800,
+  });
   return response;
 };
 
