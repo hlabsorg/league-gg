@@ -1,8 +1,4 @@
-"use client";
-
 import { ChampionIcon } from "./champion-icon";
-import { useEffect, useState } from "react";
-import { getChampionIdToNameMapping } from "@/lib/server/champions";
 
 function MasteryLevel({ level }) {
   return (
@@ -14,16 +10,8 @@ function MasteryLevel({ level }) {
   );
 }
 
-export function ChampionMasteries({ masteries }) {
-  const [championNames, setChampionNames] = useState({});
+export async function ChampionMasteries({ masteries, championNames }) {
 
-  useEffect(() => {
-    async function loadChampionNames() {
-      const mapping = await getChampionIdToNameMapping();
-      setChampionNames(mapping);
-    }
-    loadChampionNames();
-  }, []);
 
   if (!masteries || !Array.isArray(masteries)) {
     return <div>No champion masteries found.</div>;

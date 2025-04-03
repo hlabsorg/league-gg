@@ -5,6 +5,7 @@ import { MatchHistory } from "@/components/match-history";
 import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queueTypes";
 import Link from "next/link";
 import { ChampionMasteries } from "@/components/champion-masteries";
+import { getMappedChampionNames } from "@/lib/server/actions/summoner-page";
 
 
 export default async function Page({ params, searchParams }) {
@@ -40,6 +41,11 @@ export default async function Page({ params, searchParams }) {
     return <div>Error loading match history</div>;
   }
 
+  const [championNames, championNamesError ]= await getMappedChampionNames();
+  if (championNamesError) {
+    return <div>Error loading champion names</div>;
+  }
+
   return (
     <div className="bg-gray-100 p-6">
       <div className="mb-6 flex items-center">
@@ -68,7 +74,7 @@ export default async function Page({ params, searchParams }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Champion Masteries</h2>
-        <ChampionMasteries masteries={masteries} />
+        <ChampionMasteries masteries={masteries} championNames={championNames} />
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>

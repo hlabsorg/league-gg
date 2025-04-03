@@ -1,6 +1,7 @@
 "use server";
 
 import { Riot } from "@/lib/server/riot";
+import { getChampionIdToNameMapping } from "@/lib/server/champions";
 
 export const getSummonerProfile = async (gameName, tagLine, regionId) => {
   try {
@@ -64,3 +65,13 @@ export const getSummonerChampionMasteries = async (puuid, regionId) => {
     return [null, error];
   }
 };
+
+export const getMappedChampionNames = async () => {
+  try {
+    const championNames = await getChampionIdToNameMapping();
+    return [championNames, null]
+  } catch (error){
+    console.error(error);
+    return [null, error];
+  }
+}
