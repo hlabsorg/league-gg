@@ -17,8 +17,8 @@ export async function getChampionIdToNameMapping(language = "en_US") {
   );
 }
 
-// export async function getChampionByKey(key, language = "en_US") {
-//   const getChampionName = await getChampionIdToNameMapping(language);
-//   const championName = getChampionName[key];
-//   return championName;
-// } 
+export async function getChampionByKey(key, language = "en_US") {
+  const getChampionName = await getChampionIdToNameMapping(language);
+  const championName = getChampionName[key];
+  return championName;
+} 
