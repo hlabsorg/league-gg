@@ -68,9 +68,10 @@ export const getLeagueEntries = async (summonerId, regionId) => {
   return response;
 };
 
-export const getSummonerMatches = async (puuid, regionId) => {
+export const getSummonerMatches = async (puuid, regionId, queueId) => {
   const prefix = REGION_MAP[regionId];
-  const url = `https://${prefix}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids`;
+  const queue = queueId ? queueId : "";
+  const url = `https://${prefix}.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?queue=${queue}`;
   const cached = await checkCache(url);
   if (cached) {
     return cached;
