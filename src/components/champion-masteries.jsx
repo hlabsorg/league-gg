@@ -29,7 +29,6 @@ export async function ChampionMasteries({ masteries, championNames }) {
             <div className="relative overflow-hidden rounded-lg ring-2 ring-black/10">
               <ChampionIcon
                 championName={championNames[mastery.championId]}
-                size={128}
                 className="size-10 md:size-12 lg:size-16"
               />
             </div>

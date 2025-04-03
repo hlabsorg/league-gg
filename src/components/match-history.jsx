@@ -41,11 +41,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 <div className="flex items-center gap-2">
                   <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12 lg:size-14" />
                   <div className="overflow-hidden">
-                    <ChampionIcon
-                      championName={championNames[currentPlayer.championId]}
-                      size={128}
-                      className="size-6 lg:size-7"
-                    />
+                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-6 lg:size-7" />
                   </div>
                 </div>
 
@@ -68,13 +64,13 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
 
                 {/* Items */}
                 <div className="flex gap-1">
-                  <ItemIcon itemId={currentPlayer.item0} size={24} />
-                  <ItemIcon itemId={currentPlayer.item1} size={24} />
-                  <ItemIcon itemId={currentPlayer.item2} size={24} />
-                  <ItemIcon itemId={currentPlayer.item3} size={24} />
-                  <ItemIcon itemId={currentPlayer.item4} size={24} />
-                  <ItemIcon itemId={currentPlayer.item5} size={24} />
-                  <ItemIcon itemId={currentPlayer.item6} size={24} />
+                  <ItemIcon itemId={currentPlayer.item0} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item1} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item2} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item3} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item4} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item5} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item6} className="size-6" />
                 </div>
 
                 {/* Game Time */}
@@ -102,7 +98,6 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                           </Link>
                           <ChampionIcon
                             championName={championNames[participant.championId]}
-                            size={24}
                             className="size-6 lg:size-7"
                           />
                         </div>
@@ -121,13 +116,13 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                             </span>
                           </div>
                           <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} size={20} />
-                            <ItemIcon itemId={participant.item1} size={20} />
-                            <ItemIcon itemId={participant.item2} size={20} />
-                            <ItemIcon itemId={participant.item3} size={20} />
-                            <ItemIcon itemId={participant.item4} size={20} />
-                            <ItemIcon itemId={participant.item5} size={20} />
-                            <ItemIcon itemId={participant.item6} size={20} />
+                            <ItemIcon itemId={participant.item0} className="size-5" />
+                            <ItemIcon itemId={participant.item1} className="size-5" />
+                            <ItemIcon itemId={participant.item2} className="size-5" />
+                            <ItemIcon itemId={participant.item3} className="size-5" />
+                            <ItemIcon itemId={participant.item4} className="size-5" />
+                            <ItemIcon itemId={participant.item5} className="size-5" />
+                            <ItemIcon itemId={participant.item6} className="size-5" />
                           </div>
                         </div>
                       </div>
@@ -150,7 +145,6 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                           </Link>
                           <ChampionIcon
                             championName={championNames[participant.championId]}
-                            size={24}
                             className="size-6 lg:size-7"
                           />
                         </div>
@@ -169,13 +163,13 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                             </span>
                           </div>
                           <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} size={20} />
-                            <ItemIcon itemId={participant.item1} size={20} />
-                            <ItemIcon itemId={participant.item2} size={20} />
-                            <ItemIcon itemId={participant.item3} size={20} />
-                            <ItemIcon itemId={participant.item4} size={20} />
-                            <ItemIcon itemId={participant.item5} size={20} />
-                            <ItemIcon itemId={participant.item6} size={20} />
+                            <ItemIcon itemId={participant.item0} className="size-5" />
+                            <ItemIcon itemId={participant.item1} className="size-5" />
+                            <ItemIcon itemId={participant.item2} className="size-5" />
+                            <ItemIcon itemId={participant.item3} className="size-5" />
+                            <ItemIcon itemId={participant.item4} className="size-5" />
+                            <ItemIcon itemId={participant.item5} className="size-5" />
+                            <ItemIcon itemId={participant.item6} className="size-5" />
                           </div>
                         </div>
                       </div>
