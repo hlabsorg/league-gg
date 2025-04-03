@@ -17,10 +17,6 @@ const requestRiot = (url) =>
 const getRiotAccountByName = async (gameName, tagLine, regionId) => {
   const prefix = REGION_MAP[regionId];
   const url = `https://${prefix}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`;
-  // const cached = await checkCache(url);
-  // if (cached) {
-  //   return cached;
-  // }
   const res = await requestRiot(url);
   const response = await res.json();
   if (!res.ok) {
@@ -28,9 +24,6 @@ const getRiotAccountByName = async (gameName, tagLine, regionId) => {
     error.status = res.status;
     throw error;
   }
-  // await setCache(url, response, {
-  //   ex: 604800,
-  // });
   return response;
 };
 

@@ -1,12 +1,7 @@
 import { DATA_DRAGON_ASSETS_PATH } from "@/constants/data-dragon";
-import { setCache, checkCache } from "@/db/redis/cache";
 
 const getLatestChampionDDragon = async (language = "en_US") => {
   const url = `${DATA_DRAGON_ASSETS_PATH}/data/${language}/champion.json`;
-  const cached = await checkCache(url);
-  if (cached) {
-    return cached;
-  }
   const res = await fetch(url);
   const response = await res.json();
   if (!res.ok) {
@@ -14,9 +9,6 @@ const getLatestChampionDDragon = async (language = "en_US") => {
     error.status = res.status;
     throw Error;
   }
-  await setCache(url, response, {
-    ex: 604800,
-  });
   return response;
 };
 
