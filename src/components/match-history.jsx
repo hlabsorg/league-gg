@@ -4,7 +4,7 @@ import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 
-export function MatchHistory({ matches, regionId, summonerName }) {
+export function MatchHistory({ matches, regionId, summonerName, championNames }) {
   if (!matches || !Array.isArray(matches)) {
     return <div>No matches found</div>;
   }
@@ -39,9 +39,9 @@ export function MatchHistory({ matches, regionId, summonerName }) {
 
                 {/* Champion and Summoner Info in preview */}
                 <div className="flex items-center gap-2">
-                  <ProfileIcon profileIconId={currentPlayer.profileIcon} size={32} />
-                  <div className="size-7 overflow-hidden">
-                    <ChampionIcon championName={currentPlayer.championName} size={28} />
+                  <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12 lg:size-14" />
+                  <div className="overflow-hidden">
+                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-6 lg:size-7" />
                   </div>
                 </div>
 
@@ -64,13 +64,13 @@ export function MatchHistory({ matches, regionId, summonerName }) {
 
                 {/* Items */}
                 <div className="flex gap-1">
-                  <ItemIcon itemId={currentPlayer.item0} size={24} />
-                  <ItemIcon itemId={currentPlayer.item1} size={24} />
-                  <ItemIcon itemId={currentPlayer.item2} size={24} />
-                  <ItemIcon itemId={currentPlayer.item3} size={24} />
-                  <ItemIcon itemId={currentPlayer.item4} size={24} />
-                  <ItemIcon itemId={currentPlayer.item5} size={24} />
-                  <ItemIcon itemId={currentPlayer.item6} size={24} />
+                  <ItemIcon itemId={currentPlayer.item0} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item1} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item2} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item3} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item4} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item5} className="size-6" />
+                  <ItemIcon itemId={currentPlayer.item6} className="size-6" />
                 </div>
 
                 {/* Game Time */}
@@ -94,11 +94,12 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             prefetch
                             href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
                           >
-                            <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                            <ProfileIcon profileIconId={participant.profileIcon} className="size-12 lg:size-14" />
                           </Link>
-                          <div className="size-6">
-                            <ChampionIcon championName={participant.championName} size={24} />
-                          </div>
+                          <ChampionIcon
+                            championName={championNames[participant.championId]}
+                            className="size-6 lg:size-7"
+                          />
                         </div>
                         <div className="ml-2 grow">
                           <div className="flex items-center">
@@ -115,13 +116,13 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             </span>
                           </div>
                           <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} size={20} />
-                            <ItemIcon itemId={participant.item1} size={20} />
-                            <ItemIcon itemId={participant.item2} size={20} />
-                            <ItemIcon itemId={participant.item3} size={20} />
-                            <ItemIcon itemId={participant.item4} size={20} />
-                            <ItemIcon itemId={participant.item5} size={20} />
-                            <ItemIcon itemId={participant.item6} size={20} />
+                            <ItemIcon itemId={participant.item0} className="size-5" />
+                            <ItemIcon itemId={participant.item1} className="size-5" />
+                            <ItemIcon itemId={participant.item2} className="size-5" />
+                            <ItemIcon itemId={participant.item3} className="size-5" />
+                            <ItemIcon itemId={participant.item4} className="size-5" />
+                            <ItemIcon itemId={participant.item5} className="size-5" />
+                            <ItemIcon itemId={participant.item6} className="size-5" />
                           </div>
                         </div>
                       </div>
@@ -140,11 +141,12 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             prefetch
                             href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
                           >
-                            <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+                            <ProfileIcon profileIconId={participant.profileIcon} className="size-12 lg:size-14" />
                           </Link>
-                          <div className="size-6">
-                            <ChampionIcon championName={participant.championName} size={24} />
-                          </div>
+                          <ChampionIcon
+                            championName={championNames[participant.championId]}
+                            className="size-6 lg:size-7"
+                          />
                         </div>
                         <div className="ml-2 grow">
                           <div className="flex items-center">
@@ -161,13 +163,13 @@ export function MatchHistory({ matches, regionId, summonerName }) {
                             </span>
                           </div>
                           <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} size={20} />
-                            <ItemIcon itemId={participant.item1} size={20} />
-                            <ItemIcon itemId={participant.item2} size={20} />
-                            <ItemIcon itemId={participant.item3} size={20} />
-                            <ItemIcon itemId={participant.item4} size={20} />
-                            <ItemIcon itemId={participant.item5} size={20} />
-                            <ItemIcon itemId={participant.item6} size={20} />
+                            <ItemIcon itemId={participant.item0} className="size-5" />
+                            <ItemIcon itemId={participant.item1} className="size-5" />
+                            <ItemIcon itemId={participant.item2} className="size-5" />
+                            <ItemIcon itemId={participant.item3} className="size-5" />
+                            <ItemIcon itemId={participant.item4} className="size-5" />
+                            <ItemIcon itemId={participant.item5} className="size-5" />
+                            <ItemIcon itemId={participant.item6} className="size-5" />
                           </div>
                         </div>
                       </div>

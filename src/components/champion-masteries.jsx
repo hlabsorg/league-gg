@@ -26,8 +26,11 @@ export async function ChampionMasteries({ masteries, championNames }) {
           className="relative flex items-center gap-4 rounded-lg border bg-gradient-to-b from-slate-50 to-slate-100 p-4 pb-8 shadow-md md:flex-col md:items-center"
         >
           <div className="relative">
-            <div className="relative size-16 overflow-hidden rounded-lg ring-2 ring-black/10">
-              <ChampionIcon championName={championNames[mastery.championId]} size={64} />
+            <div className="relative overflow-hidden rounded-lg ring-2 ring-black/10">
+              <ChampionIcon
+                championName={championNames[mastery.championId]}
+                className="size-10 md:size-12 lg:size-16"
+              />
             </div>
             <MasteryLevel level={mastery.championLevel} />
           </div>
