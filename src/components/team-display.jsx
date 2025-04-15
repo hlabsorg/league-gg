@@ -15,10 +15,10 @@ return (
         <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
           <div className="flex items-center gap-2">
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
-              <ProfileIcon profileIconId={participant.profileIcon} size={32} />
+              <ProfileIcon profileIconId={participant.profileIcon} className="size-12" />
             </Link>
             <div className="h-6 w-6">
-              <ChampionIcon championName={participant.championName} size={24} />
+              <ChampionIcon championName={participant.championName} className="size-6" />
             </div>
           </div>
           <div className="ml-2 grow">
@@ -36,13 +36,13 @@ return (
               </span>
             </div>
             <div className="mt-1 flex gap-1">
-              <ItemIcon itemId={participant.item0} size={20} />
-              <ItemIcon itemId={participant.item1} size={20} />
-              <ItemIcon itemId={participant.item2} size={20} />
-              <ItemIcon itemId={participant.item3} size={20} />
-              <ItemIcon itemId={participant.item4} size={20} />
-              <ItemIcon itemId={participant.item5} size={20} />
-              <ItemIcon itemId={participant.item6} size={20} />
+              <ItemIcon itemId={participant.item0} className="size-6" />
+              <ItemIcon itemId={participant.item1} className="size-6" />
+              <ItemIcon itemId={participant.item2} className="size-6" />
+              <ItemIcon itemId={participant.item3} className="size-6" />
+              <ItemIcon itemId={participant.item4} className="size-6" />
+              <ItemIcon itemId={participant.item5} className="size-6" />
+              <ItemIcon itemId={participant.item6} className="size-6" />
             </div>
           </div>
         </div>
