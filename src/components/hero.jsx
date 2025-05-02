@@ -14,6 +14,7 @@ import { Icons } from "./icons";
 import { REGION_IDS } from "@/constants/regions";
 import { getBrowserClient } from "@/lib/supabase/browser";
 import { debounce } from "@/utils/debounce";
+import { Logo } from "./logo";
 
 export function Hero() {
   const supabase = getBrowserClient();
@@ -50,12 +51,23 @@ export function Hero() {
   };
 
   return (
-    <section className="relative h-[500px] w-full bg-background">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat">
+    <section className="relative h-screen w-screen bg-background">
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute w-screen h-screen object-cover object-center"
+        >
+          <source src="/assets/animated-freljord.webm" type="video/webm" />
+        </video>
         <div className="absolute inset-0 bg-black/50" />
       </div>
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4">
-        <h1 className="text-4xl font-bold text-white">League GG</h1>
+        <div className="mb-8">
+          <Logo />
+        </div>
         <form onSubmit={handleSubmit} className="w-full max-w-2xl">
           <div className="flex gap-2">
             <Select defaultValue={regionId} name="regionId">
