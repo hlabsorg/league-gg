@@ -1,8 +1,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
-import Link from "next/link";
 import { ItemIcon } from "./item-icon";
+import { TeamDisplay } from "./team-display";
 
 export function MatchHistory({ matches, regionId, summonerName, championNames }) {
   if (!matches || !Array.isArray(matches)) {
@@ -82,99 +82,21 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
 
             <AccordionContent className="px-4 py-2">
               <div className="grid grid-cols-2 gap-4">
-                {/* Blue Team */}
-                <div className="space-y-2">
-                  <h4 className="mb-2 font-semibold text-blue-600">Blue Team</h4>
-                  {match.info.participants
-                    .filter((p) => p.teamId === 100)
-                    .map((participant) => (
-                      <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
-                        <div className="flex items-center gap-2">
-                          <Link
-                            prefetch
-                            href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
-                          >
-                            <ProfileIcon profileIconId={participant.profileIcon} className="size-12 lg:size-14" />
-                          </Link>
-                          <ChampionIcon
-                            championName={championNames[participant.championId]}
-                            className="size-6 lg:size-7"
-                          />
-                        </div>
-                        <div className="ml-2 grow">
-                          <div className="flex items-center">
-                            <p className="font-medium">{participant.riotIdGameName}</p>
-                            <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
-                          </div>
-                          <div className="text-sm">
-                            <span className="font-medium">
-                              {participant.kills}/{participant.deaths}/{participant.assists}
-                            </span>
-                            <span className="ml-2 text-gray-500">
-                              CS: {participant.totalMinionsKilled}(
-                              {((participant.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
-                            </span>
-                          </div>
-                          <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} className="size-5" />
-                            <ItemIcon itemId={participant.item1} className="size-5" />
-                            <ItemIcon itemId={participant.item2} className="size-5" />
-                            <ItemIcon itemId={participant.item3} className="size-5" />
-                            <ItemIcon itemId={participant.item4} className="size-5" />
-                            <ItemIcon itemId={participant.item5} className="size-5" />
-                            <ItemIcon itemId={participant.item6} className="size-5" />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
+                <TeamDisplay 
+                color="blue"
+                participants={match.info.participants}
+                gameDuration={match.info.gameDuration}
+                regionId={regionId}
+                />
+                <TeamDisplay 
+                color="red"
+                participants={match.info.participants}
+                gameDuration={match.info.gameDuration}
+                regionId={regionId}
+                />
 
-                {/* Red Team */}
-                <div className="space-y-2">
-                  <h4 className="mb-2 font-semibold text-red-600">Red Team</h4>
-                  {match.info.participants
-                    .filter((p) => p.teamId === 200)
-                    .map((participant) => (
-                      <div key={participant.puuid} className="flex items-center rounded bg-red-50 p-2">
-                        <div className="flex items-center gap-2">
-                          <Link
-                            prefetch
-                            href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}
-                          >
-                            <ProfileIcon profileIconId={participant.profileIcon} className="size-12 lg:size-14" />
-                          </Link>
-                          <ChampionIcon
-                            championName={championNames[participant.championId]}
-                            className="size-6 lg:size-7"
-                          />
-                        </div>
-                        <div className="ml-2 grow">
-                          <div className="flex items-center">
-                            <p className="font-medium">{participant.riotIdGameName}</p>
-                            <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
-                          </div>
-                          <div className="text-sm">
-                            <span className="font-medium">
-                              {participant.kills}/{participant.deaths}/{participant.assists}
-                            </span>
-                            <span className="ml-2 text-gray-500">
-                              CS: {participant.totalMinionsKilled}(
-                              {((participant.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
-                            </span>
-                          </div>
-                          <div className="mt-1 flex gap-1">
-                            <ItemIcon itemId={participant.item0} className="size-5" />
-                            <ItemIcon itemId={participant.item1} className="size-5" />
-                            <ItemIcon itemId={participant.item2} className="size-5" />
-                            <ItemIcon itemId={participant.item3} className="size-5" />
-                            <ItemIcon itemId={participant.item4} className="size-5" />
-                            <ItemIcon itemId={participant.item5} className="size-5" />
-                            <ItemIcon itemId={participant.item6} className="size-5" />
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                </div>
+
+
               </div>
             </AccordionContent>
           </AccordionItem>
