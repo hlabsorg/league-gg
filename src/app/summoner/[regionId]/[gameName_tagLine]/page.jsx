@@ -9,9 +9,8 @@ import {
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
 import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queue-types";
-import Link from "next/link";
 import { ChampionMasteries } from "@/components/champion-masteries";
-
+import { QueueTypeHeader } from "@/components/queue-type-header";
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;
   const queueType = queryParams.hasOwnProperty("queue") ? queryParams.queue : "all";
@@ -61,6 +60,7 @@ export default async function Page({ params, searchParams }) {
           <p className="text-gray-600">Level: {summonerProfile.summonerLevel}</p>
         </div>
       </div>
+      <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} />
       <div className="mb-6">
         <h2 className="text-2xl font-semibold">League Entries</h2>
         {entries.length > 0 ? (
@@ -82,28 +82,6 @@ export default async function Page({ params, searchParams }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
-        <div>
-          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ALL}`}>
-            {" "}
-            All
-          </Link>
-          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.NORMAL}`}>
-            {" "}
-            Normal
-          </Link>
-          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.SOLO}`}>
-            {" "}
-            Solo
-          </Link>
-          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.FLEX}`}>
-            {" "}
-            Flex
-          </Link>
-          <Link prefetch scroll={false} href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ARAM}`}>
-            {" "}
-            Aram
-          </Link>
-        </div>
         <MatchHistory
           matches={matchHistory}
           regionId={regionId}
