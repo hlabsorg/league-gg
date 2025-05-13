@@ -8,7 +8,7 @@ import {
 } from "@/lib/server/actions/summoner-page";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
-import { QUEUE_IDS, QUEUE_TYPES } from "@/constants/queue-types";
+import { QUEUE_IDS } from "@/constants/queue-types";
 import { ChampionMasteries } from "@/components/champion-masteries";
 import { QueueTypeHeader } from "@/components/queue-type-header";
 export default async function Page({ params, searchParams }) {
@@ -60,7 +60,7 @@ export default async function Page({ params, searchParams }) {
           <p className="text-gray-600">Level: {summonerProfile.summonerLevel}</p>
         </div>
       </div>
-      <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} />
+      <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
       <div className="mb-6">
         <h2 className="text-2xl font-semibold">League Entries</h2>
         {entries.length > 0 ? (

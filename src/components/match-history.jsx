@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
@@ -10,7 +10,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
   }
 
   return (
-    <Accordion type="single" collapsible className="space-y-4">
+    <div className="space-y-4">
       {matches.map((match, index) => {
         // Find the current summoner's data in the match
         const currentPlayer = match.info.participants.find(
@@ -25,8 +25,8 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
         }
 
         return (
-          <AccordionItem key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
-            <AccordionTrigger className="w-full px-4 py-2 hover:no-underline">
+          <Drawer key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
+            <DrawerTrigger className="w-full px-4 py-2 hover:no-underline">
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
                 <div className="w-24 shrink-0">
@@ -78,9 +78,11 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                   {new Date(match.info.gameCreation).toLocaleDateString()}
                 </div>
               </div>
-            </AccordionTrigger>
-
-            <AccordionContent className="px-4 py-2">
+            </DrawerTrigger>
+            <DrawerContent className="h-[80vh] px-4 py-2">  
+              <DrawerHeader className="flex justify-center">
+                <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
+              </DrawerHeader>
               <div className="grid grid-cols-2 gap-4">
                 <TeamDisplay 
                 color="blue"
@@ -94,14 +96,11 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 gameDuration={match.info.gameDuration}
                 regionId={regionId}
                 />
-
-
-
               </div>
-            </AccordionContent>
-          </AccordionItem>
+            </DrawerContent>
+          </Drawer>
         );
       })}
-    </Accordion>
+    </div>
   );
 }
