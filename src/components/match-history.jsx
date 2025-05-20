@@ -79,22 +79,56 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
               </div>
             </DrawerTrigger>
-            <DrawerContent className="h-[80vh] px-4 py-2">  
+            <DrawerContent className="h-[80vh] px-4 py-2">
               <DrawerHeader className="flex justify-center">
                 <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
               </DrawerHeader>
+              <div className="flex justify-center gap-4">
+                <p>
+                  {" "}
+                  Game Mode: <br />
+                  {match.info.gameMode}
+                </p>
+                <p>
+                  {" "}
+                  Game Duration: <br />
+                  {Math.floor(match.info.gameDuration / 60)}m {Math.floor(match.info.gameDuration % 60)}s
+                </p>
+                <p>
+                  Match Winner: <br />
+                  <p
+                    className={`font-bold ${
+                      currentPlayer.win
+                        ? currentPlayer.teamId === 100
+                          ? "text-blue-600"
+                          : "text-red-600"
+                        : currentPlayer.teamId === 100
+                          ? "text-red-600"
+                          : "text-blue-600"
+                    }`}
+                  >
+                    {currentPlayer.win
+                      ? currentPlayer.teamId === 100
+                        ? "Blue Side Victory"
+                        : "Red Side Victory"
+                      : currentPlayer.teamId === 100
+                        ? "Red Side Victory"
+                        : "Blue Side Victory"}
+                  </p>
+                </p>
+              </div>
               <div className="grid grid-cols-2 gap-4">
-                <TeamDisplay 
-                color="blue"
-                participants={match.info.participants}
-                gameDuration={match.info.gameDuration}
-                regionId={regionId}
+                <TeamDisplay
+                  color="blue"
+                  participants={match.info.participants}
+                  gameDuration={match.info.gameDuration}
+                  regionId={regionId}
                 />
-                <TeamDisplay 
-                color="red"
-                participants={match.info.participants}
-                gameDuration={match.info.gameDuration}
-                regionId={regionId}
+                <TeamDisplay
+                  color="red"
+                  participants={match.info.participants}
+                  gameDuration={match.info.gameDuration}
+                  regionId={regionId}
                 />
               </div>
             </DrawerContent>
