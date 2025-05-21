@@ -84,38 +84,36 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
               </DrawerHeader>
               <div className="flex justify-center gap-4">
-                <p>
-                  {" "}
+                <div>
                   Game Mode: <br />
                   {match.info.gameMode}
-                </p>
-                <p>
-                  {" "}
+                </div>
+                <div>
                   Game Duration: <br />
                   {Math.floor(match.info.gameDuration / 60)}m {Math.floor(match.info.gameDuration % 60)}s
-                </p>
-                <p>
+                </div>
+                <div>
                   Match Winner: <br />
-                  <p
+                  <span
                     className={`font-bold ${
-                      currentPlayer.win
-                        ? currentPlayer.teamId === 100
+                      currentPlayer.teamId === 100
+                        ? currentPlayer.win
                           ? "text-blue-600"
                           : "text-red-600"
-                        : currentPlayer.teamId === 100
+                        : currentPlayer.win
                           ? "text-red-600"
                           : "text-blue-600"
                     }`}
                   >
-                    {currentPlayer.win
-                      ? currentPlayer.teamId === 100
+                    {currentPlayer.teamId === 100
+                      ? currentPlayer.win
                         ? "Blue Side Victory"
                         : "Red Side Victory"
-                      : currentPlayer.teamId === 100
+                      : currentPlayer.win
                         ? "Red Side Victory"
                         : "Blue Side Victory"}
-                  </p>
-                </p>
+                  </span>
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <TeamDisplay
