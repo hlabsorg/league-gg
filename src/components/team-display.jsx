@@ -15,10 +15,10 @@ return (
         <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
           <div className="flex items-center gap-2">
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
-              <ProfileIcon profileIconId={participant.profileIcon} className="size-12" />
+              <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
             </Link>
-            <div className="h-6 w-6">
-              <ChampionIcon championName={participant.championName} className="size-6" />
+            <div className="size-14">
+              <ChampionIcon championName={participant.championName} className="size-12" />
             </div>
           </div>
           <div className="ml-2 grow">

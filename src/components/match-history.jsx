@@ -26,7 +26,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
 
         return (
           <Drawer key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
-            <DrawerTrigger className="w-full px-4 py-2 hover:no-underline">
+            <DrawerTrigger className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
                 <div className="w-24 shrink-0">
@@ -38,12 +38,14 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
 
                 {/* Champion and Summoner Info in preview */}
+               
                 <div className="flex items-center gap-2">
                   <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12 lg:size-14" />
                   <div className="overflow-hidden">
-                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-6 lg:size-7" />
+                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-8 lg:size-10" />
                   </div>
                 </div>
+                
 
                 {/* KDA and CS */}
                 <div className="grow">
