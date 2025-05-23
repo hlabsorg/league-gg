@@ -20,7 +20,11 @@ return (
     {participants
       .filter((p) => p.teamId === teamId)
       .map((participant) => (
-        <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
+        <div key={participant.puuid} className={`flex items-center justify-center rounded ${
+          participant.teamId === 100
+              ? "bg-blue-600/20"
+              : "bg-red-600/20"
+        }`}>
           <div className="flex items-center gap-2">
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
               <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
@@ -36,7 +40,7 @@ return (
               <ChampionIcon championName={participant.championName} className="size-12" />
             </div>
           </div>
-          <div className="ml-2 grow">
+          <div className="ml-2 ">
             <div className="flex items-center">
               <p className="font-medium">{participant.riotIdGameName}</p>
               <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
