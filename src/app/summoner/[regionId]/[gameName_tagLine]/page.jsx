@@ -82,6 +82,9 @@ export default async function Page({ params, searchParams }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
+        <div className="text-lg font-bold">
+          Last {matchHistory.length} matches
+        </div>
         <MatchHistory
           matches={matchHistory}
           regionId={regionId}
