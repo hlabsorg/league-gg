@@ -3,6 +3,14 @@ import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 
+const laneIcons = {
+  TOP: "/assets/lane-icons/top.png",
+  JUNGLE: "/assets/lane-icons/jungle.png",
+  MIDDLE: "/assets/lane-icons/mid.png",
+  BOTTOM: "/assets/lane-icons/bot.png",
+  UTILITY: "/assets/lane-icons/support.png"
+};
+
 export function TeamDisplay({ color, participants, gameDuration, regionId }) {
   const teamColor = color === "blue" ? "blue" : "red";
   const teamId = color === "blue" ? 100 : 200;
@@ -17,6 +25,13 @@ return (
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
               <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
             </Link>
+            <div className="size-10 flex items-center justify-center">
+              <img 
+                src = {laneIcons[participant.individualPosition]}
+                alt = {participant.individualPosition}
+                className = "size-6"
+              />
+            </div>
             <div className="size-14">
               <ChampionIcon championName={participant.championName} className="size-12" />
             </div>
