@@ -2,6 +2,8 @@ import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
+import { RoleIcon } from "./role-icon";
+
 
 export function TeamDisplay({ color, participants, gameDuration, regionId }) {
   const teamColor = color === "blue" ? "blue" : "red";
@@ -12,16 +14,23 @@ return (
     {participants
       .filter((p) => p.teamId === teamId)
       .map((participant) => (
-        <div key={participant.puuid} className="flex items-center rounded bg-blue-50 p-2">
+        <div key={participant.puuid} className={`flex items-center justify-center rounded ${
+          participant.teamId === 100
+              ? "bg-blue-600/20"
+              : "bg-red-600/20"
+        }`}>
           <div className="flex items-center gap-2">
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
-              <ProfileIcon profileIconId={participant.profileIcon} className="size-12" />
+              <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
             </Link>
-            <div className="h-6 w-6">
-              <ChampionIcon championName={participant.championName} className="size-6" />
+            <div className="flex size-10 items-center justify-center">
+              <RoleIcon role={participant.individualPosition} className="size-6" />
+            </div>
+            <div className="size-14">
+              <ChampionIcon championName={participant.championName} className="size-12" />
             </div>
           </div>
-          <div className="ml-2 grow">
+          <div className="ml-2 ">
             <div className="flex items-center">
               <p className="font-medium">{participant.riotIdGameName}</p>
               <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>

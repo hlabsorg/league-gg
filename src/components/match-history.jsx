@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
@@ -10,7 +10,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
   }
 
   return (
-    <Accordion type="single" collapsible className="space-y-4">
+    <div className="space-y-4">
       {matches.map((match, index) => {
         // Find the current summoner's data in the match
         const currentPlayer = match.info.participants.find(
@@ -25,8 +25,8 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
         }
 
         return (
-          <AccordionItem key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
-            <AccordionTrigger className="w-full px-4 py-2 hover:no-underline">
+          <Drawer key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
+            <DrawerTrigger className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
                 <div className="w-24 shrink-0">
@@ -38,12 +38,14 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
 
                 {/* Champion and Summoner Info in preview */}
+               
                 <div className="flex items-center gap-2">
                   <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12 lg:size-14" />
                   <div className="overflow-hidden">
-                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-6 lg:size-7" />
+                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-8 lg:size-10" />
                   </div>
                 </div>
+                
 
                 {/* KDA and CS */}
                 <div className="grow">
@@ -78,30 +80,61 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                   {new Date(match.info.gameCreation).toLocaleDateString()}
                 </div>
               </div>
-            </AccordionTrigger>
-
-            <AccordionContent className="px-4 py-2">
-              <div className="grid grid-cols-2 gap-4">
-                <TeamDisplay 
-                color="blue"
-                participants={match.info.participants}
-                gameDuration={match.info.gameDuration}
-                regionId={regionId}
-                />
-                <TeamDisplay 
-                color="red"
-                participants={match.info.participants}
-                gameDuration={match.info.gameDuration}
-                regionId={regionId}
-                />
-
-
-
+            </DrawerTrigger>
+            <DrawerContent className="h-[80vh] px-4 py-2">
+              <DrawerHeader className="flex justify-center">
+                <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
+              </DrawerHeader>
+              <div className="flex justify-center gap-4">
+                <div>
+                  Game Mode: <br />
+                  {match.info.gameMode}
+                </div>
+                <div>
+                  Game Duration: <br />
+                  {Math.floor(match.info.gameDuration / 60)}m {Math.floor(match.info.gameDuration % 60)}s
+                </div>
+                <div>
+                  Match Winner: <br />
+                  <span
+                    className={`font-bold ${
+                      currentPlayer.teamId === 100
+                        ? currentPlayer.win
+                          ? "text-blue-600"
+                          : "text-red-600"
+                        : currentPlayer.win
+                          ? "text-red-600"
+                          : "text-blue-600"
+                    }`}
+                  >
+                    {currentPlayer.teamId === 100
+                      ? currentPlayer.win
+                        ? "Blue Side Victory"
+                        : "Red Side Victory"
+                      : currentPlayer.win
+                        ? "Red Side Victory"
+                        : "Blue Side Victory"}
+                  </span>
+                </div>
               </div>
-            </AccordionContent>
-          </AccordionItem>
+              <div className="grid grid-cols-2 gap-4">
+                <TeamDisplay
+                  color="blue"
+                  participants={match.info.participants}
+                  gameDuration={match.info.gameDuration}
+                  regionId={regionId}
+                />
+                <TeamDisplay
+                  color="red"
+                  participants={match.info.participants}
+                  gameDuration={match.info.gameDuration}
+                  regionId={regionId}
+                />
+              </div>
+            </DrawerContent>
+          </Drawer>
         );
       })}
-    </Accordion>
+    </div>
   );
 }
