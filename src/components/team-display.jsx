@@ -2,6 +2,7 @@ import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
+import { RoleIcon } from "./role-icon";
 
 const laneIcons = {
   TOP: "/assets/lane-icons/top.png",
@@ -29,12 +30,8 @@ return (
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
               <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
             </Link>
-            <div className="size-10 flex items-center justify-center">
-              <img 
-                src = {laneIcons[participant.individualPosition]}
-                alt = {participant.individualPosition}
-                className = "size-6"
-              />
+            <div className="flex size-10 items-center justify-center">
+              <RoleIcon role={participant.individualPosition} className="size-6" />
             </div>
             <div className="size-14">
               <ChampionIcon championName={participant.championName} className="size-12" />
