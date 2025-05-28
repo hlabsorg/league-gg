@@ -4,13 +4,6 @@ import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 import { RoleIcon } from "./role-icon";
 
-const laneIcons = {
-  TOP: "/assets/lane-icons/top.png",
-  JUNGLE: "/assets/lane-icons/jungle.png",
-  MIDDLE: "/assets/lane-icons/mid.png",
-  BOTTOM: "/assets/lane-icons/bot.png",
-  UTILITY: "/assets/lane-icons/support.png"
-};
 
 export function TeamDisplay({ color, participants, gameDuration, regionId }) {
   const teamColor = color === "blue" ? "blue" : "red";
