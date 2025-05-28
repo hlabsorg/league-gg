@@ -100,6 +100,8 @@ export default async function Page({ params, searchParams }) {
           <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
           <h2>Champion Masteries</h2>
           <pre>{JSON.stringify(masteries, null, 2)}</pre>
+          <h2>Entries / Ranks</h2>
+          <pre>{JSON.stringify(entries, null, 2)}</pre>
         </div>
       )}
     </div>
