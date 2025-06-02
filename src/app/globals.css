@@ -10,7 +10,7 @@ body {
   :root {
     --background: #1A1B2F;
     --foreground: #E5E7EB;
-    --card: #232946;
+    --card: #101013;
     --card-foreground: #E5E7EB;
     --popover: #232946;
     --popover-foreground: #E5E7EB;
@@ -20,23 +20,38 @@ body {
     --secondary-foreground: #232946;
     --muted: #9CA3AF;
     --accent: #14F195;
-    --accent-foreground: #232946;
+    --accent-foreground: #101013;
     --destructive: #F43F5E;
     --destructive-foreground: #E5E7EB;
     --border: #232946;
-    --input: #232946;
+    --input: #1A1B2F;
     --ring: #3B82F6;
     --radius: 0.5rem;
     --gold: #FBBF24;
   }
-  .dark {
-    --background: 0 0% 3.9%;
+  
+  input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 1000px #1A1B2F inset !important;
+    box-shadow: 0 0 0 1000px #1A1B2F inset !important;
+    -webkit-text-fill-color: #9CA3AF !important;
+}
+input:-internal-autofill-selected {
+  appearance: menulist-button;
+  background-image: none !important;
+  background-color: #1A1B2F !important;
+  color: fieldtext !important;
+}
+  /* .dark {
+    --background: 0 0% 3.9%;    
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 0 0% 98%;                
     --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --popover-foreground: 0 0% 98%; 
+    --primary: 0 0% 98%;            
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
@@ -54,7 +69,7 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-  }
+  } */
 }
 
 @layer base {

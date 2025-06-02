@@ -71,10 +71,10 @@ export function Hero() {
         <form onSubmit={handleSubmit} className="w-full max-w-2xl">
           <div className="flex gap-2">
             <Select defaultValue={regionId} name="regionId">
-              <SelectTrigger className="h-12 w-[100px] bg-card text-muted">
+              <SelectTrigger className="h-12 w-[100px] bg-background text-muted">
                 <SelectValue placeholder="Region" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background">
                 {Object.entries(REGION_IDS).map(([key, value]) => (
                   <SelectItem key={key} value={value}>
                     {key}
@@ -82,27 +82,27 @@ export function Hero() {
                 ))}
               </SelectContent>
             </Select>
-            <Popover open={isOpen} onOpenChange={setIsOpen}>
-              <Command label="Summoner Name" shouldFilter={false} className="z-10">
+            <Popover open={isOpen} onOpenChange={setIsOpen} className="bg-background">
+              <Command label="Summoner Name" shouldFilter={false} className="bg-background z-10 text-muted">
                 <PopoverTrigger asChild>
                   <CommandInput
-                    className="h-12 bg-card"
+                    className="h-12 bg-background"
                     placeholder="Summoner Name"
                     name="gameName"
                     type="text"
                     onValueChange={debounce(handleSearch, 200)}
                   />
                 </PopoverTrigger>
-                <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()}>
-                  <CommandList className="z-10">
+                <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()} className="bg-background">
+                  <CommandList className="bg-background z-10 text-muted">
                     <CommandEmpty>
                       {!searchResults
                         ? "Search for summoner by Game Name!"
                         : "No results found.  Please manually input Tagline in the next field."}
                     </CommandEmpty>
-                    <CommandGroup className="z-10">
+                    <CommandGroup className="bg-background z-10">
                       {searchResults?.map((summoner) => (
-                        <CommandItem key={summoner.id} value={summoner}>
+                        <CommandItem key={summoner.id} value={summoner} className="bg-background">
                           <Link
                             prefetch
                             href={`/summoner/${summoner.regionId}/${summoner.gameName}-${summoner.tagLine}`}
@@ -115,7 +115,7 @@ export function Hero() {
                               <div className="flex w-full flex-col justify-center">
                                 <div className="flex flex-row gap-2">
                                   <h4 className="text-foreground font-bold">{summoner.gameName}</h4>
-                                  <h4 className="text-muted">#{summoner.tagLine}</h4>
+                                  <h4 className="bg-background text-muted">#{summoner.tagLine}</h4>
                                 </div>
                                 <p className="text-sm text-muted">Level {summoner.summonerLevel}</p>
                               </div>
@@ -130,13 +130,13 @@ export function Hero() {
               </Command>
             </Popover>
             <Input
-              className="h-12 bg-card"
+              className="tagline-input bg-background text-muted h-12"
               placeholder="Tagline"
               name="tagLine"
               type="text"
               defaultValue={tagLine}
             />
-            <Button type="submit" className="bg-card h-12 px-6" variant="default">
+            <Button type="submit" className="bg-background h-12 px-6" variant="default">
               <Icons.search className="size-5" />
             </Button>
           </div>
