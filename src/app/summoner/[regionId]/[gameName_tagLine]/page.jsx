@@ -50,7 +50,7 @@ export default async function Page({ params, searchParams }) {
   }
 
   return (
-    <div className="bg-gray-100 p-6">
+    <div className="bg-background p-6">
       <div className="mb-6 flex items-center">
         <ProfileIcon profileIconId={summonerProfile.profileIconId} className="size-16 md:size-24 lg:size-32" />
         <div className="ml-4">

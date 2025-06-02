@@ -71,7 +71,7 @@ export function Hero() {
         <form onSubmit={handleSubmit} className="w-full max-w-2xl">
           <div className="flex gap-2">
             <Select defaultValue={regionId} name="regionId">
-              <SelectTrigger className="h-12 w-[100px] bg-white/95">
+              <SelectTrigger className="h-12 w-[100px] bg-card text-muted">
                 <SelectValue placeholder="Region" />
               </SelectTrigger>
               <SelectContent>
@@ -86,7 +86,7 @@ export function Hero() {
               <Command label="Summoner Name" shouldFilter={false} className="z-10">
                 <PopoverTrigger asChild>
                   <CommandInput
-                    className="h-12 bg-white/95"
+                    className="h-12 bg-card"
                     placeholder="Summoner Name"
                     name="gameName"
                     type="text"
@@ -114,10 +114,10 @@ export function Hero() {
                               </div>
                               <div className="flex w-full flex-col justify-center">
                                 <div className="flex flex-row gap-2">
-                                  <h4 className="font-bold">{summoner.gameName}</h4>
-                                  <h4 className="text-slate-500">#{summoner.tagLine}</h4>
+                                  <h4 className="text-foreground font-bold">{summoner.gameName}</h4>
+                                  <h4 className="text-muted">#{summoner.tagLine}</h4>
                                 </div>
-                                <p className="text-sm text-slate-500">Level {summoner.summonerLevel}</p>
+                                <p className="text-sm text-muted">Level {summoner.summonerLevel}</p>
                               </div>
                               <Icons.chevronRight className="self-center justify-self-end" />
                             </div>
@@ -130,13 +130,13 @@ export function Hero() {
               </Command>
             </Popover>
             <Input
-              className="h-12 bg-white/95"
+              className="h-12 bg-card"
               placeholder="Tagline"
               name="tagLine"
               type="text"
               defaultValue={tagLine}
             />
-            <Button type="submit" className="h-12 px-6" variant="default">
+            <Button type="submit" className="bg-card h-12 px-6" variant="default">
               <Icons.search className="size-5" />
             </Button>
           </div>

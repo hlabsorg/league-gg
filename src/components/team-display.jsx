@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 import { RoleIcon } from "./role-icon";
 
+const roleCheck = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"];
 
 export function TeamDisplay({ color, participants, gameDuration, regionId }) {
   const teamColor = color === "blue" ? "blue" : "red";
@@ -23,9 +24,11 @@ return (
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
               <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
             </Link>
-            <div className="flex size-10 items-center justify-center">
-              <RoleIcon role={participant.individualPosition} className="size-6" />
-            </div>
+            {roleCheck.includes(participant.individualPosition) ? (
+              <div className="flex size-10 items-center justify-center">
+                <RoleIcon role={participant.individualPosition} className="size-6" />
+              </div>
+            ) : null}
             <div className="size-14">
               <ChampionIcon championName={participant.championName} className="size-12" />
             </div>
