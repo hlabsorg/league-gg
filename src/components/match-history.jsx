@@ -26,15 +26,15 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
 
         return (
           <Drawer key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
-            <DrawerTrigger className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+            <DrawerTrigger className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? 'bg-victory' : 'bg-defeat'}`}>
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
                 <div className="w-24 shrink-0">
                   <p className="font-medium">{match.info.gameMode}</p>
-                  <p className={`font-bold ${currentPlayer.win ? "text-blue-600" : "text-red-600"}`}>
+                  <p className={`font-bold ${currentPlayer.win ? "text-bteam" : "text-rteam"}`}>
                     {currentPlayer.win ? "Victory" : "Defeat"}
                   </p>
-                  <p className="text-sm text-gray-500">{Math.floor(match.info.gameDuration / 60)}m</p>
+                  <p className="text-sm text-muted">{Math.floor(match.info.gameDuration / 60)}m</p>
                 </div>
 
                 {/* Champion and Summoner Info in preview */}
@@ -53,12 +53,12 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                     <span className="font-medium">
                       {currentPlayer.kills}/{currentPlayer.deaths}/{currentPlayer.assists}
                     </span>
-                    <span className="text-gray-600">
+                    <span className="text-muted">
                       {((currentPlayer.kills + currentPlayer.assists) / Math.max(1, currentPlayer.deaths)).toFixed(2)}{" "}
                       KDA
                     </span>
                   </div>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-muted">
                     CS: {currentPlayer.totalMinionsKilled} (
                     {((currentPlayer.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
                   </div>
@@ -76,7 +76,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
 
                 {/* Game Time */}
-                <div className="shrink-0 text-right text-sm text-gray-500">
+                <div className="shrink-0 text-right text-sm text-muted">
                   {new Date(match.info.gameCreation).toLocaleDateString()}
                 </div>
               </div>
@@ -100,11 +100,11 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                     className={`font-bold ${
                       currentPlayer.teamId === 100
                         ? currentPlayer.win
-                          ? "text-blue-600"
-                          : "text-red-600"
+                          ? "text-bteam"
+                          : "text-rteam"
                         : currentPlayer.win
-                          ? "text-red-600"
-                          : "text-blue-600"
+                          ? "text-rteam"
+                          : "text-bteam"
                     }`}
                   >
                     {currentPlayer.teamId === 100

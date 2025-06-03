@@ -39,6 +39,22 @@ module.exports = {
   				DEFAULT: 'var(--destructive)',
   				foreground: 'var(--destructive-foreground)'
   			},
+			victory: {
+				DEFAULT: 'var(--victory)',
+				foreground: 'var(--victory-foreground)'
+			},
+			defeat: {
+				DEFAULT: 'var(--defeat)',
+				foreground: 'var(--defeat-foreground)'
+			},
+			bteam: {
+				DEFAULT: 'var(--bteam)',
+				foreground: 'var(--bteam-foreground)'
+			},
+			rteam: {
+				DEFAULT: 'var(--rteam)',
+				foreground: 'var(--rteam-foreground)'
+			},
   			border: 'var(--border)',
   			input: 'var(--input)',
   			ring: 'var(--ring)',

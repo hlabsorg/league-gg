@@ -28,6 +28,10 @@ body {
     --ring: #3B82F6;
     --radius: 0.5rem;
     --gold: #FBBF24;
+    --victory: #22c55e33;
+    --defeat: #ef444433;
+    --bteam: #2563eb;
+    --rteam: #dc2626;
   }
   
   input:-webkit-autofill,
