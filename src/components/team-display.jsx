@@ -11,14 +11,14 @@ export function TeamDisplay({ color, participants, gameDuration, regionId }) {
   const teamId = color === "blue" ? 100 : 200;
 return (
   <div className="space-y-2">
-    <h4 className={`mb-2 font-semibold text-${teamColor}-600`}>{color === "blue" ? "Blue" : "Red"} Team</h4>
+    <h4 className={`mb-2 font-semibold`}>{color === "blue" ? "Blue" : "Red"} Team</h4>
     {participants
       .filter((p) => p.teamId === teamId)
       .map((participant) => (
         <div key={participant.puuid} className={`flex items-center justify-center rounded ${
           participant.teamId === 100
-              ? "bg-blue-600/20"
-              : "bg-red-600/20"
+              ? "bg-bteam-foreground"
+              : "bg-rteam-foreground"
         }`}>
           <div className="flex items-center gap-2">
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
@@ -36,13 +36,13 @@ return (
           <div className="ml-2 ">
             <div className="flex items-center">
               <p className="font-medium">{participant.riotIdGameName}</p>
-              <p className="ml-1 text-sm text-gray-600">#{participant.riotIdTagline}</p>
+              <p className="ml-1 text-sm text-muted">#{participant.riotIdTagline}</p>
             </div>
             <div className="text-sm">
               <span className="font-medium">
                 {participant.kills}/{participant.deaths}/{participant.assists}
               </span>
-              <span className="ml-2 text-gray-500">
+              <span className="ml-2 text-muted">
                 CS: {participant.totalMinionsKilled}(
                 {((participant.totalMinionsKilled * 60) / gameDuration).toFixed(1)}/min)
               </span>

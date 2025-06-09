@@ -31,7 +31,9 @@ body {
     --victory: #22c55e33;
     --defeat: #ef444433;
     --bteam: #2563eb;
+    --bteam-foreground: #2563eb33;
     --rteam: #dc2626;
+    --rteam-foreground: #dc262633;
   }
   
   input:-webkit-autofill,

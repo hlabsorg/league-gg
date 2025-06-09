@@ -31,7 +31,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 {/* Left side - Game info */}
                 <div className="w-24 shrink-0">
                   <p className="font-medium">{match.info.gameMode}</p>
-                  <p className={`font-bold ${currentPlayer.win ? "text-bteam" : "text-rteam"}`}>
+                  <p className={`font-bold ${currentPlayer.win ? "text-accent" : "text-destructive"}`}>
                     {currentPlayer.win ? "Victory" : "Defeat"}
                   </p>
                   <p className="text-sm text-muted">{Math.floor(match.info.gameDuration / 60)}m</p>
