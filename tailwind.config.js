@@ -8,6 +8,10 @@ module.exports = {
   ],
   theme: {
   	extend: {
+      fontFamily: {
+        poppins: ['var(--font-poppins)', 'Arial', 'Helvetica', 'sans-serif'],
+        roboto: ['var(--font-roboto)', 'Arial', 'Helvetica', 'sans-serif'],
+      },
   		colors: {
   			background: 'var(--background)',
   			foreground: 'var(--foreground)',

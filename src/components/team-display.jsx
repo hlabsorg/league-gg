@@ -7,7 +7,7 @@ import { RoleIcon } from "./role-icon";
 const roleCheck = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"];
 
 export function TeamDisplay({ color, participants, gameDuration, regionId }) {
-  const teamColor = color === "blue" ? "blue" : "red";
+  // const teamColor = color === "blue" ? "blue" : "red";
   const teamId = color === "blue" ? 100 : 200;
 return (
   <div className="space-y-2">
