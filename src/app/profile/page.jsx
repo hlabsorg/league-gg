@@ -26,7 +26,7 @@ const ProfilePage = async () => {
                         type="text"
                         value={user.email}
                         readOnly
-                        className="w-full p-2 border border-gray-300 rounded bg-gray-100"
+                        className="w-full p-2 border border-gray-300 rounded bg-gray-100 text-gray-500"
                     />
                 </div>
                 <div>
@@ -51,7 +51,7 @@ const ProfilePage = async () => {
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
-                                        <g clip-path="url(#riot_svg__a)">
+                                        <g clipPath="url(#riot_svg__a)">
                                             <path fill="#E21215" d="M10 20c5.523 0 10-4.477 10-10S15.523 0 10 0 0 4.477 0 10s4.477 10 10 10Z"></path>
                                             <path fill="#F1F5F1" d="M10.266 4.993 4.216 7.79l1.507 5.737 1.153-.144-.321-3.601.382-.17.648 3.683 1.958-.24-.348-3.976.368-.164.716 4.052 1.985-.245-.381-4.36.375-.163.784 4.427L15 12.387V6.18l-4.734-1.187ZM10.41 13.683l.095.566L15 15v-1.875l-4.584.56h-.007Z"></path>
                                         </g>
@@ -63,7 +63,7 @@ const ProfilePage = async () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="font-medium">Riot Games</p>
+                                    <p className="font-medium  text-gray-600">Riot Games</p>
                                     <p className="text-sm text-gray-500">Not connected</p>
                                 </div>
                             </div>
