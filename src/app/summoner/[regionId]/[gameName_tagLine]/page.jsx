@@ -50,18 +50,19 @@ export default async function Page({ params, searchParams }) {
   }
 
   return (
-    <div className="bg-gray-100 p-6">
+    <div className="bg-background p-6">
       <div className="mb-6 flex items-center">
         <ProfileIcon profileIconId={summonerProfile.profileIconId} className="size-16 md:size-24 lg:size-32" />
         <div className="ml-4">
           <h1 className="text-3xl font-bold">
             {summonerProfile.gameName}#{summonerProfile.tagLine}
           </h1>
-          <p className="text-gray-600">Level: {summonerProfile.summonerLevel}</p>
+          <p className="text-muted">Level: {summonerProfile.summonerLevel}</p>
         </div>
       </div>
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
       <div className="mb-6">
+        {/* TODO: Change the entries in another ticket */}
         <h2 className="text-2xl font-semibold">League Entries</h2>
         {entries.length > 0 ? (
           entries.map((entry) => (
