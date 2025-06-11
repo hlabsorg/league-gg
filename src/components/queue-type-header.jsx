@@ -4,8 +4,8 @@ import { QUEUE_TYPES } from "@/constants/queue-types";
 
 export function QueueTypeHeader({ regionId, gameName_tagLine, activeQueue }) {
   return (
-    <Tabs value={activeQueue} className="w-full flex justify-center my-4">
-      <TabsList className="bg-accent-foreground rounded-lg shadow-md p-1 w-full">
+    <Tabs value={activeQueue} className="my-4 flex w-full justify-center">
+      <TabsList className="w-full rounded-lg bg-accent-foreground p-1 shadow-md">
         <TabsTrigger value={QUEUE_TYPES.ALL} asChild className="flex-1 data-[state=active]:bg-primary">
           <Link href={`/summoner/${regionId}/${gameName_tagLine}?queue=${QUEUE_TYPES.ALL}`}>All</Link>
         </TabsTrigger>
