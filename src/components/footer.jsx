@@ -24,15 +24,19 @@ export default function Footer() {
             <Link href="/terms" className="text-sm text-muted-foreground transition-colors hover:text-primary">
               Terms of Use
             </Link> */}
-          </nav> 
+          </nav>
         </div>
 
         <div className="my-8 border-t" />
 
         <div className="flex w-full items-start justify-between gap-4">
-          <p className="text-sm text-muted-foreground ">© {new Date().getFullYear()} League GG. All rights reserved.</p>
-          <p className="text-sm text-muted-foreground max-w-3xl mx-4 flex-1">
-            League GG is not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc
+          <p className="text-sm text-muted-foreground ">
+            © {new Date().getFullYear()} League GG. All rights reserved.
+          </p>
+          <p className="mx-4 max-w-3xl flex-1 text-sm text-muted-foreground">
+            League GG is not endorsed by Riot Games and does not reflect the views or opinions of Riot Games or anyone
+            officially involved in producing or managing Riot Games properties. Riot Games and all associated properties
+            are trademarks or registered trademarks of Riot Games, Inc
           </p>
           <p className="text-sm text-muted-foreground">Made for the League community</p>
         </div>

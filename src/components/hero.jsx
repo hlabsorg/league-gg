@@ -53,13 +53,7 @@ export function Hero() {
   return (
     <section className="relative h-screen w-screen bg-background">
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute w-screen h-screen object-cover object-center"
-        >
+        <video autoPlay muted loop playsInline className="absolute h-screen w-screen object-cover object-center">
           <source src="/assets/animated-freljord.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-black/50" />
@@ -83,7 +77,7 @@ export function Hero() {
               </SelectContent>
             </Select>
             <Popover open={isOpen} onOpenChange={setIsOpen} className="bg-background">
-              <Command label="Summoner Name" shouldFilter={false} className="bg-background z-10 text-muted">
+              <Command label="Summoner Name" shouldFilter={false} className="z-10 bg-background text-muted">
                 <PopoverTrigger asChild>
                   <CommandInput
                     className="h-12 bg-background"
@@ -94,13 +88,13 @@ export function Hero() {
                   />
                 </PopoverTrigger>
                 <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()} className="bg-background">
-                  <CommandList className="bg-background z-10 text-muted">
+                  <CommandList className="z-10 bg-background text-muted">
                     <CommandEmpty>
                       {!searchResults
                         ? "Search for summoner by Game Name!"
                         : "No results found.  Please manually input Tagline in the next field."}
                     </CommandEmpty>
-                    <CommandGroup className="bg-background z-10">
+                    <CommandGroup className="z-10 bg-background">
                       {searchResults?.map((summoner) => (
                         <CommandItem key={summoner.id} value={summoner} className="bg-background">
                           <Link
@@ -114,7 +108,7 @@ export function Hero() {
                               </div>
                               <div className="flex w-full flex-col justify-center">
                                 <div className="flex flex-row gap-2">
-                                  <h4 className="text-foreground font-bold">{summoner.gameName}</h4>
+                                  <h4 className="font-bold text-foreground">{summoner.gameName}</h4>
                                   <h4 className="bg-background text-muted">#{summoner.tagLine}</h4>
                                 </div>
                                 <p className="text-sm text-muted">Level {summoner.summonerLevel}</p>
@@ -130,13 +124,13 @@ export function Hero() {
               </Command>
             </Popover>
             <Input
-              className="tagline-input bg-background text-muted h-12"
+              className="tagline-input h-12 bg-background text-muted"
               placeholder="Tagline"
               name="tagLine"
               type="text"
               defaultValue={tagLine}
             />
-            <Button type="submit" className="bg-background h-12 px-6" variant="default">
+            <Button type="submit" className="h-12 bg-background px-6" variant="default">
               <Icons.search className="size-5" />
             </Button>
           </div>
