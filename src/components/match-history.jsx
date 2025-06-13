@@ -3,6 +3,7 @@ import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
 import { TeamDisplay } from "./team-display";
+import { Matchup } from "./matchup";
 
 export function MatchHistory({ matches, regionId, summonerName, championNames }) {
   if (!matches || !Array.isArray(matches)) {
@@ -125,12 +126,17 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                   regionId={regionId}
                 />
                 <TeamDisplay
-                  color="red"
+                  color="red" 
                   participants={match.info.participants}
                   gameDuration={match.info.gameDuration}
                   regionId={regionId}
                 />
               </div>
+              <Matchup
+              currentPlayer={currentPlayer}
+              matchInfo={match.info}
+
+              />
             </DrawerContent>
           </Drawer>
         );

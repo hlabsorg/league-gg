@@ -3,8 +3,7 @@ import { ChampionIcon } from "./champion-icon";
 import Link from "next/link";
 import { ItemIcon } from "./item-icon";
 import { RoleIcon } from "./role-icon";
-
-const roleCheck = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"];
+import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 
 export function TeamDisplay({ color, participants, gameDuration, regionId }) {
   // const teamColor = color === "blue" ? "blue" : "red";
@@ -24,7 +23,7 @@ return (
             <Link prefetch href={`/summoner/${regionId}/${participant.riotIdGameName}-${participant.riotIdTagline}`}>
               <ProfileIcon profileIconId={participant.profileIcon} className="size-10" />
             </Link>
-            {roleCheck.includes(participant.individualPosition) ? (
+            {Object.values(INDIVIDUAL_POSITION).includes(participant.individualPosition) ? (
               <div className="flex size-10 items-center justify-center">
                 <RoleIcon role={participant.individualPosition} className="size-6" />
               </div>
