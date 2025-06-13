@@ -3,6 +3,7 @@ import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
 import { MatchStats } from "@/helpers/stats";
+import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 
 export function Matchup({ currentPlayer, matchInfo }) {
   const opponent = (currentPlayer, matchInfo) => {
@@ -30,7 +31,11 @@ export function Matchup({ currentPlayer, matchInfo }) {
               <ChampionIcon championName={currentPlayer.championName} className="size-8" />
             </div>
             <div>
-              <RoleIcon role={currentPlayer.individualPosition} className="size-8" />
+            {Object.values(INDIVIDUAL_POSITION).includes(currentPlayer.individualPosition) ? (
+              <div className="flex size-10 items-center justify-center">
+                <RoleIcon role={currentPlayer.individualPosition} className="size-6" />
+              </div>
+            ) : null}
             </div>
           </div>
           <div className="flex gap-2">
@@ -66,7 +71,11 @@ export function Matchup({ currentPlayer, matchInfo }) {
               <ChampionIcon championName={opponent(currentPlayer, matchInfo).championName} className="size-8" />
             </div>
             <div>
-              <RoleIcon role={opponent(currentPlayer, matchInfo).individualPosition} className="size-8" />
+            {Object.values(INDIVIDUAL_POSITION).includes(currentPlayer.individualPosition) ? (
+              <div className="flex size-10 items-center justify-center">
+                <RoleIcon role={opponent(currentPlayer, matchInfo).individualPosition} className="size-6" />
+              </div>
+            ) : null}
             </div>
           </div>
           <div className="flex gap-2">
