@@ -28,7 +28,7 @@ export class MatchStats {
   }
 
   getGoldPerMinute(player) {
-    return Math.floor(player.goldPerMinute);
+    return Math.floor(player.challenges.goldPerMinute);
   }
   
   getGoldSpent(player) {
@@ -36,7 +36,7 @@ export class MatchStats {
   }
 
   getSoloKills(player) {
-    return player.soloKills;
+    return player.challenges.soloKills;
   }
 
   getKillingSpree(player) {
