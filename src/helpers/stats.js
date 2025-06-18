@@ -7,6 +7,10 @@ export class MatchStats {
     return `${player.kills}/${player.deaths}/${player.assists}`;
   }
 
+  getKDARatio(player) {
+    return (player.kills + player.assists)/player.deaths
+  }
+
   getCS(player) {
     return `${player.totalMinionsKilled} (${((player.totalMinionsKilled * 60) / this.matchInfo.gameDuration).toFixed(1)}/min)`;
   }

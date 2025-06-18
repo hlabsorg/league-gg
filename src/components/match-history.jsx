@@ -82,7 +82,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
               </div>
             </DrawerTrigger>
-            <DrawerContent className="h-[80vh] px-4 py-2">
+            <DrawerContent className="h-[90vh] px-4 py-2">
               <DrawerHeader className="flex justify-center">
                 <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
               </DrawerHeader>
