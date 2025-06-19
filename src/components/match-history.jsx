@@ -1,11 +1,21 @@
+"use client";
+
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from "./ui/drawer";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
 import { TeamDisplay } from "./team-display";
 import { Matchup } from "./matchup";
+import { Button } from "./ui/button";
+import { useState } from "react"
+import { POSITION_LABELS } from "@/constants/individual-position"
+import { RoleIcon } from "./role-icon";
+
 
 export function MatchHistory({ matches, regionId, summonerName, championNames }) {
+  const [drawerDisplay, setDrawerDisplay] = useState('matchDetails')
+  const [selectedMatchup, setSelectedMatchup] = useState(null)
+  
   if (!matches || !Array.isArray(matches)) {
     return <div>No matches found</div>;
   }
@@ -16,8 +26,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
         // Find the current summoner's data in the match
         const currentPlayer = match.info.participants.find(
           (p) =>
-            p.riotIdGameName?.toLowerCase() === summonerName.toLowerCase() ||
-            p.summonerName?.toLowerCase() === summonerName.toLowerCase(),
+            p.riotIdGameName
         );
 
         if (!currentPlayer) {
@@ -82,61 +91,120 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
               </div>
             </DrawerTrigger>
-            <DrawerContent className="h-[90vh] px-4 py-2">
-              <DrawerHeader className="flex justify-center">
-                <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
-              </DrawerHeader>
-              <div className="flex justify-center gap-4">
-                <div>
-                  Game Mode: <br />
-                  {match.info.gameMode}
-                </div>
-                <div>
-                  Game Duration: <br />
-                  {Math.floor(match.info.gameDuration / 60)}m {Math.floor(match.info.gameDuration % 60)}s
-                </div>
-                <div>
-                  Match Winner: <br />
-                  <span
-                    className={`font-bold ${
-                      currentPlayer.teamId === 100
-                        ? currentPlayer.win
-                          ? "text-bteam"
-                          : "text-rteam"
-                        : currentPlayer.win
-                          ? "text-rteam"
-                          : "text-bteam"
-                    }`}
-                  >
-                    {currentPlayer.teamId === 100
-                      ? currentPlayer.win
-                        ? "Blue Side Victory"
-                        : "Red Side Victory"
-                      : currentPlayer.win
-                        ? "Red Side Victory"
-                        : "Blue Side Victory"}
-                  </span>
-                </div>
+            <DrawerContent className="h-[80vh] px-4 py-2 overflow-y-scroll">
+              <div className="flex justify-center gap-4 mb-4">
+                <Button className="w-[100px]"
+                  variant={drawerDisplay === "matchDetails" ? "default" : "outline"}
+                  onClick={() => setDrawerDisplay("matchDetails")}
+                >
+                  Match Details
+                </Button>
+                <Button className="w-[200px]"
+                  variant={drawerDisplay === "matchup" ? "default" : "outline"}
+                  onClick={() => setDrawerDisplay("matchup")}
+                >
+                  Tale of the Tape
+                </Button>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <TeamDisplay
-                  color="blue"
-                  participants={match.info.participants}
-                  gameDuration={match.info.gameDuration}
-                  regionId={regionId}
-                />
-                <TeamDisplay
-                  color="red" 
-                  participants={match.info.participants}
-                  gameDuration={match.info.gameDuration}
-                  regionId={regionId}
-                />
-              </div>
-              <Matchup
-              currentPlayer={currentPlayer}
-              matchInfo={match.info}
 
-              />
+
+              {drawerDisplay === "matchDetails" ? (
+                <div>
+                  <DrawerHeader className="flex justify-center">
+                    <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
+                  </DrawerHeader>
+                  
+                  <div className="flex justify-center gap-4">
+                    <div>
+                      Game Mode: <br />
+                      {match.info.gameMode}
+                    </div>
+                    <div>
+                      Game Duration: <br />
+                      {Math.floor(match.info.gameDuration / 60)}m {Math.floor(match.info.gameDuration % 60)}s
+                    </div>
+                    <div>
+                      Match Winner: <br />
+                      <span
+                        className={`font-bold ${
+                          currentPlayer.teamId === 100
+                            ? currentPlayer.win
+                              ? "text-bteam"
+                              : "text-rteam"
+                            : currentPlayer.win
+                              ? "text-rteam"
+                              : "text-bteam"
+                        }`}
+                      >
+                        {currentPlayer.teamId === 100
+                          ? currentPlayer.win
+                            ? "Blue Side Victory"
+                            : "Red Side Victory"
+                          : currentPlayer.win
+                            ? "Red Side Victory"
+                            : "Blue Side Victory"}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="flex flex-col w-2/5">
+                      <TeamDisplay
+                        color="blue"
+                        participants={match.info.participants}
+                        gameDuration={match.info.gameDuration}
+                        regionId={regionId}
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/5 items-center">
+                      <h3 className="font-semibold mb-4">Tale of the Tape</h3>
+                      <div className="flex flex-col justify-around h-full gap-2">
+                        {Object.entries(POSITION_LABELS).map(([position, label]) => {
+                          const leftPlayer = match.info.participants.find(player => player.teamId === 100 && player.individualPosition === position);
+                          const rightPlayer = match.info.participants.find(player => player.teamId === 200 && player.individualPosition === position);
+                         
+                          if (!leftPlayer || !rightPlayer) return null;
+
+                          return (
+                            <Button
+                              key={position}
+                              variant="outline"
+                              size="sm"
+                              className="text-lg w-full"
+                              onClick={() => {
+                                setDrawerDisplay("matchup")
+                                setSelectedMatchup({ position, label, leftPlayer, rightPlayer })
+                              }}
+                            >
+                              <RoleIcon role={position} className="size-6 mr-2" />
+                              {label} Matchup
+                            </Button>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    <div className="flex flex-col w-2/5">
+                      <TeamDisplay
+                        color="red" 
+                        participants={match.info.participants}
+                        gameDuration={match.info.gameDuration}
+                        regionId={regionId}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <DrawerHeader className="flex justify-center">
+                    <DrawerTitle className="text-4xl font-bold">
+                      {selectedMatchup ? `${selectedMatchup.label} Matchup` : 'Tale of the Tape'}
+                    </DrawerTitle>
+                  </DrawerHeader>
+                  <Matchup
+                    currentPlayer={selectedMatchup ? selectedMatchup.leftPlayer : currentPlayer}
+                    matchInfo={match.info}
+                  />
+                </div>
+              )}
             </DrawerContent>
           </Drawer>
         );

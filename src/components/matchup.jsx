@@ -6,6 +6,8 @@ import { MatchStats } from "@/helpers/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art"
 
+// Set default state to current player, find player opponent and pass each participant to matchup
+
 export function Matchup({ currentPlayer, matchInfo }) {
   const opponent = (currentPlayer, matchInfo) => {
     return matchInfo.participants.find(
@@ -44,7 +46,7 @@ export function Matchup({ currentPlayer, matchInfo }) {
           <div className="flex gap-2 justify-center items-center">
             <div>
               <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12" />
-              <h3 className="text-lg font-bold">{currentPlayer.summonerName}</h3>
+              <h3 className="text-lg font-bold">{currentPlayer.riotIdGameName}</h3>
             </div>
             <div>
               <ChampionIcon championName={currentPlayer.championName} className="size-8" />
@@ -111,7 +113,7 @@ export function Matchup({ currentPlayer, matchInfo }) {
           <div className="flex gap-2 justify-center items-center">
             <div>
               <ProfileIcon profileIconId={opponent(currentPlayer, matchInfo).profileIcon} className="size-12" />
-              <h3 className="text-lg font-bold">{opponent(currentPlayer, matchInfo).summonerName}</h3>
+              <h3 className="text-lg font-bold">{opponent(currentPlayer, matchInfo).riotIdGameName}</h3>
             </div>
             <div>
               <ChampionIcon championName={opponent(currentPlayer, matchInfo).championName} className="size-8" />
