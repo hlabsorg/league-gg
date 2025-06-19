@@ -8,7 +8,7 @@ export class MatchStats {
   }
 
   getKDARatio(player) {
-    return (player.kills + player.assists)/player.deaths
+    return player.deaths === 0 ? (player.kills + player.assists) : (player.kills + player.assists)/player.deaths;
   }
 
   getCS(player) {

@@ -6,7 +6,6 @@ import { MatchStats } from "@/helpers/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art"
 
-// Set default state to current player, find player opponent and pass each participant to matchup
 
 export function Matchup({ currentPlayer, matchInfo }) {
   const opponent = (currentPlayer, matchInfo) => {

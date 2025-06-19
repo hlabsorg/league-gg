@@ -26,7 +26,8 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
         // Find the current summoner's data in the match
         const currentPlayer = match.info.participants.find(
           (p) =>
-            p.riotIdGameName
+            p.riotIdGameName?.toLowerCase() === summonerName.toLowerCase() ||
+            p.summonerName?.toLowerCase() === summonerName.toLowerCase(),
         );
 
         if (!currentPlayer) {
