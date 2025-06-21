@@ -2,13 +2,13 @@ export class MatchStats {
   constructor(matchInfo) {
     this.matchInfo = matchInfo;
   }
-
+  // test change
   getKDA(player) {
     return `${player.kills}/${player.deaths}/${player.assists}`;
   }
 
   getKDARatio(player) {
-    return player.deaths === 0 ? (player.kills + player.assists) : (player.kills + player.assists)/player.deaths;
+    return player.deaths === 0 ? player.kills + player.assists : (player.kills + player.assists) / player.deaths;
   }
 
   getCS(player) {
@@ -34,7 +34,7 @@ export class MatchStats {
   getGoldPerMinute(player) {
     return Math.floor(player.challenges.goldPerMinute);
   }
-  
+
   getGoldSpent(player) {
     return player.goldSpent;
   }
@@ -78,68 +78,68 @@ export class MatchStats {
     return {
       kda: {
         label: "KDA",
-        getValue: (player) => this.getKDA(player)
+        getValue: (player) => this.getKDA(player),
       },
       cs: {
         label: "CS",
-        getValue: (player) => this.getCS(player)
+        getValue: (player) => this.getCS(player),
       },
       visionScore: {
         label: "Vision Score",
-        getValue: (player) => this.getVisionScore(player)
+        getValue: (player) => this.getVisionScore(player),
       },
       magicDamageDealt: {
         label: "Magic Damage To Champions",
-        getValue: (player) => this.getMagicDamageDealt(player)
+        getValue: (player) => this.getMagicDamageDealt(player),
       },
       physicalDamageDealt: {
         label: "Physical Damage To Champions",
-        getValue: (player) => this.getPhysicalDamageDealt(player)
+        getValue: (player) => this.getPhysicalDamageDealt(player),
       },
       damageToChampions: {
         label: "Total Damage To Champions",
-        getValue: (player) => this.getDamageToChampions(player)
+        getValue: (player) => this.getDamageToChampions(player),
       },
       goldEarned: {
         label: "Gold Earned",
-        getValue: (player) => this.getGoldEarned(player)
+        getValue: (player) => this.getGoldEarned(player),
       },
       goldPerMinute: {
         label: "Gold/Min",
-        getValue: (player) => this.getGoldPerMinute(player)
+        getValue: (player) => this.getGoldPerMinute(player),
       },
       goldSpent: {
         label: "Gold Spent",
-        getValue: (player) => this.getGoldSpent(player)
+        getValue: (player) => this.getGoldSpent(player),
       },
       soloKills: {
         label: "Solo Kills",
-        getValue: (player) => this.getSoloKills(player)
+        getValue: (player) => this.getSoloKills(player),
       },
       killingSpree: {
         label: "Largest Killing Spree",
-        getValue: (player) => this.getKillingSpree(player)
+        getValue: (player) => this.getKillingSpree(player),
       },
       turretKills: {
         label: "Turret Kills",
-        getValue: (player) => this.getTurretKills(player)
+        getValue: (player) => this.getTurretKills(player),
       },
       dragonKills: {
         label: "Dragon Kills",
-        getValue: (player) => this.getdragonKills(player)
+        getValue: (player) => this.getdragonKills(player),
       },
       baronKills: {
         label: "Baron Kills",
-        getValue: (player) => this.getBaronKills(player)
+        getValue: (player) => this.getBaronKills(player),
       },
       wardsKilled: {
         label: "Wards Killed",
-        getValue: (player) => this.getwardsKilled(player)
+        getValue: (player) => this.getwardsKilled(player),
       },
       visionWardsBought: {
         label: "Control Wards Bought",
-        getValue: (player) => this.getVisionWardsBoughtInGame(player)
-      }
+        getValue: (player) => this.getVisionWardsBoughtInGame(player),
+      },
     };
   }
-} 
+}
