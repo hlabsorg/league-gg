@@ -2,11 +2,13 @@ import { RoleIcon } from "./role-icon";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
-import { PlayerMatchStats } from "@/lib/match/stats";
+import { MatchStats, PlayerMatchStats } from "@/helpers/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
 
-export function Matchup({ redPlayer, bluePlayer }) {
+// Set default state to current player, find player opponent and pass each participant to matchup
+
+export function Matchup({ currentPlayer, opponent }) {
   const getOpponent = (currentPlayer, matchInfo) => {
     return matchInfo.participants.find(
       (player) =>
