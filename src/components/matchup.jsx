@@ -8,7 +8,7 @@ import { SplashArt } from "./splash-art";
 
 // Set default state to current player, find player opponent and pass each participant to matchup
 
-export function Matchup({ currentPlayer, opponent }) {
+export function Matchup({ currentPlayer }) {
   const getOpponent = (currentPlayer, matchInfo) => {
     return matchInfo.participants.find(
       (player) =>
