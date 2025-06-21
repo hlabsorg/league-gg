@@ -75,51 +75,37 @@ export class PlayerMatchStats {
     return this.player.visionWardsBoughtInGame;
   }
 
-  getRenderedStats() {
-    return [
-      {
-        label: "KDA",
-        value: this.getKDA(),
-      },
-      {
-        label: "CS",
-        value: this.getCS(),
-      },
-      {
-        label: "Vision Score",
-        value: this.getVisionScore(),
-      },
-      {
-        label: "Physical Damage To Champions",
-        value: this.getPhysicalDamageDealt(),
-      },
-      {
-        label: "Magic Damage To Champions",
-        value: this.getMagicDamageDealt(),
-      },
-      {
-        label: "Total Damage To Champions",
-        value: this.getDamageToChampions(),
-      },
-      {
-        label: "Gold Earned",
-        value: this.getGoldEarned(),
-      },
-      {
-        label: "Gold/Min",
-        value: this.getGoldPerMinute(),
-      },
-      {
-        label: "Control Wards Bought",
-        value: this.getVisionWardsBoughtInGame(),
-      },
-    ];
+  getAllStats() {
+    return {
+      kda: this.getKDA(),
+      cs: this.getCS(),
+      visionScore: this.getVisionScore(),
+      magicDamageDealt: this.getMagicDamageDealt(),
+      physicalDamageDealt: this.getPhysicalDamageDealt(),
+      damageToChampions: this.getDamageToChampions(),
+      goldEarned: this.getGoldEarned(),
+      goldPerMinute: this.getGoldPerMinute(player),
+      goldSpent: this.getGoldSpent(player),
+      soloKills: this.getSoloKills(player),
+      killingSpree: this.getKillingSpree(player),
+      turretKills: this.getTurretKills(player),
+      dragonKills: this.getdragonKills(player),
+      baronKills: this.getBaronKills(player),
+      wardsKilled: this.getwardsKilled(player),
+      visionWardsBought: this.getVisionWardsBoughtInGame(player),
+    };
   }
 }
 
 export class MatchStats {
   constructor(matchInfo) {
+    // set what the class attribute are
     this.matchInfo = matchInfo;
+  }
+
+  setPlayer;
+  setOpponent(opponent) {
+    this.opponent = opponent;
   }
 
   getKDA(player) {
