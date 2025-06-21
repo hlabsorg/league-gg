@@ -5,6 +5,44 @@ import { ItemIcon } from "./item-icon";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
 
+const statsToRender = [
+  {
+    label: "KDA",
+    key: "kda",
+  },
+  {
+    label: "CS",
+    key: "cs",
+  },
+  {
+    label: "Vision Score",
+    key: "visionScore",
+  },
+  {
+    label: "Physical Damage To Champions",
+    key: "physicalDamageDealt",
+  },
+  {
+    label: "Magic Damage To Champions",
+    key: "magicDamageDealt",
+  },
+  {
+    label: "Total Damage To Champions",
+    key: "damageToChampions",
+  },
+  {
+    label: "Gold Earned",
+    key: "goldEarned",
+  },
+  {
+    label: "Gold/Min",
+    key: "goldPerMinute",
+  },
+  {
+    label: "Control Wards Bought",
+    key: "visionWardsBought",
+  },
+];
 // Set default state to current player, find player opponent and pass each participant to matchup
 
 export function Matchup({ currentPlayer }) {
