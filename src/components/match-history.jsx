@@ -165,6 +165,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                       <div className="flex h-full flex-col justify-around gap-2">
                         {Object.entries(POSITION_LABELS).map(([position, label]) => {
                           const leftPlayer = match.info.participants.find(
+                            //typeof INDIVIDUAL_POSITIONS
                             (player) => player.teamId === 100 && player.individualPosition === position,
                           );
                           const rightPlayer = match.info.participants.find(
@@ -181,7 +182,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                               className="w-full text-lg"
                               onClick={() => {
                                 setDrawerDisplay("matchup");
-                                setSelectedMatchup({ position, label, leftPlayer, rightPlayer });
+                                setSelectedMatchup({ label, leftPlayer, rightPlayer });
                               }}
                             >
                               <RoleIcon role={position} className="mr-2 size-6" />
@@ -208,7 +209,11 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                       {selectedMatchup ? `${selectedMatchup.label} Matchup` : "Tale of the Tape"}
                     </DrawerTitle>
                   </DrawerHeader>
-                  <Matchup currentPlayer={selectedMatchup.leftPlayer} matchInfo={match.info} />
+                  <Matchup
+                    leftPlayer={selectedMatchup.leftPlayer}
+                    rightPlayer={selectedMatchup.rightPlayer}
+                    matchInfo={match.info}
+                  />
                 </div>
               )}
             </DrawerContent>
