@@ -2,7 +2,6 @@ import { RoleIcon } from "./role-icon";
 import { ProfileIcon } from "./profile-icon";
 import { ChampionIcon } from "./champion-icon";
 import { ItemIcon } from "./item-icon";
-import { MatchStats, PlayerMatchStats } from "@/helpers/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
 
@@ -17,9 +16,6 @@ export function Matchup({ currentPlayer }) {
   };
 
   const opponent = getOpponent(currentPlayer, matchInfo);
-
-  const currentPlayerStats = new PlayerMatchStats(currentPlayer);
-  const opponentStats = new PlayerMatchStats(opponent);
 
   const getKDAWinner = (current, opponent) => {
     const currentKDA = matchupStats.getKDARatio(current);
