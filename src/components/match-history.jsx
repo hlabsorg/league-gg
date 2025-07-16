@@ -7,15 +7,14 @@ import { ItemIcon } from "./item-icon";
 import { TeamDisplay } from "./team-display";
 import { Matchup } from "./matchup";
 import { Button } from "./ui/button";
-import { useState } from "react"
-import { POSITION_LABELS } from "@/constants/individual-position"
+import { useState } from "react";
+import { POSITION_LABELS } from "@/constants/individual-position";
 import { RoleIcon } from "./role-icon";
 
-
 export function MatchHistory({ matches, regionId, summonerName, championNames }) {
-  const [drawerDisplay, setDrawerDisplay] = useState('matchDetails')
-  const [selectedMatchup, setSelectedMatchup] = useState(null)
-  
+  const [drawerDisplay, setDrawerDisplay] = useState("matchDetails");
+  const [selectedMatchup, setSelectedMatchup] = useState();
+
   if (!matches || !Array.isArray(matches)) {
     return <div>No matches found</div>;
   }
@@ -37,7 +36,9 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
 
         return (
           <Drawer key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
-            <DrawerTrigger className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? 'bg-victory' : 'bg-defeat'}`}>
+            <DrawerTrigger
+              className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? "bg-victory" : "bg-defeat"}`}
+            >
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
                 <div className="w-24 shrink-0">
@@ -49,14 +50,16 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
 
                 {/* Champion and Summoner Info in preview */}
-               
+
                 <div className="flex items-center gap-2">
                   <ProfileIcon profileIconId={currentPlayer.profileIcon} className="size-12 lg:size-14" />
                   <div className="overflow-hidden">
-                    <ChampionIcon championName={championNames[currentPlayer.championId]} className="size-8 lg:size-10" />
+                    <ChampionIcon
+                      championName={championNames[currentPlayer.championId]}
+                      className="size-8 lg:size-10"
+                    />
                   </div>
                 </div>
-                
 
                 {/* KDA and CS */}
                 <div className="grow">
@@ -94,13 +97,15 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
             </DrawerTrigger>
             <DrawerContent className="h-[80vh] px-4 py-2 overflow-y-scroll">
               <div className="flex justify-center gap-4 mb-4">
-                <Button className="w-[100px]"
+                <Button
+                  className="w-[100px]"
                   variant={drawerDisplay === "matchDetails" ? "default" : "outline"}
                   onClick={() => setDrawerDisplay("matchDetails")}
                 >
                   Match Details
                 </Button>
-                <Button className="w-[200px]"
+                <Button
+                  className="w-[200px]"
                   variant={drawerDisplay === "matchup" ? "default" : "outline"}
                   onClick={() => setDrawerDisplay("matchup")}
                 >
@@ -108,13 +113,12 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </Button>
               </div>
 
-
               {drawerDisplay === "matchDetails" ? (
                 <div>
                   <DrawerHeader className="flex justify-center">
                     <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
                   </DrawerHeader>
-                  
+
                   <div className="flex justify-center gap-4">
                     <div>
                       Game Mode: <br />
@@ -160,9 +164,13 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                       <h3 className="font-semibold mb-4">Tale of the Tape</h3>
                       <div className="flex flex-col justify-around h-full gap-2">
                         {Object.entries(POSITION_LABELS).map(([position, label]) => {
-                          const leftPlayer = match.info.participants.find(player => player.teamId === 100 && player.individualPosition === position);
-                          const rightPlayer = match.info.participants.find(player => player.teamId === 200 && player.individualPosition === position);
-                         
+                          const leftPlayer = match.info.participants.find(
+                            (player) => player.teamId === 100 && player.individualPosition === position,
+                          );
+                          const rightPlayer = match.info.participants.find(
+                            (player) => player.teamId === 200 && player.individualPosition === position,
+                          );
+
                           if (!leftPlayer || !rightPlayer) return null;
 
                           return (
@@ -172,20 +180,20 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                               size="sm"
                               className="text-lg w-full"
                               onClick={() => {
-                                setDrawerDisplay("matchup")
-                                setSelectedMatchup({ position, label, leftPlayer, rightPlayer })
+                                setDrawerDisplay("matchup");
+                                setSelectedMatchup({ label, leftPlayer, rightPlayer });
                               }}
                             >
                               <RoleIcon role={position} className="size-6 mr-2" />
                               {label} Matchup
                             </Button>
-                          )
+                          );
                         })}
                       </div>
                     </div>
                     <div className="flex flex-col w-2/5">
                       <TeamDisplay
-                        color="red" 
+                        color="red"
                         participants={match.info.participants}
                         gameDuration={match.info.gameDuration}
                         regionId={regionId}
@@ -197,11 +205,12 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 <div>
                   <DrawerHeader className="flex justify-center">
                     <DrawerTitle className="text-4xl font-bold">
-                      {selectedMatchup ? `${selectedMatchup.label} Matchup` : 'Tale of the Tape'}
+                      {selectedMatchup ? `${selectedMatchup.label} Matchup` : "Tale of the Tape"}
                     </DrawerTitle>
                   </DrawerHeader>
                   <Matchup
-                    currentPlayer={selectedMatchup ? selectedMatchup.leftPlayer : currentPlayer}
+                    leftPlayer={selectedMatchup.leftPlayer}
+                    rightPlayer={selectedMatchup.rightPlayer}
                     matchInfo={match.info}
                   />
                 </div>

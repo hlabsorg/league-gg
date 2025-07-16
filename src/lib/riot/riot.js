@@ -44,8 +44,8 @@ const getSummonerAccountByPUUID = async (puuid, regionId) => {
   return response;
 };
 
-const getLeagueEntries = async (summonerId, regionId) => {
-  const url = `https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`;
+const getLeagueEntries = async (puuid, regionId) => {
+  const url = `https://${regionId}.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}`;
   const cached = await checkCache(url);
   if (cached) {
     return cached;
