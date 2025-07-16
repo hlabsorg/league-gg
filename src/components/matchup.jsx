@@ -59,16 +59,16 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
   };
 
   return (
-    <div className="bg-[url('/assets/background/matchupBG.png')] aspect-video bg-cover bg-center">
-      <div className="flex justify-center items-center w-full h-[100px]">
-        <div className="bg-[url('/assets/background/taleBanner.png')] h-[100px] w-[500px] bg-cover bg-center flex justify-center items-center rounded-2xl border-4 border-popover">
-          <h3 className="text-4xl font-semibold font-foreground">Tale of the Tape</h3>
+    <div className="aspect-video bg-[url('/assets/background/matchupBG.png')] bg-cover bg-center">
+      <div className="flex h-[100px] w-full items-center justify-center">
+        <div className="flex h-[100px] w-[500px] items-center justify-center rounded-2xl border-4 border-popover bg-[url('/assets/background/taleBanner.png')] bg-cover bg-center">
+          <h3 className="font-foreground text-4xl font-semibold">Tale of the Tape</h3>
         </div>
       </div>
       <div className="flex justify-between">
         {/* Current Summoner*/}
-        <div className="flex flex-col gap-2 w-1/3">
-          <div className="flex gap-2 justify-center items-center">
+        <div className="flex w-1/3 flex-col gap-2">
+          <div className="flex items-center justify-center gap-2">
             <div>
               <ProfileIcon profileIconId={leftPlayer.profileIcon} className="size-12" />
               <h3 className="text-lg font-bold">{leftPlayer.riotIdGameName}</h3>
@@ -84,7 +84,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
               ) : null}
             </div>
           </div>
-          <div className="flex gap-2 justify-center">
+          <div className="flex justify-center gap-2">
             <ItemIcon itemId={leftPlayer.item0} className="size-6" />
             <ItemIcon itemId={leftPlayer.item1} className="size-6" />
             <ItemIcon itemId={leftPlayer.item2} className="size-6" />
@@ -93,17 +93,17 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
             <ItemIcon itemId={leftPlayer.item5} className="size-6" />
             <ItemIcon itemId={leftPlayer.item6} className="size-6" />
           </div>
-          <div className="flex justify-center items-center">
-            <div className="relative w-[500px] h-[281px]">
+          <div className="flex items-center justify-center">
+            <div className="relative h-[281px] w-[500px]">
               <SplashArt championName={leftPlayer.championName} className="object-contain" />
             </div>
           </div>
         </div>
 
         {/* Stats Section */}
-        <div className="flex flex-col gap-2 w-1/3">
-          <div className="bg-card p-4 border-2 border-background ">
-            <h4 className="text-xl font-bold text-foreground text-center mb-4">Match Statistics</h4>
+        <div className="flex w-1/3 flex-col gap-2">
+          <div className="border-2 border-background bg-card p-4 ">
+            <h4 className="mb-4 text-center text-xl font-bold text-foreground">Match Statistics</h4>
             {statsToRender.map((stat) => {
               const leftStats = leftPlayerStatsAll[stat.key];
               const rightStats = rightPlayerStatsAll[stat.key];
@@ -119,16 +119,16 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
               }
 
               return (
-                <div key={stat.key} className="flex items-center justify-between py-2 border-b">
+                <div key={stat.key} className="flex items-center justify-between border-b py-2">
                   {/* Left Player */}
-                  <div className={`${leftClass} w-2/5 text-right pr-3 text-sm`}>{leftStats}</div>
+                  <div className={`${leftClass} w-2/5 pr-3 text-right text-sm`}>{leftStats}</div>
                   <div className="w-1/5 text-center">
-                    <div className="text-xs font-semibold text-foreground bg-gray-700/50 px-2 py-1 rounded">
+                    <div className="rounded bg-gray-700/50 px-2 py-1 text-xs font-semibold text-foreground">
                       {stat.label}
                     </div>
                   </div>
                   {/* Right Player */}
-                  <div className={`${rightClass} w-2/5 text-left pl-3 text-sm`}>{rightStats}</div>
+                  <div className={`${rightClass} w-2/5 pl-3 text-left text-sm`}>{rightStats}</div>
                 </div>
               );
             })}
@@ -136,8 +136,8 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
         </div>
 
         {/* Opponent*/}
-        <div className="flex flex-col gap-2 w-1/3">
-          <div className="flex gap-2 justify-center items-center">
+        <div className="flex w-1/3 flex-col gap-2">
+          <div className="flex items-center justify-center gap-2">
             <div>
               <ProfileIcon profileIconId={rightPlayer.profileIcon} className="size-12" />
               <h3 className="text-lg font-bold">{rightPlayer.riotIdGameName}</h3>
@@ -162,8 +162,8 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
             <ItemIcon itemId={rightPlayer.item5} className="size-6" />
             <ItemIcon itemId={rightPlayer.item6} className="size-6" />
           </div>
-          <div className="flex justify-center items-center">
-            <div className="relative w-[500px] h-[281px]">
+          <div className="flex items-center justify-center">
+            <div className="relative h-[281px] w-[500px]">
               <SplashArt championName={rightPlayer.championName} className="object-contain" />
             </div>
           </div>

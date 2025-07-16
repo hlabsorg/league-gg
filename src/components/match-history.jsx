@@ -95,8 +95,8 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
               </div>
             </DrawerTrigger>
-            <DrawerContent className="h-[80vh] px-4 py-2 overflow-y-scroll">
-              <div className="flex justify-center gap-4 mb-4">
+            <DrawerContent className="h-[80vh] overflow-y-scroll px-4 py-2">
+              <div className="mb-4 flex justify-center gap-4">
                 <Button
                   className="w-[100px]"
                   variant={drawerDisplay === "matchDetails" ? "default" : "outline"}
@@ -152,7 +152,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <div className="flex flex-col w-2/5">
+                    <div className="flex w-2/5 flex-col">
                       <TeamDisplay
                         color="blue"
                         participants={match.info.participants}
@@ -160,9 +160,9 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                         regionId={regionId}
                       />
                     </div>
-                    <div className="flex flex-col w-1/5 items-center">
-                      <h3 className="font-semibold mb-4">Tale of the Tape</h3>
-                      <div className="flex flex-col justify-around h-full gap-2">
+                    <div className="flex w-1/5 flex-col items-center">
+                      <h3 className="mb-4 font-semibold">Tale of the Tape</h3>
+                      <div className="flex h-full flex-col justify-around gap-2">
                         {Object.entries(POSITION_LABELS).map(([position, label]) => {
                           const leftPlayer = match.info.participants.find(
                             (player) => player.teamId === 100 && player.individualPosition === position,
@@ -178,20 +178,20 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                               key={position}
                               variant="outline"
                               size="sm"
-                              className="text-lg w-full"
+                              className="w-full text-lg"
                               onClick={() => {
                                 setDrawerDisplay("matchup");
                                 setSelectedMatchup({ label, leftPlayer, rightPlayer });
                               }}
                             >
-                              <RoleIcon role={position} className="size-6 mr-2" />
+                              <RoleIcon role={position} className="mr-2 size-6" />
                               {label} Matchup
                             </Button>
                           );
                         })}
                       </div>
                     </div>
-                    <div className="flex flex-col w-2/5">
+                    <div className="flex w-2/5 flex-col">
                       <TeamDisplay
                         color="red"
                         participants={match.info.participants}
