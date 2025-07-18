@@ -21,10 +21,10 @@ export class PlayerMatchStats {
   }
 
   getMagicDamageDealt() {
-    this.player.magicDamageDealtToChampions;
+    return this.player.magicDamageDealtToChampions;
   }
 
-  getDamageTochampions() {
+  getDamageToChampions() {
     return this.player.totalDamageDealtToChampions;
   }
 
@@ -90,9 +90,9 @@ export class PlayerMatchStats {
       soloKills: this.getSoloKills(),
       killingSpree: this.getKillingSpree(),
       turretKills: this.getTurretKills(),
-      dragonKills: this.getdragonKills(),
+      dragonKills: this.getDragonKills(),
       baronKills: this.getBaronKills(),
-      wardsKilled: this.getwardsKilled(),
+      wardsKilled: this.getWardsKilled(),
       visionWardsBought: this.getVisionWardsBoughtInGame(),
     };
   }
