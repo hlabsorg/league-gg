@@ -97,20 +97,11 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
             </DrawerTrigger>
             <DrawerContent className="h-[80vh] overflow-y-scroll px-4 py-2">
               <div className="mb-4 flex justify-center gap-4">
-                <Button
-                  className="w-[100px]"
-                  variant={drawerDisplay === "matchDetails" ? "default" : "outline"}
-                  onClick={() => setDrawerDisplay("matchDetails")}
-                >
-                  Match Details
-                </Button>
-                <Button
-                  className="w-[200px]"
-                  variant={drawerDisplay === "matchup" ? "default" : "outline"}
-                  onClick={() => setDrawerDisplay("matchup")}
-                >
-                  Tale of the Tape
-                </Button>
+                {drawerDisplay !== "matchDetails" && (
+                  <Button className="w-[100px]" variant="outline" onClick={() => setDrawerDisplay("matchDetails")}>
+                    Match Details
+                  </Button>
+                )}
               </div>
 
               {drawerDisplay === "matchDetails" ? (
