@@ -35,7 +35,12 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
         }
 
         return (
-          <Drawer key={match.info.gameId} value={`match-${index}`} className="rounded-lg border">
+          <Drawer
+            key={match.info.gameId}
+            value={`match-${index}`}
+            onOpenChange={() => setDrawerDisplay("matchDetails")}
+            className="rounded-lg border"
+          >
             <DrawerTrigger
               className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? "bg-victory" : "bg-defeat"}`}
             >
@@ -98,8 +103,8 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
             <DrawerContent className="h-[80vh] overflow-y-scroll px-4 py-2">
               <div className="mb-4 flex justify-center gap-4">
                 {drawerDisplay !== "matchDetails" && (
-                  <Button className="w-[100px]" variant="outline" onClick={() => setDrawerDisplay("matchDetails")}>
-                    Match Details
+                  <Button className="w-auto text-md" variant="outline" onClick={() => setDrawerDisplay("matchDetails")}>
+                    Back To Match Details
                   </Button>
                 )}
               </div>
@@ -172,6 +177,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                               className="w-full text-lg"
                               onClick={() => {
                                 setDrawerDisplay("matchup");
+                                // set drawer state back to match details when clicking out
                                 setSelectedMatchup({ label, leftPlayer, rightPlayer });
                               }}
                             >
