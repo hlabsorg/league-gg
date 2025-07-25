@@ -103,7 +103,11 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
             <DrawerContent className="h-[80vh] overflow-y-scroll px-4 py-2">
               <div className="mb-4 flex justify-center gap-4">
                 {drawerDisplay !== "matchDetails" && (
-                  <Button className="w-auto text-md" variant="outline" onClick={() => setDrawerDisplay("matchDetails")}>
+                  <Button
+                    className="text-base w-auto"
+                    variant="outline"
+                    onClick={() => setDrawerDisplay("matchDetails")}
+                  >
                     Back To Match Details
                   </Button>
                 )}
