@@ -21,8 +21,8 @@ export function ComparisonChart({ leftValue, rightValue, leftPlayerName, rightPl
     <HoverCard>
       <HoverCardTrigger asChild>{children}</HoverCardTrigger>
       <HoverCardContent className="w-80">
-        <div className="p-4 bg-card border rounded-lg">
-          <div className="text-center font-semibold mb-2">{`${leftPlayerName} VS ${rightPlayerName}`}</div>
+        <div className="rounded-lg border bg-card p-4">
+          <div className="mb-2 text-center font-semibold">{`${leftPlayerName} VS ${rightPlayerName}`}</div>
 
           <div className="h-35 flex items-center justify-between">
             <BarChart data={data} width={280} height={220} barGap={20}>

@@ -148,7 +148,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
                   rightPlayerName={rightPlayer.riotIdGameName}
                   statLabel={stat.label}
                 >
-                  <div className="flex items-center justify-between border-b py-2 cursor-pointer hover:bg-accent/50 transition-colors">
+                  <div className="hover:bg-accent/50 flex cursor-pointer items-center justify-between border-b py-2 transition-colors">
                     {/* Left Player */}
                     <div className={`${leftClass} w-2/5 pr-3 text-right text-sm`}>{leftStats}</div>
                     <div className="w-1/5 text-center">
