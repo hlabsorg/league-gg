@@ -104,7 +104,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
               <div className="mb-4 flex justify-center gap-4">
                 {drawerDisplay !== "matchDetails" && (
                   <Button
-                    className="text-base w-auto"
+                    className="w-auto text-base"
                     variant="outline"
                     onClick={() => setDrawerDisplay("matchDetails")}
                   >
@@ -181,7 +181,6 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                               className="w-full text-lg"
                               onClick={() => {
                                 setDrawerDisplay("matchup");
-                                // set drawer state back to match details when clicking out
                                 setSelectedMatchup({ label, leftPlayer, rightPlayer });
                               }}
                             >

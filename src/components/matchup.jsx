@@ -5,6 +5,7 @@ import { ItemIcon } from "./item-icon";
 import { PlayerMatchStats } from "@/lib/match/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
+import { ComparisonChart } from "./comparisonChart";
 
 const statsToRender = [
   {
@@ -38,6 +39,26 @@ const statsToRender = [
   {
     label: "Gold/Min",
     key: "goldPerMinute",
+  },
+  {
+    label: "Solo Kills",
+    key: "soloKills",
+  },
+  {
+    label: "Turret Kills",
+    key: "turretKills",
+  },
+  {
+    label: "Dragon Kills",
+    key: "dragonKills",
+  },
+  {
+    label: "Baron Kills",
+    key: "baronKills",
+  },
+  {
+    label: "Wards Killed",
+    key: "wardsKilled",
   },
   {
     label: "Control Wards Bought",
@@ -119,17 +140,26 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
               }
 
               return (
-                <div key={stat.key} className="flex items-center justify-between border-b py-2">
-                  {/* Left Player */}
-                  <div className={`${leftClass} w-2/5 pr-3 text-right text-sm`}>{leftStats}</div>
-                  <div className="w-1/5 text-center">
-                    <div className="rounded bg-gray-700/50 px-2 py-1 text-xs font-semibold text-foreground">
-                      {stat.label}
+                <ComparisonChart
+                  key={stat.key}
+                  leftValue={stat.key === "kda" ? leftPlayerStats.getKDARatio() : leftStats}
+                  rightValue={stat.key === "kda" ? rightPlayerStats.getKDARatio() : rightStats}
+                  leftPlayerName={leftPlayer.riotIdGameName}
+                  rightPlayerName={rightPlayer.riotIdGameName}
+                  statLabel={stat.label}
+                >
+                  <div className="flex items-center justify-between border-b py-2 cursor-pointer hover:bg-accent/50 transition-colors">
+                    {/* Left Player */}
+                    <div className={`${leftClass} w-2/5 pr-3 text-right text-sm`}>{leftStats}</div>
+                    <div className="w-1/5 text-center">
+                      <div className="rounded bg-gray-700/50 px-2 py-1 text-xs font-semibold text-foreground">
+                        {stat.label}
+                      </div>
                     </div>
+                    {/* Right Player */}
+                    <div className={`${rightClass} w-2/5 pl-3 text-left text-sm`}>{rightStats}</div>
                   </div>
-                  {/* Right Player */}
-                  <div className={`${rightClass} w-2/5 pl-3 text-left text-sm`}>{rightStats}</div>
-                </div>
+                </ComparisonChart>
               );
             })}
           </div>
