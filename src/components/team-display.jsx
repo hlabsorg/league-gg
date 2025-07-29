@@ -45,7 +45,7 @@ export function TeamDisplay({ color, participants, gameDuration, regionId, curre
               </div>
               <div className="ml-2 ">
                 <div className="flex items-center">
-                  <p className={`font-medium ${isCurrentPlayer ? "text-accent font-bold" : ""}`}>
+                  <p className={`font-medium ${isCurrentPlayer ? "font-bold text-accent" : ""}`}>
                     {participant.riotIdGameName}
                   </p>
                   <p className="ml-1 text-sm text-muted">#{participant.riotIdTagline}</p>
