@@ -58,25 +58,14 @@ export default async function Page({ params, searchParams }) {
             {summonerProfile.gameName}#{summonerProfile.tagLine}
           </h1>
           <p className="text-muted">Level: {summonerProfile.summonerLevel}</p>
+          <p className="font-bold text-white">
+            {entries.length > 0
+              ? `${entries[0].tier} ${entries[0].rank} LP: ${entries[0].leaguePoints}`
+              : "No League Entries Found"}
+          </p>
         </div>
       </div>
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
-      <div className="mb-6">
-        {/* TODO: Change the entries in another ticket */}
-        <h2 className="text-2xl font-semibold">League Entries</h2>
-        {entries.length > 0 ? (
-          entries.map((entry) => (
-            <div key={entry.queueType} className="mb-2 rounded border bg-white p-4 shadow">
-              <p className="font-bold">
-                {entry.tier} {entry.rank} - LP: {entry.leaguePoints}
-              </p>
-              <p className="text-gray-500">{entry.queueType}</p>
-            </div>
-          ))
-        ) : (
-          <p>No league entries found.</p>
-        )}
-      </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Champion Masteries</h2>
         <ChampionMasteries masteries={masteries} championNames={championNames} />
@@ -95,12 +84,12 @@ export default async function Page({ params, searchParams }) {
       {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
         <div>
           <h1>Debug Information</h1>
-          <h2>Match History</h2>
-          <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
-          <h2>Champion Masteries</h2>
-          <pre>{JSON.stringify(masteries, null, 2)}</pre>
+          {/* <h2>Match History</h2>
+        <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
+        <h2>Champion Masteries</h2>
+        <pre>{JSON.stringify(masteries, null, 2)}</pre> */}
           <h2>Entries / Ranks</h2>
-          {/* <pre>{JSON.stringify(entries, null, 2)}</pre> */}
+          <pre>{JSON.stringify(entries, null, 2)}</pre>
         </div>
       )}
     </div>
