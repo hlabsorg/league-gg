@@ -24,7 +24,7 @@ export function ComparisonChart({ leftValue, rightValue, leftPlayerName, rightPl
         <div className="rounded-lg border bg-card p-4">
           <div className="mb-2 text-center font-semibold">{`${leftPlayerName} VS ${rightPlayerName}`}</div>
 
-          <div className="h-35 flex items-center justify-between">
+          <div className="flex h-60 items-center justify-between">
             <BarChart data={data} width={280} height={220} barGap={20}>
               <XAxis type="category" dataKey="label" tick={{ fill: "var(--foreground)" }} />
               <YAxis type="number" tick={{ fill: "var(--foreground)" }} />

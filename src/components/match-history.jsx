@@ -10,6 +10,9 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { POSITION_LABELS } from "@/constants/individual-position";
 import { RoleIcon } from "./role-icon";
+// import { PlayerMatchStats } from "@/lib/match/stats"
+
+// const selectedPlayerStats = new PlayerMatchStats(selectedPlayer, matchInfo)
 
 export function MatchHistory({ matches, regionId, summonerName, championNames }) {
   const [drawerDisplay, setDrawerDisplay] = useState("matchDetails");
@@ -80,6 +83,10 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                   <div className="text-sm text-muted">
                     CS: {currentPlayer.totalMinionsKilled} (
                     {((currentPlayer.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
+                  </div>
+                  <div className="text-sm text-muted">DMG: {currentPlayer.totalDamageDealtToChampions}</div>
+                  <div className="text-sm text-muted">
+                    Gold: {currentPlayer.goldEarned} ({Math.floor(currentPlayer.challenges.goldPerMinute)}/min)
                   </div>
                 </div>
 
@@ -158,6 +165,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                         participants={match.info.participants}
                         gameDuration={match.info.gameDuration}
                         regionId={regionId}
+                        currentPlayer={currentPlayer}
                       />
                     </div>
                     <div className="flex w-1/5 flex-col items-center">
@@ -197,6 +205,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                         participants={match.info.participants}
                         gameDuration={match.info.gameDuration}
                         regionId={regionId}
+                        currentPlayer={currentPlayer}
                       />
                     </div>
                   </div>
