@@ -58,11 +58,21 @@ export default async function Page({ params, searchParams }) {
             {summonerProfile.gameName}#{summonerProfile.tagLine}
           </h1>
           <p className="text-muted">Level: {summonerProfile.summonerLevel}</p>
-          <p className="font-bold text-white">
-            {entries.length > 0
-              ? `${entries[0].tier} ${entries[0].rank} LP: ${entries[0].leaguePoints}`
-              : "No League Entries Found"}
-          </p>
+          <div className="font-bold text-white">
+            {entries.length > 0 ? (
+              <>
+                <div>
+                  {entries[0].tier} {entries[0].rank}
+                </div>
+                <div>LP: {entries[0].leaguePoints}</div>
+                <div>
+                  Wins: {entries[0].wins} Losses: {entries[0].losses}
+                </div>
+              </>
+            ) : (
+              "No League Entries Found"
+            )}
+          </div>
         </div>
       </div>
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
