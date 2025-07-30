@@ -21,7 +21,7 @@ export async function ChampionMasteries({ masteries, championNames }) {
       {topMasteries.map((mastery) => (
         <div
           key={mastery.championId}
-          className="relative flex items-center justify-evenly gap-4 border-b-2 border-double mb-4 "
+          className="relative mb-4 flex items-center justify-evenly gap-4 border-b-2 border-double "
         >
           <div className="relative">
             <div className="relative ">

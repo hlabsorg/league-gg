@@ -65,13 +65,13 @@ export default async function Page({ params, searchParams }) {
       </div>
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
       <div className="flex flex-row gap-10">
-        <div className="mb-6 bg-card border-2 rounded-md border-border ">
-          <h2 className="mb-4 text-2xl font-semibold border-b-4 border-solid p-4">Champion Masteries</h2>
+        <div className="mb-6 rounded-md border-2 border-border bg-card ">
+          <h2 className="mb-4 border-b-4 border-solid p-4 text-2xl font-semibold">Champion Masteries</h2>
           <ChampionMasteries masteries={masteries} championNames={championNames} />
         </div>
-        <div className="mb-6 bg-card border-border border-2 rounded-md p-6">
-          <h2 className="mb-4 text-2xl font-semibold border-b-4  border-solid p-4 rounded-md ">Match History</h2>
-          <div className="text-lg font-bold mb-4 border-b-2">Last {matchHistory.length} matches</div>
+        <div className="mb-6 rounded-md border-2 border-border bg-card p-6">
+          <h2 className="mb-4 rounded-md border-b-4 border-solid  p-4 text-2xl font-semibold ">Match History</h2>
+          <div className="mb-4 border-b-2 text-lg font-bold">Last {matchHistory.length} matches</div>
           <MatchHistory
             matches={matchHistory}
             regionId={regionId}

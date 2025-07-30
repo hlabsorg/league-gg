@@ -45,7 +45,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
             className="rounded-lg border"
           >
             <DrawerTrigger
-              className={`w-full px-4 py-2 rounded-md hover:no-underline ${currentPlayer.win ? "bg-victory" : "bg-defeat"}`}
+              className={`w-full rounded-md px-4 py-2 hover:no-underline ${currentPlayer.win ? "bg-victory" : "bg-defeat"}`}
             >
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
