@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
 }
 
@@ -12,26 +17,26 @@ body {
 
 @layer base {
   :root {
-    --background: #1A1B2F;
-    --foreground: #E5E7EB;
-    --card: #101013;
-    --card-foreground: #E5E7EB;
+    --background: #1a1b2f;
+    --foreground: #e5e7eb;
+    --card: #1f1f25;
+    --card-foreground: #e5e7eb;
     --popover: #232946;
-    --popover-foreground: #E5E7EB;
-    --primary: #3B82F6;
-    --primary-foreground: #E5E7EB;
-    --secondary: #14F195;
+    --popover-foreground: #e5e7eb;
+    --primary: #3b82f6;
+    --primary-foreground: #e5e7eb;
+    --secondary: #14f195;
     --secondary-foreground: #232946;
-    --muted: #9CA3AF;
-    --accent: #14F195;
+    --muted: #9ca3af;
+    --accent: #14f195;
     --accent-foreground: #101013;
-    --destructive: #F43F5E;
-    --destructive-foreground: #E5E7EB;
+    --destructive: #f43f5e;
+    --destructive-foreground: #e5e7eb;
     --border: #232946;
-    --input: #1A1B2F;
-    --ring: #3B82F6;
+    --input: #1a1b2f;
+    --ring: #3b82f6;
     --radius: 0.5rem;
-    --gold: #FBBF24;
+    --gold: #fbbf24;
     --victory: #22c55e33;
     --defeat: #ef444433;
     --bteam: #2563eb;
@@ -39,21 +44,21 @@ body {
     --rteam: #dc2626;
     --rteam-foreground: #dc262633;
   }
-  
+
   input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 1000px #1A1B2F inset !important;
-    box-shadow: 0 0 0 1000px #1A1B2F inset !important;
-    -webkit-text-fill-color: #9CA3AF !important;
-}
-input:-internal-autofill-selected {
-  appearance: menulist-button;
-  background-image: none !important;
-  background-color: #1A1B2F !important;
-  color: fieldtext !important;
-}
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #1a1b2f inset !important;
+    box-shadow: 0 0 0 1000px #1a1b2f inset !important;
+    -webkit-text-fill-color: #9ca3af !important;
+  }
+  input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: #1a1b2f !important;
+    color: fieldtext !important;
+  }
   /* .dark {
     --background: 0 0% 3.9%;    
     --foreground: 0 0% 98%;
