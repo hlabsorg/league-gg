@@ -5,7 +5,7 @@ import { ItemIcon } from "./item-icon";
 import { PlayerMatchStats } from "@/lib/match/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
-import { ComparisonChart } from "./comparisonChart";
+import { ComparisonChart } from "./comparison-chart";
 
 const statsToRender = [
   {

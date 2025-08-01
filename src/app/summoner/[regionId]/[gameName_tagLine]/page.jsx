@@ -12,6 +12,7 @@ import { QUEUE_IDS } from "@/constants/queue-types";
 import { ChampionMasteries } from "@/components/champion-masteries";
 import { QueueTypeHeader } from "@/components/queue-type-header";
 import { RankEntries } from "@/components/entries";
+import { TopChampions } from "@/components/top-champions";
 
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;
@@ -65,11 +66,14 @@ export default async function Page({ params, searchParams }) {
       </div>
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
       <div className="flex flex-row gap-10">
-        <div className="mb-6 rounded-md border-2 border-border bg-card ">
-          <h2 className="mb-4 border-b-4 border-solid p-4 text-2xl font-semibold">Champion Masteries</h2>
-          <ChampionMasteries masteries={masteries} championNames={championNames} />
+        <div className="flex flex-col gap-6">
+          <TopChampions matches={matchHistory} summonerName={summonerProfile.gameName} championNames={championNames} />
+          <div className="rounded-md border-2 border-border bg-card">
+            <h2 className="mb-4 border-b-4 border-solid p-4 text-2xl font-semibold">Champion Masteries</h2>
+            <ChampionMasteries masteries={masteries} championNames={championNames} />
+          </div>
         </div>
-        <div className="mb-6 rounded-md border-2 border-border bg-card p-6">
+        <div className="mb-6 rounded-md border-2 border-border bg-card p-6 w-auto">
           <h2 className="mb-4 rounded-md border-b-4 border-solid  p-4 text-2xl font-semibold ">Match History</h2>
           <div className="mb-4 border-b-2 text-lg font-bold">Last {matchHistory.length} matches</div>
           <MatchHistory
