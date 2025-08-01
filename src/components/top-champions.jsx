@@ -56,6 +56,7 @@ export function TopChampions({ matches, summonerName, championNames }) {
       losses: champion.games - champion.wins,
       avgKDA: ((champion.kills + champion.assists) / Math.max(1, champion.deaths)).toFixed(2),
     }))
+
     .sort((a, b) => b.winRate - a.winRate)
     .slice(0, 3);
 
@@ -68,7 +69,7 @@ export function TopChampions({ matches, summonerName, championNames }) {
       <div className="space-y-3 p-4">
         {topChampionsSorted.map((champion) => (
           <div key={champion.name} className="flex items-center gap-4 p-2">
-            <div className="relative">
+            <div className="size-12">
               <ChampionIcon championName={champion.name} className="size-12" />
             </div>
             <div className="min-w-[100px]">
