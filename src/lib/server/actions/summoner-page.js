@@ -31,9 +31,9 @@ export const getSummonerProfileByPUUID = async (puuid, regionId) => {
   }
 };
 
-export const getSummonerEntries = async (summonerId, regionId) => {
+export const getSummonerEntries = async (puuid, regionId) => {
   try {
-    const entries = await Riot.getLeagueEntries(summonerId, regionId);
+    const entries = await Riot.getLeagueEntries(puuid, regionId);
     return [entries, null];
   } catch (error) {
     console.error(error);

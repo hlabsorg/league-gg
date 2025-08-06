@@ -28,7 +28,7 @@ export default async function Page({ params, searchParams }) {
     return <div>{profileError.message}</div>;
   }
 
-  const [entries, entriesError] = await getSummonerEntries(summonerProfile.id, regionId);
+  const [entries, entriesError] = await getSummonerEntries(summonerProfile.puuid, regionId);
   if (entriesError) {
     return <div>{entriesError.message}</div>;
   }
@@ -83,9 +83,7 @@ export default async function Page({ params, searchParams }) {
       </div>
       <div className="mb-6">
         <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
-        <div className="text-lg font-bold">
-          Last {matchHistory.length} matches
-        </div>
+        <div className="text-lg font-bold">Last {matchHistory.length} matches</div>
         <MatchHistory
           matches={matchHistory}
           regionId={regionId}
@@ -102,7 +100,7 @@ export default async function Page({ params, searchParams }) {
           <h2>Champion Masteries</h2>
           <pre>{JSON.stringify(masteries, null, 2)}</pre>
           <h2>Entries / Ranks</h2>
-          <pre>{JSON.stringify(entries, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(entries, null, 2)}</pre> */}
         </div>
       )}
     </div>
