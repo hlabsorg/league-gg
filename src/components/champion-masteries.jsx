@@ -2,10 +2,8 @@ import { ChampionIcon } from "./champion-icon";
 
 function MasteryLevel({ level }) {
   return (
-    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2">
-      <div className="flex size-8 items-center justify-center rounded-full bg-gradient-to-b from-blue-600 to-blue-700 text-sm font-bold text-white shadow-lg ring-2 ring-black/20">
-        {level}
-      </div>
+    <div className="relative">
+      <div className="flex size-auto items-center justify-center text-sm font-semibold">{level}</div>
     </div>
   );
 }
@@ -19,24 +17,21 @@ export async function ChampionMasteries({ masteries, championNames }) {
   const topMasteries = [...masteries].sort((a, b) => b.championPoints - a.championPoints).slice(0, 5);
 
   return (
-    <div className="grid gap-4 md:grid-cols-5">
+    <div className="flex flex-col items-center">
       {topMasteries.map((mastery) => (
         <div
           key={mastery.championId}
-          className="relative flex items-center gap-4 rounded-lg border bg-gradient-to-b from-slate-50 to-slate-100 p-4 pb-8 shadow-md md:flex-col md:items-center"
+          className="relative mb-4 flex items-center justify-evenly gap-4 border-b-2 border-double "
         >
           <div className="relative">
-            <div className="relative overflow-hidden rounded-lg ring-2 ring-black/10">
-              <ChampionIcon
-                championName={championNames[mastery.championId]}
-                className="size-10 md:size-12 lg:size-16"
-              />
+            <div className="relative ">
+              <ChampionIcon championName={championNames[mastery.championId]} className="size-10" />
             </div>
             <MasteryLevel level={mastery.championLevel} />
           </div>
           <div className="md:mt-2 md:text-center">
-            <p className="font-bold text-slate-900">{championNames[mastery.championId] || "Loading..."}</p>
-            <p className="text-sm font-medium text-slate-600">{mastery.championPoints.toLocaleString()} pts</p>
+            <p className="font-bold text-white">{championNames[mastery.championId] || "Loading..."}</p>
+            <p className="text-sm text-muted">{mastery.championPoints.toLocaleString()} pts</p>
           </div>
         </div>
       ))}

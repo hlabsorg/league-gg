@@ -45,7 +45,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
             className="rounded-lg border"
           >
             <DrawerTrigger
-              className={`w-full px-4 py-2 hover:no-underline ${currentPlayer.win ? "bg-victory" : "bg-defeat"}`}
+              className={`w-full rounded-md px-4 py-2 hover:no-underline ${currentPlayer.win ? "bg-victory" : "bg-defeat"}`}
             >
               <div className="flex w-full items-center gap-4">
                 {/* Left side - Game info */}
@@ -72,21 +72,24 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 {/* KDA and CS */}
                 <div className="grow">
                   <div className="flex items-center gap-2">
-                    <span className="font-medium">
+                    <p className="font-medium">
                       {currentPlayer.kills}/{currentPlayer.deaths}/{currentPlayer.assists}
-                    </span>
-                    <span className="text-muted">
+                    </p>
+
+                    <p className="text-muted">
                       {((currentPlayer.kills + currentPlayer.assists) / Math.max(1, currentPlayer.deaths)).toFixed(2)}{" "}
                       KDA
-                    </span>
+                    </p>
                   </div>
-                  <div className="text-sm text-muted">
-                    CS: {currentPlayer.totalMinionsKilled} (
-                    {((currentPlayer.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
-                  </div>
-                  <div className="text-sm text-muted">DMG: {currentPlayer.totalDamageDealtToChampions}</div>
-                  <div className="text-sm text-muted">
-                    Gold: {currentPlayer.goldEarned} ({Math.floor(currentPlayer.challenges.goldPerMinute)}/min)
+                  <div className="flex-col items-center justify-center">
+                    <div className="text-sm text-muted">
+                      CS: {currentPlayer.totalMinionsKilled} (
+                      {((currentPlayer.totalMinionsKilled * 60) / match.info.gameDuration).toFixed(1)}/min)
+                    </div>
+                    <div className="text-sm text-muted">DMG: {currentPlayer.totalDamageDealtToChampions}</div>
+                    <div className="text-sm text-muted">
+                      Gold: {currentPlayer.goldEarned} ({Math.floor(currentPlayer.challenges.goldPerMinute)}/min)
+                    </div>
                   </div>
                 </div>
 

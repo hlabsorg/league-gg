@@ -12,6 +12,7 @@ import { QUEUE_IDS } from "@/constants/queue-types";
 import { ChampionMasteries } from "@/components/champion-masteries";
 import { QueueTypeHeader } from "@/components/queue-type-header";
 import { RankEntries } from "@/components/entries";
+import { TopChampions } from "@/components/top-champions";
 
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;
@@ -64,30 +65,35 @@ export default async function Page({ params, searchParams }) {
         </div>
       </div>
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
-      <div className="mb-6">
-        <h2 className="mb-4 text-2xl font-semibold">Champion Masteries</h2>
-        <ChampionMasteries masteries={masteries} championNames={championNames} />
-      </div>
-      <div className="mb-6">
-        <h2 className="mb-4 text-2xl font-semibold">Match History</h2>
-        <div className="text-lg font-bold">Last {matchHistory.length} matches</div>
-        <MatchHistory
-          matches={matchHistory}
-          regionId={regionId}
-          summonerName={summonerProfile.gameName}
-          championNames={championNames}
-        />
+      <div className="flex flex-row gap-10">
+        <div className="flex flex-col gap-6">
+          <TopChampions matches={matchHistory} summonerName={summonerProfile.gameName} championNames={championNames} />
+          <div className="rounded-md border-2 border-border bg-card">
+            <h2 className="mb-4 border-b-4 border-solid p-4 text-2xl font-semibold">Champion Masteries</h2>
+            <ChampionMasteries masteries={masteries} championNames={championNames} />
+          </div>
+        </div>
+        <div className="mb-6 rounded-md border-2 border-border bg-card p-6 w-auto">
+          <h2 className="mb-4 rounded-md border-b-4 border-solid  p-4 text-2xl font-semibold ">Match History</h2>
+          <div className="mb-4 border-b-2 text-lg font-bold">Last {matchHistory.length} matches</div>
+          <MatchHistory
+            matches={matchHistory}
+            regionId={regionId}
+            summonerName={summonerProfile.gameName}
+            championNames={championNames}
+          />
+        </div>
       </div>
 
       {process.env.NEXT_PUBLIC_DEBUG_MODE == "true" && (
         <div>
-          <h1>Debug Information</h1>
-          {/* <h2>Match History</h2>
-        <pre>{JSON.stringify(matchHistory, null, 2)}</pre>
-        <h2>Champion Masteries</h2>
-        <pre>{JSON.stringify(masteries, null, 2)}</pre> */}
-          <h2>Entries / Ranks</h2>
-          <pre>{JSON.stringify(entries, null, 2)}</pre>
+          {/* <h1>Debug Information</h1>
+          <h2>Match History</h2>
+        <pre>{JSON.stringify(matchHistory, null, 2)}</pre> */}
+          <h2>Champion Masteries</h2>
+          <pre>{JSON.stringify(masteries, null, 2)}</pre>
+          {/* <h2>Entries / Ranks</h2>
+          <pre>{JSON.stringify(entries, null, 2)}</pre> */}
         </div>
       )}
     </div>
