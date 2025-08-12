@@ -118,7 +118,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                   <div className="flex flex-col gap-2">
                     {/* Blue Team */}
                     <div className="flex items-center gap-2">
-                      <div className="w-8 text-md font-bold text-bteam">Blue</div>
+                      <div className="text-md w-8 font-bold text-bteam">Blue</div>
                       <div className="flex gap-1">
                         {match.info.participants
                           .filter((p) => p.teamId === 100)
@@ -133,7 +133,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                     </div>
                     {/* Red Team */}
                     <div className="flex items-center gap-2">
-                      <div className="w-8 text-md font-bold text-rteam">Red</div>
+                      <div className="text-md w-8 font-bold text-rteam">Red</div>
                       <div className="flex gap-1">
                         {match.info.participants
                           .filter((p) => p.teamId === 200)
