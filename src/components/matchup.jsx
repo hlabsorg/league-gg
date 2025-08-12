@@ -6,6 +6,7 @@ import { PlayerMatchStats } from "@/lib/match/stats";
 import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
 import { ComparisonChart } from "./comparison-chart";
+import Link from "next/link";
 
 const statsToRender = [
   {
@@ -66,7 +67,7 @@ const statsToRender = [
   },
 ];
 
-export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
+export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
   const leftPlayerStats = new PlayerMatchStats(leftPlayer, matchInfo);
   const rightPlayerStats = new PlayerMatchStats(rightPlayer, matchInfo);
 
@@ -80,51 +81,53 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
   };
 
   return (
-    <div className="aspect-video bg-[url('/assets/background/matchupBG.png')] bg-cover bg-center">
-      <div className="flex h-[100px] w-full items-center justify-center">
-        <div className="flex h-[100px] w-[500px] items-center justify-center rounded-2xl border-4 border-popover bg-[url('/assets/background/taleBanner.png')] bg-cover bg-center">
-          <h3 className="font-foreground text-4xl font-semibold">Tale of the Tape</h3>
+    <div className="space-y-4">
+      <div className="flex items-center justify-center">
+        <div className="rounded-lg px-6 py-2">
+          <h3 className="text-2xl font-bold text-foreground">Tale of the Tape</h3>
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex gap-6 items-start">
         {/* Current Summoner*/}
-        <div className="flex w-1/3 flex-col gap-2">
-          <div className="flex items-center justify-center gap-2">
-            <div>
-              <ProfileIcon profileIconId={leftPlayer.profileIcon} className="size-12" />
-              <h3 className="text-lg font-bold">{leftPlayer.riotIdGameName}</h3>
+        <div className="flex w-1/3 flex-col">
+          <div className="rounded-lg border bg-card p-3 shadow-sm">
+            <div className="mb-3 flex items-center justify-center gap-2">
+              <div className="text-center">
+                <Link prefetch href={`/summoner/${regionId}/${leftPlayer.riotIdGameName}-${leftPlayer.riotIdTagline}`}>
+                  <ProfileIcon profileIconId={leftPlayer.profileIcon} className="size-16" />
+                </Link>
+                <h3 className="mt-1 text-sm font-bold text-foreground">{leftPlayer.riotIdGameName}</h3>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <ChampionIcon championName={leftPlayer.championName} className="size-12" />
+                {Object.values(INDIVIDUAL_POSITION).includes(leftPlayer.individualPosition) ? (
+                  <div className="flex size-6 items-center justify-center rounded-full bg-primary/20">
+                    <RoleIcon role={leftPlayer.individualPosition} className="size-4" />
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <div>
-              <ChampionIcon championName={leftPlayer.championName} className="size-8" />
+            <div className="mb-4 flex justify-center gap-1">
+              <ItemIcon itemId={leftPlayer.item0} className="size-8" />
+              <ItemIcon itemId={leftPlayer.item1} className="size-8" />
+              <ItemIcon itemId={leftPlayer.item2} className="size-8" />
+              <ItemIcon itemId={leftPlayer.item3} className="size-8" />
+              <ItemIcon itemId={leftPlayer.item4} className="size-8" />
+              <ItemIcon itemId={leftPlayer.item5} className="size-8" />
+              <ItemIcon itemId={leftPlayer.item6} className="size-8" />
             </div>
-            <div>
-              {Object.values(INDIVIDUAL_POSITION).includes(leftPlayer.individualPosition) ? (
-                <div className="flex size-10 items-center justify-center">
-                  <RoleIcon role={leftPlayer.individualPosition} className="size-6" />
-                </div>
-              ) : null}
-            </div>
-          </div>
-          <div className="flex justify-center gap-2">
-            <ItemIcon itemId={leftPlayer.item0} className="size-6" />
-            <ItemIcon itemId={leftPlayer.item1} className="size-6" />
-            <ItemIcon itemId={leftPlayer.item2} className="size-6" />
-            <ItemIcon itemId={leftPlayer.item3} className="size-6" />
-            <ItemIcon itemId={leftPlayer.item4} className="size-6" />
-            <ItemIcon itemId={leftPlayer.item5} className="size-6" />
-            <ItemIcon itemId={leftPlayer.item6} className="size-6" />
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="relative h-[281px] w-[500px]">
-              <SplashArt championName={leftPlayer.championName} className="object-contain" />
+            <div className="flex items-center justify-center">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+                <SplashArt championName={leftPlayer.championName} className="object-cover" />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Stats Section */}
-        <div className="flex w-1/3 flex-col gap-2">
-          <div className="border-2 border-background bg-card p-4 ">
-            <h4 className="mb-4 text-center text-xl font-bold text-foreground">Match Statistics</h4>
+        <div className="flex w-1/3 flex-col">
+          <div className="rounded-lg border bg-card p-4 shadow-sm">
+            <h4 className="mb-4 text-center text-lg font-bold text-foreground">Match Statistics</h4>
             {statsToRender.map((stat) => {
               const leftStats = leftPlayerStatsAll[stat.key];
               const rightStats = rightPlayerStatsAll[stat.key];
@@ -148,16 +151,16 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
                   rightPlayerName={rightPlayer.riotIdGameName}
                   statLabel={stat.label}
                 >
-                  <div className="hover:bg-accent/50 flex cursor-pointer items-center justify-between border-b py-2 transition-colors">
+                  <div className="flex cursor-pointer items-center justify-between border-b border-border/30 py-1.5 transition-colors hover:bg-accent/10">
                     {/* Left Player */}
-                    <div className={`${leftClass} w-2/5 pr-3 text-right text-sm`}>{leftStats}</div>
+                    <div className={`${leftClass} w-2/5 pr-2 text-right text-sm font-medium`}>{leftStats}</div>
                     <div className="w-1/5 text-center">
-                      <div className="rounded bg-gray-700/50 px-2 py-1 text-xs font-semibold text-foreground">
+                      <div className="rounded bg-muted/20 px-2 py-0.5 text-xs font-semibold text-foreground">
                         {stat.label}
                       </div>
                     </div>
                     {/* Right Player */}
-                    <div className={`${rightClass} w-2/5 pl-3 text-left text-sm`}>{rightStats}</div>
+                    <div className={`${rightClass} w-2/5 pl-2 text-left text-sm font-medium`}>{rightStats}</div>
                   </div>
                 </ComparisonChart>
               );
@@ -166,35 +169,40 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo }) {
         </div>
 
         {/* Opponent*/}
-        <div className="flex w-1/3 flex-col gap-2">
-          <div className="flex items-center justify-center gap-2">
-            <div>
-              <ProfileIcon profileIconId={rightPlayer.profileIcon} className="size-12" />
-              <h3 className="text-lg font-bold">{rightPlayer.riotIdGameName}</h3>
+        <div className="flex w-1/3 flex-col">
+          <div className="rounded-lg border bg-card p-3 shadow-sm">
+            <div className="mb-3 flex items-center justify-center gap-2">
+              <div className="text-center">
+                <Link
+                  prefetch
+                  href={`/summoner/${regionId}/${rightPlayer.riotIdGameName}-${rightPlayer.riotIdTagline}`}
+                >
+                  <ProfileIcon profileIconId={rightPlayer.profileIcon} className="size-16" />
+                </Link>
+                <h3 className="mt-1 text-sm font-bold text-foreground">{rightPlayer.riotIdGameName}</h3>
+              </div>
+              <div className="flex flex-col items-center gap-1">
+                <ChampionIcon championName={rightPlayer.championName} className="size-12" />
+                {Object.values(INDIVIDUAL_POSITION).includes(rightPlayer.individualPosition) ? (
+                  <div className="flex size-6 items-center justify-center rounded-full bg-primary/20">
+                    <RoleIcon role={rightPlayer.individualPosition} className="size-4" />
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <div>
-              <ChampionIcon championName={rightPlayer.championName} className="size-8" />
+            <div className="mb-4 flex justify-center gap-1">
+              <ItemIcon itemId={rightPlayer.item0} className="size-8" />
+              <ItemIcon itemId={rightPlayer.item1} className="size-8" />
+              <ItemIcon itemId={rightPlayer.item2} className="size-8" />
+              <ItemIcon itemId={rightPlayer.item3} className="size-8" />
+              <ItemIcon itemId={rightPlayer.item4} className="size-8" />
+              <ItemIcon itemId={rightPlayer.item5} className="size-8" />
+              <ItemIcon itemId={rightPlayer.item6} className="size-8" />
             </div>
-            <div>
-              {Object.values(INDIVIDUAL_POSITION).includes(rightPlayer.individualPosition) ? (
-                <div className="flex size-10 items-center justify-center">
-                  <RoleIcon role={rightPlayer.individualPosition} className="size-6" />
-                </div>
-              ) : null}
-            </div>
-          </div>
-          <div className="flex justify-center gap-2">
-            <ItemIcon itemId={rightPlayer.item0} className="size-6" />
-            <ItemIcon itemId={rightPlayer.item1} className="size-6" />
-            <ItemIcon itemId={rightPlayer.item2} className="size-6" />
-            <ItemIcon itemId={rightPlayer.item3} className="size-6" />
-            <ItemIcon itemId={rightPlayer.item4} className="size-6" />
-            <ItemIcon itemId={rightPlayer.item5} className="size-6" />
-            <ItemIcon itemId={rightPlayer.item6} className="size-6" />
-          </div>
-          <div className="flex items-center justify-center">
-            <div className="relative h-[281px] w-[500px]">
-              <SplashArt championName={rightPlayer.championName} className="object-contain" />
+            <div className="flex items-center justify-center">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+                <SplashArt championName={rightPlayer.championName} className="object-cover" />
+              </div>
             </div>
           </div>
         </div>
