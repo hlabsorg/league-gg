@@ -132,7 +132,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
         {/* Stats Section */}
         <div className="flex w-1/3 flex-col">
           <div className="rounded-lg border bg-card p-4 shadow-sm">
-            <div className="mb-4 flex items-center justify-center relative">
+            <div className="relative mb-4 flex items-center justify-center">
               <h4 className="text-lg font-bold text-foreground">Match Statistics</h4>
               <div className="absolute right-0 flex gap-2">
                 <Button
@@ -177,7 +177,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
                     rightPlayerName={rightPlayer.riotIdGameName}
                     statLabel={stat.label}
                   >
-                    <div className="border-border hover:bg-popover flex cursor-pointer items-center justify-between border-b py-1.5 transition-colors">
+                    <div className="flex cursor-pointer items-center justify-between border-b border-border py-1.5 transition-colors hover:bg-popover">
                       {/* Left Player */}
                       <div className={`${leftClass} w-2/5 pr-2 text-right text-sm font-medium`}>{leftStats}</div>
                       <div className="w-1/5 text-center">

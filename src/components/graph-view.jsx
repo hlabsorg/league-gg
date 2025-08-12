@@ -28,24 +28,24 @@ export default function GraphView({
             <div className="flex h-8 w-full overflow-hidden rounded-md">
               {/* Left Player Bar */}
               <div
-                className="bg-bteam flex items-center justify-start pl-2 relative"
+                className="relative flex items-center justify-start bg-bteam pl-2"
                 style={{ width: `${leftPercentage}%` }}
               >
                 {!leftIsWinner && leftValue !== rightValue && <div className="absolute inset-0 bg-black/30 "></div>}
-                <span className="text-xs font-bold text-foreground relative z-10">{leftStats}</span>
+                <span className="relative z-10 text-xs font-bold text-foreground">{leftStats}</span>
               </div>
               {/* Right Player Bar */}
               <div
-                className="bg-rteam flex items-center justify-end pr-2 relative"
+                className="relative flex items-center justify-end bg-rteam pr-2"
                 style={{ width: `${rightPercentage}%` }}
               >
                 {!rightIsWinner && leftValue !== rightValue && <div className="absolute inset-0 bg-black/30 "></div>}
-                <span className="text-xs font-bold text-foreground relative z-10">{rightStats}</span>
+                <span className="relative z-10 text-xs font-bold text-foreground">{rightStats}</span>
               </div>
             </div>
             {/* Centered Stat Label */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="text-xs font-bold text-foreground bg-black/30 px-2 py-1 rounded">{stat.label}</span>
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <span className="rounded bg-black/30 px-2 py-1 text-xs font-bold text-foreground">{stat.label}</span>
             </div>
           </div>
         );
