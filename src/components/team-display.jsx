@@ -23,7 +23,7 @@ export function TeamDisplay({ color, participants, gameDuration, regionId, curre
               <div
                 key={participant.puuid}
                 className={`flex items-center justify-between rounded-lg border p-3 ${
-                  isCurrentPlayer ? "border-accent border-2" : ""
+                  isCurrentPlayer ? "border-2 border-accent" : ""
                   // Using bg-accent/(opacity value) does not work
                 }`}
               >

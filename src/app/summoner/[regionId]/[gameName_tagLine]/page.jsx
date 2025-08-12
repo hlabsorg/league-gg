@@ -73,7 +73,7 @@ export default async function Page({ params, searchParams }) {
             <ChampionMasteries masteries={masteries} championNames={championNames} />
           </div>
         </div>
-        <div className="mb-6 rounded-md border-2 border-border bg-card p-6 w-auto">
+        <div className="mb-6 w-auto rounded-md border-2 border-border bg-card p-6">
           <h2 className="mb-4 rounded-md border-b-4 border-solid  p-4 text-2xl font-semibold ">Match History</h2>
           <div className="mb-4 border-b-2 text-lg font-bold">Last {matchHistory.length} matches</div>
           <MatchHistory

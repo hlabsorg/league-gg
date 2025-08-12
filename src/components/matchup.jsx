@@ -87,7 +87,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
           <h3 className="text-2xl font-bold text-foreground">Tale of the Tape</h3>
         </div>
       </div>
-      <div className="flex gap-6 items-start">
+      <div className="flex items-start gap-6">
         {/* Current Summoner*/}
         <div className="flex w-1/3 flex-col">
           <div className="rounded-lg border bg-card p-3 shadow-sm">
@@ -101,7 +101,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
               <div className="flex flex-col items-center gap-1">
                 <ChampionIcon championName={leftPlayer.championName} className="size-12" />
                 {Object.values(INDIVIDUAL_POSITION).includes(leftPlayer.individualPosition) ? (
-                  <div className="flex size-6 items-center justify-center rounded-full bg-primary/20">
+                  <div className="bg-primary/20 flex size-6 items-center justify-center rounded-full">
                     <RoleIcon role={leftPlayer.individualPosition} className="size-4" />
                   </div>
                 ) : null}
@@ -151,11 +151,11 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
                   rightPlayerName={rightPlayer.riotIdGameName}
                   statLabel={stat.label}
                 >
-                  <div className="flex cursor-pointer items-center justify-between border-b border-border/30 py-1.5 transition-colors hover:bg-accent/10">
+                  <div className="border-border/30 hover:bg-accent/10 flex cursor-pointer items-center justify-between border-b py-1.5 transition-colors">
                     {/* Left Player */}
                     <div className={`${leftClass} w-2/5 pr-2 text-right text-sm font-medium`}>{leftStats}</div>
                     <div className="w-1/5 text-center">
-                      <div className="rounded bg-muted/20 px-2 py-0.5 text-xs font-semibold text-foreground">
+                      <div className="bg-muted/20 rounded px-2 py-0.5 text-xs font-semibold text-foreground">
                         {stat.label}
                       </div>
                     </div>
@@ -184,7 +184,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
               <div className="flex flex-col items-center gap-1">
                 <ChampionIcon championName={rightPlayer.championName} className="size-12" />
                 {Object.values(INDIVIDUAL_POSITION).includes(rightPlayer.individualPosition) ? (
-                  <div className="flex size-6 items-center justify-center rounded-full bg-primary/20">
+                  <div className="bg-primary/20 flex size-6 items-center justify-center rounded-full">
                     <RoleIcon role={rightPlayer.individualPosition} className="size-4" />
                   </div>
                 ) : null}

@@ -80,7 +80,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                 </div>
 
                 {/* Middle Section - Stats and Items */}
-                <div className="flex items-center justify-evenly flex-grow mx-8">
+                <div className="mx-8 flex grow items-center justify-evenly">
                   {/* Stats */}
                   <div className="flex flex-col items-center justify-center text-center">
                     <div className="text-sm font-medium">
@@ -118,7 +118,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                   <div className="flex flex-col gap-2">
                     {/* Blue Team */}
                     <div className="flex items-center gap-2">
-                      <div className="text-xs font-bold text-bteam w-8">Blue</div>
+                      <div className="w-8 text-xs font-bold text-bteam">Blue</div>
                       <div className="flex gap-1">
                         {match.info.participants
                           .filter((p) => p.teamId === 100)
@@ -133,7 +133,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                     </div>
                     {/* Red Team */}
                     <div className="flex items-center gap-2">
-                      <div className="text-xs font-bold text-rteam w-8">Red</div>
+                      <div className="w-8 text-xs font-bold text-rteam">Red</div>
                       <div className="flex gap-1">
                         {match.info.participants
                           .filter((p) => p.teamId === 200)
@@ -174,7 +174,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                     <DrawerTitle className="text-4xl font-bold">Match Details</DrawerTitle>
                   </DrawerHeader>
 
-                  <div className="flex justify-center gap-4 mb-4">
+                  <div className="mb-4 flex justify-center gap-4">
                     <div className="rounded-lg border-2 border-border bg-card px-4 py-2">
                       Game Mode: <br />
                       {match.info.gameMode}
@@ -238,7 +238,7 @@ export function MatchHistory({ matches, regionId, summonerName, championNames })
                               <Button
                                 key={position}
                                 variant="outline"
-                                className="flex min-h-[80px] w-full flex-1 items-center justify-center rounded-lg border-2 border-primary/30 bg-card/50 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-accent"
+                                className="border-primary/30 bg-card/50 flex min-h-[80px] w-full flex-1 items-center justify-center rounded-lg border-2 text-sm font-semibold text-foreground transition-all hover:border-primary hover:bg-accent"
                                 onClick={() => {
                                   setDrawerDisplay("matchup");
                                   setSelectedMatchup({ label, leftPlayer, rightPlayer });
