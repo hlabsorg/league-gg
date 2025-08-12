@@ -7,6 +7,9 @@ import { INDIVIDUAL_POSITION } from "@/constants/individual-position";
 import { SplashArt } from "./splash-art";
 import { ComparisonChart } from "./comparison-chart";
 import Link from "next/link";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import GraphView from "./graph-view";
 
 const statsToRender = [
   {
@@ -68,6 +71,8 @@ const statsToRender = [
 ];
 
 export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
+  const [viewMode, setViewMode] = useState("table"); // "table" or "graph"
+
   const leftPlayerStats = new PlayerMatchStats(leftPlayer, matchInfo);
   const rightPlayerStats = new PlayerMatchStats(rightPlayer, matchInfo);
 
@@ -127,44 +132,72 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
         {/* Stats Section */}
         <div className="flex w-1/3 flex-col">
           <div className="rounded-lg border bg-card p-4 shadow-sm">
-            <h4 className="mb-4 text-center text-lg font-bold text-foreground">Match Statistics</h4>
-            {statsToRender.map((stat) => {
-              const leftStats = leftPlayerStatsAll[stat.key];
-              const rightStats = rightPlayerStatsAll[stat.key];
-
-              let leftClass;
-              let rightClass;
-              if (stat.key === "kda") {
-                leftClass = getWinnerClass(leftPlayerStats.getKDARatio(), rightPlayerStats.getKDARatio());
-                rightClass = getWinnerClass(rightPlayerStats.getKDARatio(), leftPlayerStats.getKDARatio());
-              } else {
-                leftClass = getWinnerClass(leftStats, rightStats);
-                rightClass = getWinnerClass(rightStats, leftStats);
-              }
-
-              return (
-                <ComparisonChart
-                  key={stat.key}
-                  leftValue={stat.key === "kda" ? leftPlayerStats.getKDARatio() : leftStats}
-                  rightValue={stat.key === "kda" ? rightPlayerStats.getKDARatio() : rightStats}
-                  leftPlayerName={leftPlayer.riotIdGameName}
-                  rightPlayerName={rightPlayer.riotIdGameName}
-                  statLabel={stat.label}
+            <div className="mb-4 flex items-center justify-center relative">
+              <h4 className="text-lg font-bold text-foreground">Match Statistics</h4>
+              <div className="absolute right-0 flex gap-2">
+                <Button
+                  variant={viewMode === "table" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setViewMode("table")}
+                  className="text-xs"
                 >
-                  <div className="border-border/30 hover:bg-accent/10 flex cursor-pointer items-center justify-between border-b py-1.5 transition-colors">
-                    {/* Left Player */}
-                    <div className={`${leftClass} w-2/5 pr-2 text-right text-sm font-medium`}>{leftStats}</div>
-                    <div className="w-1/5 text-center">
-                      <div className="bg-muted/20 rounded px-2 py-0.5 text-xs font-semibold text-foreground">
-                        {stat.label}
+                  Table
+                </Button>
+                <Button
+                  variant={viewMode === "graph" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setViewMode("graph")}
+                  className="text-xs"
+                >
+                  Graph
+                </Button>
+              </div>
+            </div>
+            {viewMode === "table" ? (
+              statsToRender.map((stat) => {
+                const leftStats = leftPlayerStatsAll[stat.key];
+                const rightStats = rightPlayerStatsAll[stat.key];
+
+                let leftClass;
+                let rightClass;
+                if (stat.key === "kda") {
+                  leftClass = getWinnerClass(leftPlayerStats.getKDARatio(), rightPlayerStats.getKDARatio());
+                  rightClass = getWinnerClass(rightPlayerStats.getKDARatio(), leftPlayerStats.getKDARatio());
+                } else {
+                  leftClass = getWinnerClass(leftStats, rightStats);
+                  rightClass = getWinnerClass(rightStats, leftStats);
+                }
+
+                return (
+                  <ComparisonChart
+                    key={stat.key}
+                    leftValue={stat.key === "kda" ? leftPlayerStats.getKDARatio() : leftStats}
+                    rightValue={stat.key === "kda" ? rightPlayerStats.getKDARatio() : rightStats}
+                    leftPlayerName={leftPlayer.riotIdGameName}
+                    rightPlayerName={rightPlayer.riotIdGameName}
+                    statLabel={stat.label}
+                  >
+                    <div className="border-border hover:bg-popover flex cursor-pointer items-center justify-between border-b py-1.5 transition-colors">
+                      {/* Left Player */}
+                      <div className={`${leftClass} w-2/5 pr-2 text-right text-sm font-medium`}>{leftStats}</div>
+                      <div className="w-1/5 text-center">
+                        <div className="rounded px-2 py-0.5 text-xs font-semibold text-foreground">{stat.label}</div>
                       </div>
+                      {/* Right Player */}
+                      <div className={`${rightClass} w-2/5 pl-2 text-left text-sm font-medium`}>{rightStats}</div>
                     </div>
-                    {/* Right Player */}
-                    <div className={`${rightClass} w-2/5 pl-2 text-left text-sm font-medium`}>{rightStats}</div>
-                  </div>
-                </ComparisonChart>
-              );
-            })}
+                  </ComparisonChart>
+                );
+              })
+            ) : (
+              <GraphView
+                statsToRender={statsToRender}
+                leftPlayerStatsAll={leftPlayerStatsAll}
+                rightPlayerStatsAll={rightPlayerStatsAll}
+                leftPlayerStats={leftPlayerStats}
+                rightPlayerStats={rightPlayerStats}
+              />
+            )}
           </div>
         </div>
 
@@ -184,7 +217,7 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
               <div className="flex flex-col items-center gap-1">
                 <ChampionIcon championName={rightPlayer.championName} className="size-12" />
                 {Object.values(INDIVIDUAL_POSITION).includes(rightPlayer.individualPosition) ? (
-                  <div className="bg-primary/20 flex size-6 items-center justify-center rounded-full">
+                  <div className="flex size-6 items-center justify-center rounded-full">
                     <RoleIcon role={rightPlayer.individualPosition} className="size-4" />
                   </div>
                 ) : null}
