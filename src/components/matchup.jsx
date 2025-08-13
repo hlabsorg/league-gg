@@ -71,7 +71,7 @@ const statsToRender = [
 ];
 
 export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
-  const [viewMode, setViewMode] = useState("table"); // "table" or "graph"
+  const [viewMode, setViewMode] = useState("graph"); // "table" or "graph"
 
   const leftPlayerStats = new PlayerMatchStats(leftPlayer, matchInfo);
   const rightPlayerStats = new PlayerMatchStats(rightPlayer, matchInfo);
