@@ -70,7 +70,7 @@ export function TopRoles({ matches, summonerName }) {
       <div className="space-y-3 p-4">
         {topRolesSorted.map((role) => (
           <div key={role.role} className="flex items-center gap-4 p-2">
-            <div className="size-12 flex items-center justify-center rounded-full bg-primary/20">
+            <div className="bg-primary/20 flex size-12 items-center justify-center rounded-full">
               <RoleIcon role={role.role} className="size-8" />
             </div>
             <div className="min-w-[100px]">
