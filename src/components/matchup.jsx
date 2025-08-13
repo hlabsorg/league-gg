@@ -25,15 +25,15 @@ const statsToRender = [
     key: "visionScore",
   },
   {
-    label: "Physical Damage To Champions",
+    label: "Physical Damage",
     key: "physicalDamageDealt",
   },
   {
-    label: "Magic Damage To Champions",
+    label: "Magic Damage",
     key: "magicDamageDealt",
   },
   {
-    label: "Total Damage To Champions",
+    label: "Total Damage",
     key: "damageToChampions",
   },
   {
@@ -136,20 +136,20 @@ export function Matchup({ leftPlayer, rightPlayer, matchInfo, regionId }) {
               <h4 className="text-lg font-bold text-foreground">Match Statistics</h4>
               <div className="absolute right-0 flex gap-2">
                 <Button
-                  variant={viewMode === "table" ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setViewMode("table")}
-                  className="text-xs"
-                >
-                  Table
-                </Button>
-                <Button
                   variant={viewMode === "graph" ? "default" : "outline"}
                   size="sm"
                   onClick={() => setViewMode("graph")}
                   className="text-xs"
                 >
                   Graph
+                </Button>
+                <Button
+                  variant={viewMode === "table" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setViewMode("table")}
+                  className="text-xs"
+                >
+                  Table
                 </Button>
               </div>
             </div>
