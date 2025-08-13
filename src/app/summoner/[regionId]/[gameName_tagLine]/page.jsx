@@ -13,6 +13,7 @@ import { ChampionMasteries } from "@/components/champion-masteries";
 import { QueueTypeHeader } from "@/components/queue-type-header";
 import { RankEntries } from "@/components/entries";
 import { TopChampions } from "@/components/top-champions";
+import { TopRoles } from "@/components/top-roles";
 
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;
@@ -67,6 +68,7 @@ export default async function Page({ params, searchParams }) {
       <QueueTypeHeader regionId={regionId} gameName_tagLine={gameName_tagLine} activeQueue={queueType} />
       <div className="flex flex-row gap-10">
         <div className="flex flex-col gap-6">
+          <TopRoles matches={matchHistory} summonerName={summonerProfile.gameName} />
           <TopChampions matches={matchHistory} summonerName={summonerProfile.gameName} championNames={championNames} />
           <div className="rounded-md border-2 border-border bg-card">
             <h2 className="mb-4 border-b-4 border-solid p-4 text-2xl font-semibold">Champion Masteries</h2>
