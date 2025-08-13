@@ -31,16 +31,16 @@ export default function GraphView({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div
-                      className="relative flex h-8 items-center justify-start bg-bteam cursor-pointer rounded-l-md"
+                      className="relative flex h-8 cursor-pointer items-center justify-start rounded-l-md bg-bteam"
                       style={{ width: `${leftPercentage}%` }}
                     >
                       {!leftIsWinner && leftValue !== rightValue && (
-                        <div className="absolute inset-0 bg-black/30 rounded-l-md"></div>
+                        <div className="absolute inset-0 rounded-l-md bg-black/30"></div>
                       )}
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="border-border bg-card text-card-foreground shadow-lg">
-                    <div className="text-foreground font-semibold">
+                    <div className="font-semibold text-foreground">
                       {stat.label}: {leftStats}
                     </div>
                   </TooltipContent>
@@ -48,7 +48,7 @@ export default function GraphView({
               </div>
 
               {/* Center Label Column */}
-              <div className="flex justify-center w-1/6">
+              <div className="flex w-1/6 justify-center">
                 <span className="flex rounded-md border border-border bg-card px-3 py-1.5 text-xs font-semibold text-foreground">
                   {stat.label}
                 </span>
@@ -59,16 +59,16 @@ export default function GraphView({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div
-                      className="relative flex h-8 items-center justify-end bg-rteam cursor-pointer rounded-r-md"
+                      className="relative flex h-8 cursor-pointer items-center justify-end rounded-r-md bg-rteam"
                       style={{ width: `${rightPercentage}%` }}
                     >
                       {!rightIsWinner && leftValue !== rightValue && (
-                        <div className="absolute inset-0 bg-black/30 rounded-r-md"></div>
+                        <div className="absolute inset-0 rounded-r-md bg-black/30"></div>
                       )}
                     </div>
                   </TooltipTrigger>
                   <TooltipContent className="border-border bg-card text-card-foreground shadow-lg">
-                    <div className="text-foreground font-semibold">
+                    <div className="font-semibold text-foreground">
                       {stat.label}: {rightStats}
                     </div>
                   </TooltipContent>
