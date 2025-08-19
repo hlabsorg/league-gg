@@ -14,6 +14,7 @@ import { QueueTypeHeader } from "@/components/queue-type-header";
 import { RankEntries } from "@/components/entries";
 import { TopChampions } from "@/components/top-champions";
 import { TopRoles } from "@/components/top-roles";
+import { RecentGames } from "@/components/recent-games";
 
 export default async function Page({ params, searchParams }) {
   const queryParams = await searchParams;
@@ -75,15 +76,20 @@ export default async function Page({ params, searchParams }) {
             <ChampionMasteries masteries={masteries} championNames={championNames} />
           </div>
         </div>
-        <div className="mb-6 w-auto rounded-md border-2 border-border bg-card p-6">
-          <h2 className="mb-4 rounded-md border-b-4 border-solid  p-4 text-2xl font-semibold ">Match History</h2>
-          <div className="mb-4 border-b-2 text-lg font-bold">Last {matchHistory.length} matches</div>
-          <MatchHistory
-            matches={matchHistory}
-            regionId={regionId}
-            summonerName={summonerProfile.gameName}
-            championNames={championNames}
-          />
+        <div className="flex flex-col">
+          <div className="w-auto">
+            <RecentGames matches={matchHistory} summonerName={summonerProfile.gameName} />
+          </div>
+          <div className="mb-6 w-auto rounded-md border-2 border-border bg-card p-6">
+            <h2 className="mb-4 rounded-md border-b-4 border-solid  p-4 text-2xl font-semibold ">Match History</h2>
+            <div className="mb-4 border-b-2 text-lg font-bold">Last {matchHistory.length} matches</div>
+            <MatchHistory
+              matches={matchHistory}
+              regionId={regionId}
+              summonerName={summonerProfile.gameName}
+              championNames={championNames}
+            />
+          </div>
         </div>
       </div>
 
