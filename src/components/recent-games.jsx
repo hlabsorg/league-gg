@@ -81,40 +81,40 @@ export function RecentGames({ matches, summonerName }) {
   };
 
   return (
-    <div className="w-auto mb-6 border-2 rounded-md bg-card p-6">
+    <div className="mb-6 w-auto rounded-md border-2 bg-card p-6">
       <div>
-        <h2 className="text-2xl font-bold text-foreground border-b-4 border-solid mb-4 p-4">Recent Games Summary</h2>
+        <h2 className="mb-4 border-b-4 border-solid p-4 text-2xl font-bold text-foreground">Recent Games Summary</h2>
         <p className="mb-4 border-b-2 text-lg font-bold">Stats based on the last {aggregatedStats.games} games</p>
       </div>
-      <div className="flex flex-row min-w-full gap-8 justify-evenly">
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+      <div className="flex min-w-full flex-row justify-evenly gap-8">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">Win Rate</p>
-          <p className="text-2xl font-bold text-foreground justify-center">{aggregatedStats.winRate}%</p>
+          <p className="justify-center text-2xl font-bold text-foreground">{aggregatedStats.winRate}%</p>
           <p className="text-xs text-muted">
             {aggregatedStats.wins}W // {aggregatedStats.losses}L
           </p>
         </div>
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">AVG KDA</p>
           <p className="text-2xl font-bold text-foreground">{aggregatedStats.avgKDA}</p>
         </div>
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">AVG Kill Participation</p>
           <p className="text-2xl font-bold text-foreground">{aggregatedStats.avgKillParticipation}%</p>
         </div>
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">Preferred Role</p>
           <p className="text-2xl font-bold text-foreground">{aggregatedStats.preferredRole}</p>
         </div>
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">CS/min</p>
           <p className="text-2xl font-bold text-foreground">{aggregatedStats.avgCSPerMin}</p>
         </div>
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">Gold/min</p>
           <p className="text-2xl font-bold text-foreground">{aggregatedStats.avgGoldPerMin}</p>
         </div>
-        <div className="flex flex-col border-solid border-r-4 p-4 pr-8 items-center justify-center">
+        <div className="flex flex-col items-center justify-center border-r-4 border-solid p-4 pr-8">
           <p className="text-md text-muted">Avg Damage</p>
           <p className="text-2xl font-bold text-foreground">{aggregatedStats.avgDamagePerMatch}</p>
         </div>
