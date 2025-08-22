@@ -10,16 +10,16 @@ export function RankEntries({ entries }) {
           </div>
           <div className="flex flex-col">
             <div className="text-xl font-bold">
-              {entries[0].tier} {entries[0].rank}
+              {entries[0]?.tier} {entries[0]?.rank}
             </div>
             <div className="text-sm text-muted">{entries[0].leaguePoints} LP</div>
           </div>
           <div className="flex flex-col">
             <div className="text-sm text-muted">
-              {entries[0].wins}W {entries[0].losses}L
+              {entries[0]?.wins}W {entries[0]?.losses}L
             </div>
             <div className="text-sm text-muted">
-              Win rate {Math.floor((entries[0].wins / (entries[0].wins + entries[0].losses)) * 100)}%
+              Win rate {Math.floor((entries[0]?.wins / (entries[0]?.wins + entries[0]?.losses)) * 100)}%
             </div>
           </div>
         </div>
