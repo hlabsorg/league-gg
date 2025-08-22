@@ -3,7 +3,8 @@ import { HomepageContent } from "@/components/homepage-content";
 export default function Page() {
   return (
     <div className="container">
-      <Hero  />
+      <h1>STAGING</h1>
+      <Hero />
       <HomepageContent />
     </div>
   );
