@@ -70,14 +70,18 @@ export function RecentGames({ matches, summonerName }) {
     games: recentStats.games,
     wins: recentStats.wins,
     losses: recentStats.games - recentStats.wins,
-    winRate: ((recentStats.wins / recentStats.games) * 100).toFixed(1),
-    avgKDA: ((recentStats.kills + recentStats.assists) / recentStats.deaths).toFixed(2),
-    avgCSPerMin: (recentStats.totalCS / (recentStats.totalGameDuration / 60)).toFixed(1),
-    avgGoldPerMin: (recentStats.totalGold / (recentStats.totalGameDuration / 60)).toFixed(1),
-    avgDamagePerMatch: (recentStats.totalDamage / recentStats.games).toFixed(1),
-    avgKillParticipation: (recentStats.totalKillParticipation / recentStats.games).toFixed(1),
-    preferredRole: Object.entries(recentStats.roleFrequency).sort(([, a], [, b]) => b - a)[0][0],
-    preferredRoleLabel: POSITION_LABELS[Object.entries(recentStats.roleFrequency).sort(([, a], [, b]) => b - a)],
+    winRate: recentStats.games > 0 ? ((recentStats.wins / recentStats.games) * 100).toFixed(1) : 0,
+    avgKDA: recentStats.deaths > 0 ? ((recentStats.kills + recentStats.assists) / recentStats.deaths).toFixed(2) : 0,
+    avgCSPerMin:
+      recentStats.totalGameDuration > 0 ? (recentStats.totalCS / (recentStats.totalGameDuration / 60)).toFixed(1) : 0,
+    avgGoldPerMin:
+      recentStats.totalGameDuration > 0 ? (recentStats.totalGold / (recentStats.totalGameDuration / 60)).toFixed(1) : 0,
+    avgDamagePerMatch: recentStats.games > 0 ? (recentStats.totalDamage / recentStats.games).toFixed(1) : 0,
+    avgKillParticipation:
+      recentStats.games > 0 ? (recentStats.totalKillParticipation / recentStats.games).toFixed(1) : 0,
+    preferredRole: Object.entries(recentStats.roleFrequency).sort(([, a], [, b]) => b - a)[0]?.[0] || "None",
+    preferredRoleLabel:
+      POSITION_LABELS[Object.entries(recentStats.roleFrequency).sort(([, a], [, b]) => b - a)[0]?.[0]] || "None",
   };
 
   return (
