@@ -2,7 +2,6 @@ import Link from "next/link";
 import { getServerClient } from "@/lib/supabase/server";
 import { AuthButtons } from "@/components/auth-buttons";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 export default async function Navbar() {
   const supabase = await getServerClient();
