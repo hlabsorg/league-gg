@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useSummoners } from "@/hooks/swr/summoners";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -21,6 +20,7 @@ export function Hero() {
   const [regionId, setRegionId] = useState("na1");
   const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [formError, setFormError] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,15 +30,23 @@ export function Hero() {
   const handleSubmit = (e) => {
     setFormError(null);
     e.preventDefault();
-    const gameName = e.target.gameName.value;
-    const tagLine = e.target.tagLine.value;
+    const searchInput = e.target.searchInput.value;
     const regionId = e.target.regionId.value;
-    if (gameName.trim() && tagLine.trim() && regionId.trim()) {
-      setGameName(gameName);
-      setTagLine(tagLine);
-      setRegionId(regionId);
+
+    if (searchInput.includes("#")) {
+      const [name, tag] = searchInput.split("#");
+      const gameName = name.trim();
+      const tagLine = tag.trim();
+
+      if (gameName && tagLine && regionId.trim()) {
+        setGameName(gameName);
+        setTagLine(tagLine);
+        setRegionId(regionId);
+      } else {
+        setFormError("Both summoner name, tagline, and region must be provided.");
+      }
     } else {
-      setFormError("Both summoner name, tagline, and region must be provided.");
+      setFormError("Please enter summoner name in format: GameName#tagLine");
     }
   };
 
@@ -46,7 +54,9 @@ export function Hero() {
     if (!value) {
       return setSearchResults(null);
     }
-    const { data } = await supabase.rpc("search_summoner_profiles_by_prefix", { prefix: value });
+    // Use the part before # for autocomplete, or full value if no #
+    const searchName = value.includes("#") ? value.split("#")[0] : value;
+    const { data } = await supabase.rpc("search_summoner_profiles_by_prefix", { prefix: searchName });
     setSearchResults(data || []);
   };
 
@@ -77,22 +87,26 @@ export function Hero() {
               </SelectContent>
             </Select>
             <Popover open={isOpen} onOpenChange={setIsOpen} className="bg-background">
-              <Command label="Summoner Name" shouldFilter={false} className="z-10 bg-background text-muted">
+              <Command label="Summoner Search" shouldFilter={false} className="z-10 bg-background text-muted">
                 <PopoverTrigger asChild>
                   <CommandInput
                     className="h-12 bg-background"
-                    placeholder="Summoner Name"
-                    name="gameName"
+                    placeholder="GameName#TagLine (e.g., Faker#KR1)"
+                    name="searchInput"
                     type="text"
-                    onValueChange={debounce(handleSearch, 200)}
+                    value={searchInput}
+                    onValueChange={(value) => {
+                      setSearchInput(value);
+                      debounce(handleSearch, 200)(value);
+                    }}
                   />
                 </PopoverTrigger>
                 <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()} className="bg-background">
                   <CommandList className="z-10 bg-background text-muted">
                     <CommandEmpty>
                       {!searchResults
-                        ? "Search for summoner by Game Name!"
-                        : "No results found.  Please manually input Tagline in the next field."}
+                        ? "Start typing to search for summoners!"
+                        : "No results found. Try typing just the game name first."}
                     </CommandEmpty>
                     <CommandGroup className="z-10 bg-background">
                       {searchResults?.map((summoner) => (
@@ -123,13 +137,6 @@ export function Hero() {
                 </PopoverContent>
               </Command>
             </Popover>
-            <Input
-              className="tagline-input h-12 bg-background text-muted"
-              placeholder="Tagline"
-              name="tagLine"
-              type="text"
-              defaultValue={tagLine}
-            />
             <Button type="submit" className="h-12 bg-background px-6" variant="default">
               <Icons.search className="size-5" />
             </Button>
@@ -167,7 +174,7 @@ export function Hero() {
               </Link>
             ) : (
               <p className="mt-2 text-center text-sm text-white/80">
-                Enter your League of Legends summoner name and tagline to look up stats
+                Enter your summoner info as GameName#TagLine (e.g., &quot;Faker#KR1&quot;) to look up stats
               </p>
             )}
           </div>
