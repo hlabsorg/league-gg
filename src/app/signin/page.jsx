@@ -25,9 +25,9 @@ const SignInPage = () => {
   }, [router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center rounded-md border-border border-2">
+    <div className="flex min-h-screen items-center justify-center rounded-md border-2 border-border">
       <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-md">
-        <h1 className="text-center text-2xl text-font-bold">Sign In</h1>
+        <h1 className="text-font-bold text-center text-2xl">Sign In</h1>
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
