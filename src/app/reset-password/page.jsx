@@ -86,15 +86,15 @@ export default function ResetPasswordPage() {
   return (
     <div className="flex min-h-screen items-center justify-center rounded-md border-2 border-border">
       <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-md">
-        <h1 className="text-center text-2xl font-bold mb-6">Reset Password</h1>
+        <h1 className="mb-6 text-center text-2xl font-bold">Reset Password</h1>
 
-        {error && <div className="mb-4 p-3 bg-red-100 border border-destructive text-destructive rounded">{error}</div>}
+        {error && <div className="mb-4 rounded border border-destructive bg-red-100 p-3 text-destructive">{error}</div>}
 
-        {message && <div className="mb-4 p-3 bg-green-100 border border-accent text-accent rounded">{message}</div>}
+        {message && <div className="mb-4 rounded border border-accent bg-green-100 p-3 text-accent">{message}</div>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-2">
+            <label htmlFor="password" className="mb-2 block text-sm font-medium">
               New Password
             </label>
             <input
@@ -104,12 +104,12 @@ export default function ResetPasswordPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your new password"
               required
-              className="w-full p-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring text-black"
+              className="w-full rounded-md border border-border p-2 text-black focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+            <label htmlFor="confirmPassword" className="mb-2 block text-sm font-medium">
               Confirm New Password
             </label>
             <input
@@ -119,7 +119,7 @@ export default function ResetPasswordPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm your new password"
               required
-              className="w-full p-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring text-black"
+              className="w-full rounded-md border border-border p-2 text-black focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
           {/* only shows when the confirm password field is filled out */}
@@ -132,14 +132,14 @@ export default function ResetPasswordPage() {
           <button
             type="submit"
             disabled={loading || !passwordMatch}
-            className="w-full bg-primary text-foreground p-2 rounded-md hover:bg-primary disabled:bg-muted disabled:cursor-not-allowed"
+            className="w-full rounded-md bg-primary p-2 text-foreground hover:bg-primary disabled:cursor-not-allowed disabled:bg-muted"
           >
             {loading ? "Updating Password..." : "Update Password"}
           </button>
         </form>
 
         <div className="mt-4 text-center">
-          <button onClick={handleCancel} className="text-primary hover:text-primary text-sm">
+          <button onClick={handleCancel} className="text-sm text-primary hover:text-primary">
             Back to Sign In
           </button>
         </div>
