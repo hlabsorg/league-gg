@@ -28,7 +28,7 @@ const SignUpPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center rounded-md border-2 border-border">
       <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-md">
-        <h1 className="text-font-bold text-center text-2xl mb-6">Create Account</h1>
+        <h1 className="text-font-bold mb-6 text-center text-2xl">Create Account</h1>
 
         <Auth
           view="sign_up"
