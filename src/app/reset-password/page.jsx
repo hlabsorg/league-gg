@@ -66,9 +66,12 @@ export default function ResetPasswordPage() {
       if (updateError) {
         setError(updateError.message);
       } else {
-        setMessage("Password updated successfully! Redirecting to profile ...");
+        setMessage("Password updated successfully! Logging out for security...");
+
+        await supabase.auth.signOut();
+
         setTimeout(() => {
-          router.push("/profile");
+          router.push("/signin");
         }, 2000);
       }
     } catch (err) {

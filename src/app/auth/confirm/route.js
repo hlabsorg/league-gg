@@ -19,6 +19,10 @@ export async function GET(request) {
       if (type === "recovery") {
         redirect("/reset-password");
       }
+
+      if (type === "email") {
+        redirect("/email-confirmation");
+      }
       // redirect user to specified redirect URL or root of app
       redirect(next);
     }
