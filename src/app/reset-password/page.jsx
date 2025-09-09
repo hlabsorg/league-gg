@@ -15,7 +15,6 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState("");
 
   const router = useRouter();
-  //Check to see if the user has a valid session for password reset
   useEffect(() => {
     const checkSession = async () => {
       try {
