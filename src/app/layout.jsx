@@ -30,8 +30,33 @@ const roboto = Roboto({
 // });
 
 export const metadata = {
-  title: "League GG",
-  description: "League of Legends Statistics and Analysis",
+  title: "Elovate.GG",
+  description: "Elevate your League of Legends gameplay with advanced statistics and analysis",
+  metadataBase: new URL("https://elovate.gg"),
+  openGraph: {
+    title: "Elovate",
+    description: "Elevate your League of Legends gameplay with advanced statistics and analysis",
+    url: "https://elovate.gg",
+    siteName: "Elovate",
+    images: [
+      {
+        url: "/assets/elovate_hero.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Elovate",
+    description: "Elevate your League of Legends gameplay with advanced statistics and analysis",
+    images: ["/assets/elovate_hero.png"],
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
