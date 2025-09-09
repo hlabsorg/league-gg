@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Auth } from "@supabase/auth-ui-react";
 import { getBrowserClient } from "@/lib/supabase/browser";
 import { useRouter } from "next/navigation";
@@ -11,11 +11,8 @@ const supabase = getBrowserClient();
 
 const SignInPage = () => {
   const router = useRouter();
-  const [redirectUrl, setRedirectUrl] = useState("");
 
   useEffect(() => {
-    setRedirectUrl(`/auth/confirm`);
-
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event) => {
@@ -41,7 +38,6 @@ const SignInPage = () => {
           socialLayout="horizontal"
           showLinks={false}
           onlyThirdPartyProviders={false}
-          redirectTo={redirectUrl}
         />
 
         <div className="mt-4 space-y-2">
