@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="w-full text-black rounded-md border border-border p-3 focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full rounded-md border border-border p-3 text-black focus:outline-none focus:ring-2 focus:ring-ring"
             />
 
             <button
@@ -48,12 +48,12 @@ export default function ForgotPasswordPage() {
         </div>
 
         {emailSent && (
-          <div className="mt-4 p-3 bg-green-100 border border-accent rounded text-accent text-sm">
+          <div className="mt-4 rounded border border-accent bg-green-100 p-3 text-sm text-accent">
             Password reset email sent! Please check your inbox.
           </div>
         )}
 
-        <div className="mt-6 text-center space-y-2">
+        <div className="mt-6 space-y-2 text-center">
           <Link href="/signin" className="block text-sm text-primary hover:underline">
             Back to Sign In
           </Link>
