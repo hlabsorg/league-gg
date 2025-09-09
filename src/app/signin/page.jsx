@@ -11,7 +11,6 @@ const supabase = getBrowserClient();
 
 const SignInPage = () => {
   const router = useRouter();
-  const [view, setView] = useState("sign_in");
   const [redirectUrl, setRedirectUrl] = useState("");
 
   useEffect(() => {
@@ -31,12 +30,10 @@ const SignInPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center rounded-md border-2 border-border">
       <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-md">
-        <h1 className="text-font-bold mb-6 text-center text-2xl">
-          {view === "sign_in" ? "Welcome Back" : "Reset Password"}
-        </h1>
+        <h1 className="text-font-bold mb-6 text-center text-2xl">Welcome Back</h1>
 
         <Auth
-          view={view}
+          view="sign_in"
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark"
@@ -48,28 +45,15 @@ const SignInPage = () => {
         />
 
         <div className="mt-4 space-y-2">
-          {view === "sign_in" && (
-            <>
-              <button
-                onClick={() => setView("forgotten_password")}
-                className="w-full text-sm text-primary hover:underline"
-              >
-                Forgot your password?
-              </button>
-              <div className="text-center text-sm text-muted-foreground">
-                Don&apos;t have an account?{" "}
-                <Link href="/signup" className="text-primary hover:underline">
-                  Sign up
-                </Link>
-              </div>
-            </>
-          )}
-
-          {view === "forgotten_password" && (
-            <button onClick={() => setView("sign_in")} className="w-full text-sm text-primary hover:underline">
-              Back to sign in
-            </button>
-          )}
+          <Link href="/forgot-password" className="block w-full text-center text-sm text-primary hover:underline">
+            Forgot your password?
+          </Link>
+          <div className="text-center text-sm text-muted-foreground">
+            Don&apos;t have an account?{" "}
+            <Link href="/signup" className="text-primary hover:underline">
+              Sign up
+            </Link>
+          </div>
         </div>
       </div>
     </div>
