@@ -34,7 +34,9 @@ const SignInPage = () => {
           theme="dark"
           providers={["google"]}
           socialLayout="horizontal"
-          view="sign_in" // Explicitly set to sign in
+          view="sign_in"
+          showLinks={true}
+          onlyThirdPartyProviders={false}
         />
       </div>
     </div>
