@@ -84,7 +84,7 @@ export function Hero() {
               </SelectContent>
             </Select>
             <input
-              className="h-12 flex-1 bg-background border border-border rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-ring text-foreground"
+              className="h-12 flex-1 rounded-md border border-border bg-background px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               placeholder="Enter Riot ID, ie. player#NA1"
               name="searchInput"
               type="text"
@@ -127,7 +127,7 @@ export function Hero() {
                     href={`/summoner/${summoner.regionId}/${summoner.gameName}-${summoner.tagLine}`}
                     className="block w-full"
                   >
-                    <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground hover:bg-muted transition-all duration-200">
+                    <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground transition-all duration-200 hover:bg-muted">
                       <div>
                         <ProfileIcon profileIconId={summoner.profileIconId} />
                       </div>
@@ -146,7 +146,7 @@ export function Hero() {
             ) : (
               data && (
                 <Link prefetch href={`/summoner/${data.regionId}/${data.gameName}-${data.tagLine}`} className="w-full">
-                  <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground hover:bg-muted hover:border-primary transition-all duration-200">
+                  <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground transition-all duration-200 hover:border-primary hover:bg-muted">
                     <div>
                       <ProfileIcon profileIconId={data.profileIconId} />
                     </div>
