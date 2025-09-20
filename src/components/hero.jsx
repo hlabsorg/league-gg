@@ -126,7 +126,7 @@ export function Hero() {
                 </Alert>
               </div>
             ) : searchResults && searchResults.length > 0 ? (
-              <div className="max-h-80 w-full overflow-y-auto space-y-2 rounded-lg border border-border bg-background p-2">
+              <div className="max-h-80 w-full space-y-2 overflow-y-auto rounded-lg border border-border bg-background p-2">
                 {searchResults.map((summoner) => (
                   <Link
                     key={summoner.id}
