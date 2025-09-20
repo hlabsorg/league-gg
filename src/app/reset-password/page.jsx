@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { getBrowserClient } from "@/lib/supabase/browser";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const supabase = getBrowserClient();
 
@@ -66,13 +67,17 @@ export default function ResetPasswordPage() {
       if (updateError) {
         setError(updateError.message);
       } else {
-        setMessage("Password updated successfully! Logging out for security...");
+        setMessage(
+          <>
+            Password updated successfully! Please{" "}
+            <Link href="/signin" className="text-primary hover:underline">
+              login
+            </Link>{" "}
+            with your new credentials.
+          </>,
+        );
 
         await supabase.auth.signOut();
-
-        setTimeout(() => {
-          router.push("/signin");
-        }, 2000);
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");
