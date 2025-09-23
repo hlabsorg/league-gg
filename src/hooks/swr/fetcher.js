@@ -2,8 +2,9 @@ export const fetcher = async (...args) => {
   const res = await fetch(...args);
 
   if (!res.ok) {
+    const errorData = await res.json();
     const error = new Error("An error occurred while fetching the data.");
-    error.info = await res.json();
+    error.info = errorData;
     error.status = res.status;
     throw error;
   }

@@ -18,7 +18,6 @@ export function Hero() {
   const [regionId, setRegionId] = useState("na1");
   const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
-  const [searchInput, setSearchInput] = useState("");
   const [formError, setFormError] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [dataError, setDataError] = useState(null);
@@ -94,12 +93,14 @@ export function Hero() {
               placeholder="Enter Riot ID, ie. player#NA1"
               name="searchInput"
               type="text"
-              value={searchInput}
               onChange={(e) => {
-                setSearchInput(e.target.value);
                 // Clear errors when user starts typing
                 if (formError) setFormError(null);
                 if (dataError) setDataError(null);
+                if (gameName || tagLine) {
+                  setGameName("");
+                  setTagLine("");
+                }
                 // Data is manual search vs search from the db
                 debounce(handleSearch, 200)(e.target.value);
               }}
