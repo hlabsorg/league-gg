@@ -25,7 +25,11 @@ export function Hero() {
   const { data, error, isLoading } = useSummoners(gameName, tagLine, regionId);
 
   useEffect(() => {
-    setDataError(error);
+    if (error) {
+      setGameName("");
+      setTagLine("");
+      setDataError(error);
+    }
   }, [error]);
 
   const handleSubmit = (e) => {
@@ -97,10 +101,7 @@ export function Hero() {
                 // Clear errors when user starts typing
                 if (formError) setFormError(null);
                 if (dataError) setDataError(null);
-                if (gameName || tagLine) {
-                  setGameName("");
-                  setTagLine("");
-                }
+
                 // Data is manual search vs search from the db
                 debounce(handleSearch, 200)(e.target.value);
               }}
