@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSummoners } from "@/hooks/swr/summoners";
 import { Button } from "@/components/ui/button";
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Alert, AlertDescription } from "./ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ProfileIcon } from "./profile-icon";
@@ -20,15 +18,23 @@ export function Hero() {
   const [regionId, setRegionId] = useState("na1");
   const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
-  const [searchInput, setSearchInput] = useState("");
   const [formError, setFormError] = useState(null);
-  const [searchResults, setSearchResults] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [dataError, setDataError] = useState(null);
 
   const { data, error, isLoading } = useSummoners(gameName, tagLine, regionId);
 
+  useEffect(() => {
+    if (error) {
+      setGameName("");
+      setTagLine("");
+      setDataError(error);
+    }
+  }, [error]);
+
   const handleSubmit = (e) => {
     setFormError(null);
+    setDataError(null);
     e.preventDefault();
     const searchInput = e.target.searchInput.value;
     const regionId = e.target.regionId.value;
@@ -52,7 +58,7 @@ export function Hero() {
 
   const handleSearch = async (value) => {
     if (!value) {
-      return setSearchResults(null);
+      return setSearchResults([]);
     }
     // Use the part before # for autocomplete, or full value if no #
     const searchName = value.includes("#") ? value.split("#")[0] : value;
@@ -72,7 +78,7 @@ export function Hero() {
         <div className="mb-8">
           <Logo />
         </div>
-        <form onSubmit={handleSubmit} className="w-full max-w-2xl">
+        <form onSubmit={handleSubmit} className="relative w-full max-w-2xl">
           <div className="flex gap-2">
             <Select defaultValue={regionId} name="regionId">
               <SelectTrigger className="h-12 w-[100px] bg-background text-muted">
@@ -86,96 +92,90 @@ export function Hero() {
                 ))}
               </SelectContent>
             </Select>
-            <Popover open={isOpen} onOpenChange={setIsOpen} className="bg-background">
-              <Command label="Summoner Search" shouldFilter={false} className="z-10 bg-background text-muted">
-                <PopoverTrigger asChild>
-                  <CommandInput
-                    className="h-12 bg-background"
-                    placeholder="GameName#TagLine (e.g., Faker#KR1)"
-                    name="searchInput"
-                    type="text"
-                    value={searchInput}
-                    onValueChange={(value) => {
-                      setSearchInput(value);
-                      debounce(handleSearch, 200)(value);
-                    }}
-                  />
-                </PopoverTrigger>
-                <PopoverContent onOpenAutoFocus={(e) => e.preventDefault()} className="bg-background">
-                  <CommandList className="z-10 bg-background text-muted">
-                    <CommandEmpty>
-                      {!searchResults
-                        ? "Start typing to search for summoners!"
-                        : "No results found. Try typing just the game name first."}
-                    </CommandEmpty>
-                    <CommandGroup className="z-10 bg-background">
-                      {searchResults?.map((summoner) => (
-                        <CommandItem key={summoner.id} value={summoner} className="bg-background">
-                          <Link
-                            prefetch
-                            href={`/summoner/${summoner.regionId}/${summoner.gameName}-${summoner.tagLine}`}
-                            className="w-full"
-                          >
-                            <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
-                              <div>
-                                <ProfileIcon profileIconId={summoner.profileIconId} />
-                              </div>
-                              <div className="flex w-full flex-col justify-center">
-                                <div className="flex flex-row gap-2">
-                                  <h4 className="font-bold text-foreground">{summoner.gameName}</h4>
-                                  <h4 className="bg-background text-muted">#{summoner.tagLine}</h4>
-                                </div>
-                                <p className="text-sm text-muted">Level {summoner.summonerLevel}</p>
-                              </div>
-                              <Icons.chevronRight className="self-center justify-self-end" />
-                            </div>
-                          </Link>
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </PopoverContent>
-              </Command>
-            </Popover>
+            <input
+              className="h-12 flex-1 rounded-md border border-border bg-background px-3 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              placeholder="Enter Riot ID, ie. player#NA1"
+              name="searchInput"
+              type="text"
+              onChange={(e) => {
+                // Clear errors when user starts typing
+                if (formError) setFormError(null);
+                if (dataError) setDataError(null);
+
+                // Data is manual search vs search from the db
+                debounce(handleSearch, 200)(e.target.value);
+              }}
+            />
             <Button type="submit" className="h-12 bg-background px-6" variant="default">
               <Icons.search className="size-5" />
             </Button>
           </div>
-          <div className="mt-4 flex h-20 items-center justify-center">
+          <div className="absolute mt-4 w-full">
             {isLoading ? (
-              <Icons.spinner className="animate-spin text-white" />
+              <div className="flex items-center justify-center">
+                <Icons.spinner className="animate-spin text-white" />
+              </div>
             ) : formError ? (
-              <Alert variant="destructive">
-                <AlertDescription>{formError}</AlertDescription>
-              </Alert>
-            ) : error ? (
-              <Alert variant="destructive">
-                <AlertDescription>{error.info.error}</AlertDescription>
-              </Alert>
-            ) : formError ? (
-              <Alert variant="destructive">
-                <AlertDescription>{formError}</AlertDescription>
-              </Alert>
-            ) : data ? (
-              <Link prefetch href={`/summoner/${data.regionId}/${data.gameName}-${data.tagLine}`} className="w-full">
-                <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground">
-                  <div>
-                    <ProfileIcon profileIconId={data.profileIconId} />
-                  </div>
-                  <div className="flex w-full flex-col justify-center">
-                    <div className="flex flex-row gap-2">
-                      <h4 className="font-bold">{data.gameName}</h4>
-                      <h4 className="text-slate-500">#{data.tagLine}</h4>
+              <div className="flex items-center justify-center">
+                <Alert variant="destructive">
+                  <AlertDescription>{formError}</AlertDescription>
+                </Alert>
+              </div>
+            ) : dataError ? (
+              <div className="flex items-center justify-center">
+                <Alert variant="destructive">
+                  <AlertDescription>{dataError.info?.error}</AlertDescription>
+                </Alert>
+              </div>
+            ) : searchResults && searchResults.length > 0 ? (
+              <div className="max-h-80 w-full space-y-2 overflow-y-auto rounded-lg border border-border bg-background p-2">
+                {searchResults.map((summoner) => (
+                  <Link
+                    key={summoner.id}
+                    prefetch
+                    href={`/summoner/${summoner.regionId}/${summoner.gameName}-${summoner.tagLine}`}
+                    className="block w-full"
+                  >
+                    <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground transition-all duration-200 hover:bg-muted">
+                      <div>
+                        <ProfileIcon profileIconId={summoner.profileIconId} />
+                      </div>
+                      <div className="flex w-full flex-col justify-center">
+                        <div className="flex flex-row gap-2">
+                          <h4 className="font-bold">{summoner.gameName}</h4>
+                          <h4 className="text-slate-500">#{summoner.tagLine}</h4>
+                        </div>
+                        <p className="text-sm text-slate-500">Level {summoner.summonerLevel}</p>
+                      </div>
+                      <Icons.chevronRight className="self-center justify-self-end" />
                     </div>
-                    <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
-                  </div>
-                  <Icons.chevronRight className="self-center justify-self-end" />
-                </div>
-              </Link>
+                  </Link>
+                ))}
+              </div>
             ) : (
-              <p className="mt-2 text-center text-sm text-white/80">
-                Enter your summoner info as GameName#TagLine (e.g., &quot;Faker#KR1&quot;) to look up stats
-              </p>
+              data && (
+                <div className="w-full rounded-lg border border-border bg-background p-2">
+                  <Link
+                    prefetch
+                    href={`/summoner/${data.regionId}/${data.gameName}-${data.tagLine}`}
+                    className="w-full"
+                  >
+                    <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground transition-all duration-200 hover:border-primary hover:bg-muted">
+                      <div>
+                        <ProfileIcon profileIconId={data.profileIconId} />
+                      </div>
+                      <div className="flex w-full flex-col justify-center">
+                        <div className="flex flex-row gap-2">
+                          <h4 className="font-bold">{data.gameName}</h4>
+                          <h4 className="text-slate-500">#{data.tagLine}</h4>
+                        </div>
+                        <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
+                      </div>
+                      <Icons.chevronRight className="self-center justify-self-end" />
+                    </div>
+                  </Link>
+                </div>
+              )
             )}
           </div>
         </form>
