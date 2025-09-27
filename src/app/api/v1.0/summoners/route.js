@@ -15,10 +15,11 @@ export const GET = async (req) => {
     const summonerAccount = await Riot.getSummonerAccountByPUUID(riotAccount.puuid, regionId);
     const summonerProfile = {
       regionId,
-      ...riotAccount,
-      ...summonerAccount,
-      summonerId: summonerAccount.id,
-      id: undefined,
+      gameName: riotAccount.gameName,
+      tagLine: riotAccount.tagLine,
+      profileIconId: summonerAccount.profileIconId,
+      revisionDate: summonerAccount.revisionDate,
+      summonerLevel: summonerAccount.summonerLevel,
     };
     const supabase = await getServerClient();
     const { error } = await supabase.from("summoner_profiles").upsert(summonerProfile);
