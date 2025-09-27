@@ -19,8 +19,8 @@ export default function GraphView({
 
           // Calculate total and individual percentages for scale
           const totalValue = leftValue + rightValue;
-          const leftPercentage = totalValue > 0 ? (leftValue / totalValue) * 100 : 40;
-          const rightPercentage = totalValue > 0 ? (rightValue / totalValue) * 100 : 40;
+          const leftPercentage = totalValue > 0 ? (leftValue / totalValue) * 100 : 0;
+          const rightPercentage = totalValue > 0 ? (rightValue / totalValue) * 100 : 0;
           const leftIsWinner = leftValue > rightValue;
           const rightIsWinner = rightValue > leftValue;
 
