@@ -17,21 +17,18 @@ export async function ChampionMasteries({ masteries, championNames }) {
   const topMasteries = [...masteries].sort((a, b) => b.championPoints - a.championPoints).slice(0, 5);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-left p-4">
       {topMasteries.map((mastery) => (
-        <div
-          key={mastery.championId}
-          className="relative mb-4 flex items-center justify-evenly gap-4 border-b-2 border-double "
-        >
-          <div className="relative">
-            <div className="relative ">
-              <ChampionIcon championName={championNames[mastery.championId]} className="size-10" />
-            </div>
-            <MasteryLevel level={mastery.championLevel} />
+        <div key={mastery.championId} className="mb-4 flex  items-center gap-4 border-b-2 border-double p-2">
+          <div className="size-12">
+            <ChampionIcon championName={championNames[mastery.championId]} className="size-12" />
           </div>
-          <div className="md:mt-2 md:text-center">
-            <p className="font-bold text-white">{championNames[mastery.championId] || "Loading..."}</p>
-            <p className="text-sm text-muted">{mastery.championPoints.toLocaleString()} pts</p>
+          <div className="min-w-[100px]">
+            <div className="font-medium text-foreground">{championNames[mastery.championId] || "Loading..."}</div>
+          </div>
+          <div className="min-w-[100px]">
+            <div className="font-semibold text-foreground">Level {mastery.championLevel}</div>
+            <div className="text-sm text-muted">{mastery.championPoints.toLocaleString()} pts</div>
           </div>
         </div>
       ))}
