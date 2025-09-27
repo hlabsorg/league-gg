@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSummoners } from "@/hooks/swr/summoners";
 import { Button } from "@/components/ui/button";
@@ -18,14 +18,23 @@ export function Hero() {
   const [regionId, setRegionId] = useState("na1");
   const [gameName, setGameName] = useState("");
   const [tagLine, setTagLine] = useState("");
-  const [searchInput, setSearchInput] = useState("");
   const [formError, setFormError] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+  const [dataError, setDataError] = useState(null);
 
   const { data, error, isLoading } = useSummoners(gameName, tagLine, regionId);
 
+  useEffect(() => {
+    if (error) {
+      setGameName("");
+      setTagLine("");
+      setDataError(error);
+    }
+  }, [error]);
+
   const handleSubmit = (e) => {
     setFormError(null);
+    setDataError(null);
     e.preventDefault();
     const searchInput = e.target.searchInput.value;
     const regionId = e.target.regionId.value;
@@ -69,7 +78,7 @@ export function Hero() {
         <div className="mb-8">
           <Logo />
         </div>
-        <form onSubmit={handleSubmit} className="w-full max-w-2xl">
+        <form onSubmit={handleSubmit} className="relative w-full max-w-2xl">
           <div className="flex gap-2">
             <Select defaultValue={regionId} name="regionId">
               <SelectTrigger className="h-12 w-[100px] bg-background text-muted">
@@ -88,14 +97,12 @@ export function Hero() {
               placeholder="Enter Riot ID, ie. player#NA1"
               name="searchInput"
               type="text"
-              value={searchInput}
               onChange={(e) => {
-                setSearchInput(e.target.value);
+                // Clear errors when user starts typing
+                if (formError) setFormError(null);
+                if (dataError) setDataError(null);
+
                 // Data is manual search vs search from the db
-                if (data) {
-                  setGameName("");
-                  setTagLine("");
-                }
                 debounce(handleSearch, 200)(e.target.value);
               }}
             />
@@ -103,23 +110,25 @@ export function Hero() {
               <Icons.search className="size-5" />
             </Button>
           </div>
-          <div className="mt-4 flex min-h-20 items-start justify-center">
+          <div className="absolute mt-4 w-full">
             {isLoading ? (
-              <Icons.spinner className="animate-spin text-white" />
+              <div className="flex items-center justify-center">
+                <Icons.spinner className="animate-spin text-white" />
+              </div>
             ) : formError ? (
-              <Alert variant="destructive">
-                <AlertDescription>{formError}</AlertDescription>
-              </Alert>
-            ) : error ? (
-              <Alert variant="destructive">
-                <AlertDescription>{error.info.error}</AlertDescription>
-              </Alert>
-            ) : formError ? (
-              <Alert variant="destructive">
-                <AlertDescription>{formError}</AlertDescription>
-              </Alert>
+              <div className="flex items-center justify-center">
+                <Alert variant="destructive">
+                  <AlertDescription>{formError}</AlertDescription>
+                </Alert>
+              </div>
+            ) : dataError ? (
+              <div className="flex items-center justify-center">
+                <Alert variant="destructive">
+                  <AlertDescription>{dataError.info?.error}</AlertDescription>
+                </Alert>
+              </div>
             ) : searchResults && searchResults.length > 0 ? (
-              <div className="w-full space-y-2">
+              <div className="max-h-80 w-full space-y-2 overflow-y-auto rounded-lg border border-border bg-background p-2">
                 {searchResults.map((summoner) => (
                   <Link
                     key={summoner.id}
@@ -145,21 +154,27 @@ export function Hero() {
               </div>
             ) : (
               data && (
-                <Link prefetch href={`/summoner/${data.regionId}/${data.gameName}-${data.tagLine}`} className="w-full">
-                  <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground transition-all duration-200 hover:border-primary hover:bg-muted">
-                    <div>
-                      <ProfileIcon profileIconId={data.profileIconId} />
-                    </div>
-                    <div className="flex w-full flex-col justify-center">
-                      <div className="flex flex-row gap-2">
-                        <h4 className="font-bold">{data.gameName}</h4>
-                        <h4 className="text-slate-500">#{data.tagLine}</h4>
+                <div className="w-full rounded-lg border border-border bg-background p-2">
+                  <Link
+                    prefetch
+                    href={`/summoner/${data.regionId}/${data.gameName}-${data.tagLine}`}
+                    className="w-full"
+                  >
+                    <div className="relative flex size-full flex-row items-center gap-4 rounded-lg border bg-background p-4 text-foreground transition-all duration-200 hover:border-primary hover:bg-muted">
+                      <div>
+                        <ProfileIcon profileIconId={data.profileIconId} />
                       </div>
-                      <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
+                      <div className="flex w-full flex-col justify-center">
+                        <div className="flex flex-row gap-2">
+                          <h4 className="font-bold">{data.gameName}</h4>
+                          <h4 className="text-slate-500">#{data.tagLine}</h4>
+                        </div>
+                        <p className="text-sm text-slate-500">Level {data.summonerLevel}</p>
+                      </div>
+                      <Icons.chevronRight className="self-center justify-self-end" />
                     </div>
-                    <Icons.chevronRight className="self-center justify-self-end" />
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               )
             )}
           </div>
