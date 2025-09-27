@@ -1,9 +1,9 @@
-import { updateSession } from '@/lib/supabase/middleware'
+// import { updateSession } from '@/lib/supabase/middleware'
 
-export async function middleware(request) {
-  return await updateSession(request)
-}
+// export async function middleware(request) {
+//   return await updateSession(request)
+// }
 
-export const config = {
-  matcher: ['/profile'],
-}
+// export const config = {
+//   matcher: ['/profile'],
+// }
