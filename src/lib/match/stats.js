@@ -16,6 +16,10 @@ export class PlayerMatchStats {
     return `${this.player.totalMinionsKilled} (${((this.player.totalMinionsKilled * 60) / this.matchInfo.gameDuration).toFixed(1)}/min)`;
   }
 
+  getCSNumber() {
+    return this.player.totalMinionsKilled;
+  }
+
   getVisionScore() {
     return this.player.visionScore;
   }
@@ -79,7 +83,7 @@ export class PlayerMatchStats {
   getAllStats() {
     return {
       kda: this.getKDA(),
-      cs: this.getCS(),
+      cs: this.getCSNumber(),
       visionScore: this.getVisionScore(),
       magicDamageDealt: this.getMagicDamageDealt(),
       physicalDamageDealt: this.getPhysicalDamageDealt(),
