@@ -38,7 +38,6 @@ const SignInPage = () => {
           socialLayout="horizontal"
           showLinks={false}
           onlyThirdPartyProviders={false}
-          redirectTo="/auth/confirm"
         />
 
         <div className="mt-4 space-y-2">

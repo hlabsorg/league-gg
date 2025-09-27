@@ -39,7 +39,6 @@ const SignUpPage = () => {
           socialLayout="horizontal"
           showLinks={false}
           onlyThirdPartyProviders={false}
-          redirectTo="/auth/confirm"
         />
         <div className="mt-4 text-center">
           <div className="text-sm text-muted-foreground">
