@@ -17,7 +17,7 @@ export async function ChampionMasteries({ masteries, championNames }) {
   const topMasteries = [...masteries].sort((a, b) => b.championPoints - a.championPoints).slice(0, 5);
 
   return (
-    <div className="flex flex-col items-left p-4">
+    <div className="items-left flex flex-col p-4">
       {topMasteries.map((mastery) => (
         <div key={mastery.championId} className="mb-4 flex  items-center gap-4 border-b-2 border-double p-2">
           <div className="size-12">
