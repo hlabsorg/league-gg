@@ -6,6 +6,7 @@ import {
   getSummonerChampionMasteries,
   getMappedChampionNames,
 } from "@/lib/server/actions/summoner-page";
+import { upsertSummonerProfile } from "@/lib/server/actions/supabase";
 import { ProfileIcon } from "@/components/profile-icon"; // Import your ProfileIcon component
 import { MatchHistory } from "@/components/match-history";
 import { QUEUE_IDS } from "@/constants/queue-types";
@@ -32,6 +33,17 @@ export default async function Page({ params, searchParams }) {
   if (profileError) {
     return <div>{profileError.message}</div>;
   }
+
+  const riotId = `${summonerProfile.gameName}#${summonerProfile.tagLine}`;
+
+  const upsertProfile = {
+    regionId,
+    ...summonerProfile,
+    riotId,
+    puuid: undefined,
+  };
+
+  await upsertSummonerProfile(upsertProfile);
 
   const [entries, entriesError] = await getSummonerEntries(summonerProfile.puuid, regionId);
   if (entriesError) {
