@@ -1,13 +1,5 @@
 import { ChampionIcon } from "./champion-icon";
 
-function MasteryLevel({ level }) {
-  return (
-    <div className="relative">
-      <div className="flex size-auto items-center justify-center text-sm font-semibold">{level}</div>
-    </div>
-  );
-}
-
 export async function ChampionMasteries({ masteries, championNames }) {
   if (!masteries || !Array.isArray(masteries)) {
     return <div>No champion masteries found.</div>;
