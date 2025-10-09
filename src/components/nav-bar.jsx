@@ -27,7 +27,7 @@ export default async function Navbar() {
         <div className="flex items-center gap-6">
           <div className="hidden md:flex md:gap-6">
             <Link
-              href="/contact"
+              href="#contact-email"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
             >
               Contact Us

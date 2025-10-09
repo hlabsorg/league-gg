@@ -12,9 +12,7 @@ export default function Footer() {
 
           {/* Right side - Navigation Links */}
           <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            <Link href="/contact" className="text-sm text-muted-foreground transition-colors hover:text-primary">
-              Contact Us
-            </Link>
+            <p id="contact-email">Contact Email: ggelovate@gmail.com</p>
             {/* <Link href="/help" className="text-sm text-muted-foreground transition-colors hover:text-primary">
               Help
             </Link>
