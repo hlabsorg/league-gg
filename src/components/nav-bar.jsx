@@ -13,7 +13,7 @@ export default async function Navbar() {
     <nav className="w-full border-b bg-background py-3">
       <div className="container mx-auto flex max-w-7xl items-center justify-between px-4">
         <div className="flex items-center justify-center">
-          <Link href="/">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/assets/elovate_logo.png"
               alt="Elovate Logo"
@@ -21,8 +21,8 @@ export default async function Navbar() {
               height={50}
               className="object-contain"
             />
+            <h1 className="text-2xl font-bold">Elovate.GG</h1>
           </Link>
-          <h1 className="text-2xl font-bold ">Elovate.GG</h1>
         </div>
         <div className="flex items-center gap-6">
           <div className="hidden md:flex md:gap-6">
